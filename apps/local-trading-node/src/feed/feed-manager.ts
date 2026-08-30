@@ -1,4 +1,4 @@
-import crypto from 'node:crypto';
+// crypto.randomUUID() available natively in browsers and Node.js 19+
 import type { EventEnvelope, MarketEventPayload, MarketId } from '@trade/contracts';
 import { validateFullEvent } from '@trade/contracts';
 import { ClockSyncTracker } from './clock-sync.js';

@@ -11,7 +11,8 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@trade/contracts": "workspace:*"
+    "@trade/contracts": "workspace:*",
+    "firebase": "^12.18.0"
   },
   "devDependencies": {
     "typescript": "^5.8.2",

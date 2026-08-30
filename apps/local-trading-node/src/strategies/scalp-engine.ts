@@ -1,4 +1,4 @@
-import crypto from 'node:crypto';
+// crypto.randomUUID() available natively in browsers and Node.js 19+
 import type { StrategyCandidatePayload, FeatureSnapshotPayload, TradeSide } from '@trade/contracts';
 import { parseDecimal, toDecimalString, calculateRiskReward } from '@trade/contracts';
 import type { IStrategyEngine, StrategyEngineConfig, StrategyMetrics, StrategyEvaluationResult } from './types.js';
