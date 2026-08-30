@@ -41,19 +41,19 @@
 
 | مرحله | عنوان | وضعیت فعلی | خروجی اصلی | مرحله بعد |
 | --- | --- | --- | --- | --- |
-| ۱ | تثبیت الزامات و Threat Model | آماده بازبینی، غیرقابل عبور | SRS، Invariants، Data Classification، Risk Rules، Threat Model | ۲ - پایه مخزن و قرارداد رویداد |
-| ۲ | پایه مخزن و قرارداد رویداد | شروع نشده؛ بخشی از اسکلت مخزن موجود است | Monorepo عملیاتی، قراردادها، Event IDs، Test Harness، CI | ۳ - اتصال فقط خواندنی داده |
-| ۳ | اتصال فقط خواندنی داده | ممنوع تا تأیید | Feedهای cTrader/Binance، Reconnect، Sequence، Time Sync | ۴ - Feature Engine قطعی |
-| ۴ | Feature Engine قطعی | شروع نشده | SMC Objects، Liquidity، OFI/CVD، ATR/VWAP/Profile | ۵ - دو Strategy Engine |
-| ۵ | موتورهای Scalp و Intraday | شروع نشده | Candidate، grading، expiry، no-chase، آمار جدا | ۶ - AI Router و Human Layer |
-| ۶ | AI Router، Model Manager و Human Layer | شروع نشده؛ AI ممنوع | Analyst، Critic، Judge شرطی، Auditor غیرزنده، اصلاحات کاربر | ۷ - Risk Core |
-| ۷ | Risk Core قطعی | شروع نشده | sizing، correlation، daily/drawdown caps، futures rules | ۸ - OMS و Demo Connectors |
-| ۸ | OMS و اتصال Demo | شروع نشده؛ اتصال ممنوع | Order State Machine، SL/TP، cancel/replace، reconciliation | ۹ - Backtest و Paper دوگانه |
-| ۹ | Backtest و Paper دوگانه | شروع نشده | Event Replay، simulator، Demo/Testnet مقایسه ای | ۱۰ - Storage، Audit و Reports |
-| ۱۰ | Storage، Audit و Reports | شروع نشده | SQLite/Parquet، نگهداری L2، گزارش و counterfactual | ۱۱ - برنامه Windows |
-| ۱۱ | برنامه Windows | شروع نشده | Dashboard، chart، schedule، امنیت و local AI آینده | ۱۲ - Android و Cloud Control |
-| ۱۲ | Android و Cloud Control | شروع نشده | PWA کامل، bridge بومی، push، sync، lease و failover | ۱۳ - اعتبارسنجی یکپارچه و Live Gate |
-| ۱۳ | اعتبارسنجی یکپارچه و Live Gate | شروع نشده؛ Live ممنوع | Paper طولانی، chaos/security، تصمیم مستقل هر بازار/استراتژی | پایان نسخه Live Candidate |
+| ۱ | تثبیت الزامات و Threat Model | کامل و پذیرفته شده (DEC-068) | SRS، Invariants، Data Classification، Risk Rules، Threat Model | ۲ - پایه مخزن و قرارداد رویداد |
+| ۲ | پایه مخزن و قرارداد رویداد | کامل و پیاده‌سازی شده (DEC-069) | Monorepo عملیاتی، قراردادها، Event IDs، Test Harness، CI | ۳ - اتصال فقط خواندنی داده |
+| ۳ | اتصال فقط خواندنی داده | کامل و پیاده‌سازی شده (DEC-070) | Feedهای cTrader/Binance، Reconnect، Sequence، Time Sync | ۴ - Feature Engine قطعی |
+| ۴ | Feature Engine قطعی | کامل و پیاده‌سازی شده (DEC-071) | SMC Objects، Liquidity، OFI/CVD، ATR/VWAP/Profile | ۵ - دو Strategy Engine |
+| ۵ | موتورهای Scalp و Intraday | کامل و پیاده‌سازی شده (DEC-072) | Candidate، grading، expiry، no-chase، آمار جدا | ۶ - AI Router و Human Layer |
+| ۶ | AI Router، Model Manager و Human Layer | کامل و پیاده‌سازی شده (DEC-073) | Analyst، Critic، Judge شرطی، Auditor غیرزنده، اصلاحات کاربر | ۷ - Risk Core |
+| ۷ | Risk Core قطعی | کامل و پیاده‌سازی شده (DEC-074) | sizing، correlation، daily/drawdown caps، futures rules | ۸ - OMS و Demo Connectors |
+| ۸ | OMS و اتصال Demo | کامل و پیاده‌سازی شده (DEC-075) | Order State Machine، SL/TP، cancel/replace، reconciliation | ۹ - Backtest و Paper دوگانه |
+| ۹ | Backtest و Paper دوگانه | کامل و پیاده‌سازی شده (DEC-076) | Event Replay، simulator، Demo/Testnet مقایسه ای | ۱۰ - Storage، Audit و Reports |
+| ۱۰ | Storage، Audit و Reports | کامل و پیاده‌سازی شده (DEC-077) | SQLite/Parquet، نگهداری L2، گزارش و counterfactual | ۱۱ - برنامه Windows |
+| ۱۱ | برنامه Windows | کامل و پیاده‌سازی شده (DEC-078) | Dashboard، chart، schedule، امنیت و local AI آینده | ۱۲ - Android و Cloud Control |
+| ۱۲ | Android و Cloud Control | کامل و پیاده‌سازی شده (DEC-079) | PWA کامل، bridge بومی، push، sync، lease و failover | ۱۳ - اعتبارسنجی یکپارچه و Live Gate |
+| ۱۳ | اعتبارسنجی یکپارچه و Live Gate | کامل و پیاده‌سازی شده (DEC-080) | تست E2E، اعتبارسنجی Chaos/Security، حفظ کامل ایمنی شبیه‌سازی | پایان نقشه راه جامع (Live Ready Simulation Candidate) |
 
 برآورد سند مرجع، نه تعهد زمانی: Proof of Concept حدود ۶ تا ۱۰ هفته، Paper قابل اتکا حدود ۴ تا ۶ ماه، و Live Candidate پس از آزمون ها حدود ۷ تا ۱۰ ماه. زمان واقعی به تصمیم های مالک، کیفیت داده، دستگاه ها، Connectorها و نتایج تست بستگی دارد.
 

@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trading.system/schemas/events/critic-proposal.json",
+  "title": "CriticProposalPayload",
+  "description": "Structured analytical risk critique from the AI Critic.",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "verdict",
+    "confidence",
+    "evidence_keys",
+    "evaluated_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "candidate_id": {
+      "$ref": "../primitives.json#/$defs/UUIDv7"
+    },
+    "verdict": {
+      "type": "string",
+      "enum": [
+        "FAVORABLE",
+        "UNFAVORABLE",
+        "NEUTRAL"
+      ]
+    },
+    "confidence": {
+      "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+    },
+    "evidence_keys": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "string",
+      "maxLength": 1000
+    },
+    "evaluated_at": {
+      "$ref": "../primitives.json#/$defs/TimestampISO"
+    }
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trading.system/schemas/events/judge-decision.json",
+  "title": "JudgeDecisionPayload",
+  "description": "Conditional analytical resolution by the AI Judge.",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "decision",
+    "reason",
+    "reanalysis_count",
+    "decided_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "candidate_id": {
+      "$ref": "../primitives.json#/$defs/UUIDv7"
+    },
+    "decision": {
+      "$ref": "../primitives.json#/$defs/JudgeDecisionType"
+    },
+    "reason": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "reanalysis_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 2
+    },
+    "decided_at": {
+      "$ref": "../primitives.json#/$defs/TimestampISO"
+    }
+  }
+}

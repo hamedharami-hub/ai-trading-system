@@ -1,0 +1,69 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trading.system/schemas/events/order-intent.json",
+  "title": "OrderIntentPayload",
+  "description": "Risk-approved, idempotent order intent ready for deterministic OMS routing.",
+  "type": "object",
+  "required": [
+    "intent_id",
+    "candidate_id",
+    "idempotency_key",
+    "symbol",
+    "side",
+    "order_type",
+    "quantity",
+    "stop_loss_price",
+    "take_profit_price",
+    "time_in_force",
+    "created_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "intent_id": {
+      "$ref": "../primitives.json#/$defs/UUIDv7"
+    },
+    "candidate_id": {
+      "$ref": "../primitives.json#/$defs/UUIDv7"
+    },
+    "idempotency_key": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "symbol": {
+      "$ref": "../primitives.json#/$defs/MarketId"
+    },
+    "side": {
+      "$ref": "../primitives.json#/$defs/TradeSide"
+    },
+    "order_type": {
+      "$ref": "../primitives.json#/$defs/OrderType"
+    },
+    "quantity": {
+      "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+    },
+    "limit_price": {
+      "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+    },
+    "stop_loss_price": {
+      "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+    },
+    "take_profit_price": {
+      "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+    },
+    "max_slippage": {
+      "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+    },
+    "time_in_force": {
+      "type": "string",
+      "enum": [
+        "GTC",
+        "IOC",
+        "FOK"
+      ]
+    },
+    "created_at": {
+      "$ref": "../primitives.json#/$defs/TimestampISO"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trading.system/schemas/events/risk-decision.json",
+  "title": "RiskDecisionPayload",
+  "description": "Authoritative deterministic risk approval and position sizing calculation.",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "status",
+    "approved_risk_percent",
+    "calculated_quantity",
+    "quantized_quantity",
+    "estimated_risk_amount",
+    "portfolio_open_risk_percent",
+    "concurrent_positions_count",
+    "daily_loss_percent",
+    "drawdown_state",
+    "rejection_reasons",
+    "evaluated_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "candidate_id": {
+      "$ref": "../primitives.json#/$defs/UUIDv7"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "APPROVED",
+        "REJECTED"
+      ]
+    },
+    "approved_risk_percent": {
+      "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+    },
+    "calculated_quantity": {
+      "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+    },
+    "quantized_quantity": {
+      "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+    },
+    "estimated_risk_amount": {
+      "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+    },
+    "portfolio_open_risk_percent": {
+      "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+    },
+    "concurrent_positions_count": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 3
+    },
+    "daily_loss_percent": {
+      "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+    },
+    "drawdown_state": {
+      "type": "string",
+      "enum": [
+        "NORMAL",
+        "HALVED_RISK",
+        "STOPPED_NEW_ENTRIES"
+      ]
+    },
+    "rejection_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evaluated_at": {
+      "$ref": "../primitives.json#/$defs/TimestampISO"
+    }
+  }
+}

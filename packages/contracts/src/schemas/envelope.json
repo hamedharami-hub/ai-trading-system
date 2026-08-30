@@ -1,0 +1,73 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trading.system/schemas/envelope.json",
+  "title": "EventEnvelope",
+  "description": "Standardized, immutable envelope wrapping all system events.",
+  "type": "object",
+  "required": [
+    "schema_version",
+    "event_id",
+    "correlation_id",
+    "timestamp_exchange",
+    "timestamp_local",
+    "source",
+    "device_id",
+    "event_type",
+    "payload"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)\\.(0|[1-9]\\d*)\\.(0|[1-9]\\d*)$",
+      "description": "SemVer schema version string."
+    },
+    "event_id": {
+      "$ref": "primitives.json#/$defs/UUIDv7",
+      "description": "Unique identifier for this specific event."
+    },
+    "correlation_id": {
+      "$ref": "primitives.json#/$defs/UUIDv7",
+      "description": "Correlation identifier tracking the causal chain."
+    },
+    "timestamp_exchange": {
+      "$ref": "primitives.json#/$defs/TimestampISO",
+      "description": "Timestamp reported by the external exchange or venue (or local if generated internally)."
+    },
+    "timestamp_local": {
+      "$ref": "primitives.json#/$defs/TimestampISO",
+      "description": "Timestamp recorded locally by the node at arrival/generation."
+    },
+    "source": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Origin of the event (e.g. CTRADER, BINANCE_SPOT, LOCAL_NODE, PWA)."
+    },
+    "device_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Unique identifier of the publishing device."
+    },
+    "event_type": {
+      "type": "string",
+      "enum": [
+        "MARKET_EVENT",
+        "FEATURE_SNAPSHOT",
+        "STRATEGY_CANDIDATE",
+        "ANALYST_PROPOSAL",
+        "CRITIC_PROPOSAL",
+        "JUDGE_DECISION",
+        "POLICY_DECISION",
+        "RISK_DECISION",
+        "ORDER_INTENT",
+        "EXECUTION_REPORT",
+        "AUDIT_EVENT"
+      ],
+      "description": "Discriminator enum for the enclosed payload."
+    },
+    "payload": {
+      "type": "object",
+      "description": "Event payload adhering to the corresponding event schema."
+    }
+  }
+}

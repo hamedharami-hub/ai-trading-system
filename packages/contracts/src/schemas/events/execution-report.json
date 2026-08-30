@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trading.system/schemas/events/execution-report.json",
+  "title": "ExecutionReportPayload",
+  "description": "Execution lifecycle update from broker or venue connector.",
+  "type": "object",
+  "required": [
+    "report_id",
+    "intent_id",
+    "broker_order_id",
+    "symbol",
+    "side",
+    "status",
+    "filled_quantity",
+    "remaining_quantity",
+    "transact_time"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "report_id": {
+      "$ref": "../primitives.json#/$defs/UUIDv7"
+    },
+    "intent_id": {
+      "$ref": "../primitives.json#/$defs/UUIDv7"
+    },
+    "broker_order_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "symbol": {
+      "$ref": "../primitives.json#/$defs/MarketId"
+    },
+    "side": {
+      "$ref": "../primitives.json#/$defs/TradeSide"
+    },
+    "status": {
+      "$ref": "../primitives.json#/$defs/OrderStatus"
+    },
+    "filled_quantity": {
+      "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+    },
+    "remaining_quantity": {
+      "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+    },
+    "average_fill_price": {
+      "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+    },
+    "last_fill_price": {
+      "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+    },
+    "last_fill_qty": {
+      "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+    },
+    "commission": {
+      "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+    },
+    "commission_asset": {
+      "type": "string"
+    },
+    "rejection_reason": {
+      "type": "string"
+    },
+    "transact_time": {
+      "$ref": "../primitives.json#/$defs/TimestampISO"
+    }
+  }
+}

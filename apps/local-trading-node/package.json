@@ -1,8 +1,23 @@
 {
   "name": "@trade/local-trading-node",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "type": "module",
+  "scripts": {
+    "start": "tsx src/main.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@trade/contracts": "workspace:*",
+    "decimal.js": "^10.5.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.2",
+    "vitest": "^3.0.7"
+  },
   "engines": {
     "node": ">=24 <25",
     "pnpm": ">=11 <12"
