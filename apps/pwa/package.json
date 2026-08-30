@@ -1,0 +1,10 @@
+{
+  "name": "@trade/pwa",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=24 <25",
+    "pnpm": ">=11 <12"
+  }
+}

@@ -1,0 +1,58 @@
+# Dependencies and package-manager state
+node_modules/
+.pnpm-store/
+
+# Build, framework, and test output
+.next/
+.turbo/
+dist/
+build/
+coverage/
+playwright-report/
+test-results/
+*.tsbuildinfo
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+*.crt
+secrets/
+
+# Runtime data and model artifacts
+data/
+models/
+logs/
+*.log
+*.db
+*.db-*
+*.sqlite
+*.sqlite-*
+*.parquet
+*.duckdb
+*.onnx
+*.gguf
+*.safetensors
+
+# Caches and temporary files
+.cache/
+tmp/
+temp/
+*.tmp
+
+# Workspace-local agent/app metadata
+.codex/
+.agents/
+
+# Editors and operating systems
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*~

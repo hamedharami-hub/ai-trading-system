@@ -1,0 +1,181 @@
+# Decision Register
+
+## Authority and change control
+
+The Persian architecture PDF and subsequent explicit owner instructions are the product authority. English repository documentation is the version-controlled implementation translation. If a conflict exists, the owner's latest explicit instruction prevails.
+
+Every material change must receive a decision ID and record its reason and effects on safety, risk, data, contracts, and architecture. An open P0 issue blocks any affected execution or live-trading work. Reports and observed outcomes may propose a review, but they never change a rule automatically.
+
+Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
+
+## Locked product decisions
+
+| ID | Decision | Status |
+| --- | --- | --- |
+| DEC-001 | The product is a personal, single-user trading analysis and execution-control system for Windows and Android. | LOCKED |
+| DEC-002 | The initial market scope is OpoFinance/cTrader Forex and selected metals, Binance Spot, and Binance USD-M Futures. Initial watchlists cover Forex majors, XAU/selected metals, BTC, and ETH. Exact symbols remain open. | LOCKED |
+| DEC-003 | The default authority mode is Manual Confirm. Analysis Only and Constrained Auto are future modes; neither is implemented in this foundation. | LOCKED |
+| DEC-004 | No real account may be connected before all applicable test and live-gate criteria pass and the owner explicitly approves it. | LOCKED |
+| DEC-005 | AI has no authority over market-data truth, calculations, features, policy, risk, sizing, margin, leverage, order creation, execution, reconciliation, or settings. Deterministic Local Trading Node components own those responsibilities. | LOCKED |
+| DEC-006 | There are three live analytical AI roles: Analyst, Critic, and Judge. The Judge is conditional, invoked only for material conflict or an A+ candidate, and returns only `APPROVE`, `REJECT`, or `REANALYZE`. | LOCKED |
+| DEC-007 | Post-Trade Auditor is a fourth, non-live role. It may report and compare outcomes only. It cannot change rules, models, risk, prompts, weights, settings, or execution behavior. | LOCKED |
+| DEC-008 | Automatic learning and automatic modification of rules, prompts, weights, models, or risk settings are prohibited. Outcomes are stored and reported only. | LOCKED |
+| DEC-009 | The decision pipeline is `MarketEvent -> FeatureSnapshot -> StrategyCandidate -> AnalystProposal + CriticProposal -> JudgeDecision (conditional: material conflict or A+) -> Deterministic PolicyGate -> RiskDecision -> OrderIntent -> ExecutionReport -> AuditEvent`. | LOCKED |
+| DEC-010 | Only deterministic Local Trading Node components can calculate risk or create a risk-approved `OrderIntent`. AI output is structured analytical input and is always rejectable. | LOCKED |
+| DEC-011 | Uncertainty, stale or incomplete data, unresolved disagreement, schema failure, timeout, clock/sequence failure, or policy failure resolves fail-closed to no new trade. | LOCKED |
+| DEC-012 | Internal chain-of-thought is never displayed or stored. Only structured output, evidence references, uncertainties, rejection reasons, and auditable decisions may be persisted. | LOCKED |
+| DEC-013 | Context timeframes are 4H/1H, setup is 15M, and entry is 5M/1M. Counter-trend trading is future Manual Confirm only, A+ only, at fixed 0.25% risk; it is forbidden in Auto. | LOCKED |
+| DEC-014 | Scalp and Intraday are separate deterministic strategy engines with separate statistics and drawdown accounting. Parameter sharing requires an explicit owner decision. | LOCKED |
+| DEC-015 | A candidate requires a valid liquidity event, deterministic displacement and BOS/CHoCH, a valid entry area and invalidation, order-flow confirmation, no severe spread/volatility conflict, net R:R of at least 1.5 after costs, and no policy/risk prohibition. Exact definitions remain open. | LOCKED |
+| DEC-016 | ATR, VWAP, and Volume Profile are secondary filters. RSI, MACD, and moving averages are not v1 signal generators and cannot independently create or upgrade a candidate. | LOCKED |
+| DEC-017 | Only grades A and A+ are displayed for approval. Any future Auto mode may consider only conflict-free A+ candidates. Lower grades are stored for analysis only. | LOCKED |
+| DEC-018 | Candidate validity is dynamic and must be revalidated before future execution. Pending entry orders are cancelled on invalidation or after at most three entry-timeframe candles. Price is never chased after a missed fill. | LOCKED |
+| DEC-019 | Per-trade risk is adaptive from 0.25% to 0.75%. Total open portfolio risk across cTrader and Binance is capped at 1%, with at most three concurrent positions. | LOCKED |
+| DEC-020 | Default daily loss limit is 1.5%. At 3% drawdown, risk is halved; at 5%, new entries stop pending review. Raising a daily limit after a daily stop takes effect no earlier than the next day. | LOCKED |
+| DEC-021 | Position sizing, currency conversion, rounding, margin, min-notional, correlation, spread, slippage, and open-risk checks are deterministic. Any user change to size or risk must pass all gates again. | LOCKED |
+| DEC-022 | Future Binance Futures behavior is isolated margin only, adaptive 1x-3x leverage, and no simultaneous long and short position on one symbol. Initial future Auto trials are limited to A+, one session, and 0.25% risk for the first 100 trades. | LOCKED |
+| DEC-023 | High-impact news is a safety filter, not a direction predictor. New entries are blocked 30 minutes before and 15 minutes after a relevant event. A stale or unavailable calendar blocks affected assets only. | LOCKED |
+| DEC-024 | Forex DOM from one broker is secondary evidence and must never be represented as global Forex liquidity. Candles, bid/ask ticks, tick volume, spread, and market structure are primary. | LOCKED |
+| DEC-025 | BTC/ETH L2 planning assumes 50 bid and 50 ask levels. Raw L2 retention target is 30 days; derived features and the audit/event log are long-lived, subject to an unresolved storage policy. | LOCKED |
+| DEC-026 | The PWA is presentation and user interaction only. It cannot own persistent market connections, credentials, execution, risk, OMS, or large local models. | LOCKED |
+| DEC-027 | The v1 deterministic core is a separate Node.js/TypeScript Local Trading Node process on Windows. Rust is a later optimization option only if benchmarks prove a real bottleneck. | LOCKED |
+| DEC-028 | Local state is planned for SQLite WAL; Parquet/DuckDB are later analytical storage. The cloud-control boundary may synchronize encrypted state, notifications, device status, and executor lease, but does not run continuous analysis or execution in v1. | LOCKED |
+| DEC-029 | Every future event carries `schema_version`, `event_id`, `source`, `device_id`, `timestamp_exchange`, `timestamp_local`, and `correlation_id`. Every future `OrderIntent` carries an idempotency key. | LOCKED |
+| DEC-030 | Event logs are append-only and audit exports must remain readable. Secrets, account data, or credentials are prohibited in prompts, logs, crash reports, analytics, and repository files. | LOCKED |
+| DEC-031 | Protective SL/TP behavior, reconciliation, duplicate prevention, recovery, and executor failover are future deterministic OMS requirements. They are not implemented in this foundation. | LOCKED |
+| DEC-032 | Backtests, replay, paper simulation, and later execution reuse the same deterministic feature, strategy, risk, and OMS logic. Paper simulation and official demo/testnet results are reported separately. | LOCKED |
+| DEC-033 | The first live gate requires at least four consecutive paper/demo weeks, 500 valid signals overall, adequate per-market/path samples, positive post-cost expectancy, execution/data/security acceptance, and an explicit owner decision per market and strategy. Statistical details remain open. | LOCKED |
+| DEC-034 | The repository is TypeScript-first: Next.js/React PWA, Node.js Local Trading Node, and shared TypeScript contracts with JSON Schema at process boundaries. | LOCKED |
+| DEC-035 | Current foundation work must not add dependencies, source code, integrations, secrets, network clients, AI calls, model downloads, or lockfiles. All live, broker, connector, AI-router, and model-download switches default to disabled. | LOCKED |
+| DEC-036 | Work proceeds one roadmap phase at a time. Before a phase starts, its exact scope, unresolved owner decisions, and unsafe assumptions are stated. An unresolved P0/P1 issue is never silently resolved; affected work waits for owner approval. Compilation alone does not complete a phase. Live trading, connectors, secrets, AI calls, model downloads, and real execution remain prohibited until an explicit later owner decision. | LOCKED |
+| DEC-037 | Owner-facing conversation and progress reports shall be in Persian unless the owner explicitly requests another language. Technical repository identifiers and existing English implementation documents remain unchanged. | LOCKED |
+| DEC-038 | `Price`, `Quantity`, `Money`, `Percent`, and `R:R` values shall use decimal strings in wire contracts. JavaScript `number` is prohibited for authoritative financial calculations. Symbol precision shall come from versioned symbol metadata. The internal deterministic numeric type, rounding rules, metadata authority, and metadata-change behavior remain open. | LOCKED |
+| DEC-039 | Owner questions should use interactive selectable options when the interface supports them. When interactive controls are unavailable, ask one short Persian question at a time and do not interpret silence as approval. | LOCKED |
+| DEC-040 | Authoritative internal financial calculations shall use arbitrary-precision Decimal values. The exact package/runtime implementation requires a later dependency approval. Rounding rules, FX source/freshness, contract values, margin, step size, min-notional, metadata authority, and metadata-change behavior remain open. | LOCKED |
+| DEC-041 | The initially quantized order quantity shall be rounded down to the venue's permitted `stepSize`, so ordinary rounding cannot increase approved risk. DEC-042 defines the controlled minimum-order exception. Price, fee, FX, risk-amount, and other rounding rules remain open. | LOCKED |
+| DEC-042 | If quantity after initial rounding is below venue `minQty` or `minNotional`, it may be raised only to the minimum venue-valid quantity. Before it may proceed, every policy, risk, margin, correlation, and venue validation must run again; any failed validation rejects the trade. | LOCKED |
+| DEC-043 | The owner delegates the remaining Phase 1 P0/P1 default choices to the agent, using conservative, fail-closed engineering judgment. The resulting decisions are recorded in `phase-1-delegated-decisions-fa.md`; a later explicit owner instruction still prevails. This delegation does not authorize external capabilities. | LOCKED |
+| DEC-044 | Decimal, FX, price-validity, versioned instrument metadata, and deterministic sizing rules are fixed by the Phase 1 delegated decision profile. The planned Decimal package is `decimal.js`, to be considered only in Roadmap Phase 2 with a dependency approval. | LOCKED |
+| DEC-045 | Wire contracts use JSON Schema 2020-12, strict unknown-field handling, canonical decimal and timestamp semantics, UUIDv7 identifiers, SemVer versioning, and JCS hashing/replay as specified in the delegated profile. | LOCKED |
+| DEC-046 | Market-data freshness, drift, sequence, duplicate, reconnect, and stale-feed rules are fixed by the delegated profile; invalid or stale required data fails closed. | LOCKED |
+| DEC-047 | Versioned deterministic feature, order-flow, grading, and golden-dataset definitions are fixed by the delegated profile. | LOCKED |
+| DEC-048 | Material-conflict, Judge invocation, bounded reanalysis, timeout, and analytical-approval rules are fixed by the delegated profile; Judge remains analytical only. | LOCKED |
+| DEC-049 | Adaptive-risk mapping, portfolio equity, correlation groups/budgets, and manual-size limits are fixed by the delegated profile. | LOCKED |
+| DEC-050 | Sydney daily boundary, daily-loss basis, adjusted high-water mark, drawdown recovery, daily stop, and 5% manual-resume rules are fixed by the delegated profile. | LOCKED |
+| DEC-051 | The future OMS state machine, idempotency, reconciliation, protective-order, and recovery rules are fixed by the delegated profile; no OMS or adapter is implemented now. | LOCKED |
+| DEC-052 | Future device/cloud authority uses a fenced, monotonic lease with the delegated timing and fail-closed partition behavior; Android is not an executor before its approved phase. | LOCKED |
+| DEC-053 | The initial canonical market set is the seven specified FX pairs, XAUUSD, BTCUSDT, and ETHUSDT; venue mappings remain versioned registry data for a later phase. | LOCKED |
+| DEC-054 | Until an owner schedules a permitted session, all new entries default to `NO_NEW_ENTRIES`; exchange timestamps are authoritative and Sydney is display/reporting time. | LOCKED |
+| DEC-055 | A future read-only Trading Economics calendar adapter, deterministic impact/relevance mapping, and delegated blackout/staleness rules are selected; no provider client is added. | LOCKED |
+| DEC-056 | Candidate expiry, reanalysis, no-chase, and order-type lifecycle rules are fixed by the delegated profile. | LOCKED |
+| DEC-057 | The delegated post-cost model defines conservative deterministic cost assumptions, but no external execution or profitability claim is authorized. | LOCKED |
+| DEC-058 | Future v1 position management is fixed SL/TP only; partial take-profit, trailing, break-even, and automatic emergency flatten are prohibited unless later approved. | LOCKED |
+| DEC-059 | AI inputs remain non-authoritative analytical concepts. The Local Trading Node derives and validates all authoritative prices and execution-related values. | LOCKED |
+| DEC-060 | Human revisions are immutable, role-constrained proposals; they cannot bypass risk, policy, or execution controls and need audit/versioning. | LOCKED |
+| DEC-061 | Event taxonomy, ordering, deduplication, checkpoints, audit retention, and compatibility baseline are fixed by the delegated profile. | LOCKED |
+| DEC-062 | Future PWA-to-Local-Node transport is localhost HTTPS/WSS with authenticated pairing, origin restrictions, and fail-closed offline behavior; no transport is implemented now. | LOCKED |
+| DEC-063 | Android remains a view/approval client until the explicitly approved Android phase and cannot acquire executor authority in the foundation. | LOCKED |
+| DEC-064 | Data classification, encryption/key-custody direction, device trust, cloud-control limits, and no-secret handling are fixed as policy in the delegated profile; provider and implementation are deferred. | LOCKED |
+| DEC-065 | Local storage, retention, backup, integrity, deletion, and audit preservation policy are fixed in the delegated profile; no storage implementation is added. | LOCKED |
+| DEC-066 | Live statistical gates and their conservative evaluation baseline are fixed in the delegated profile. A passing future gate still requires explicit owner approval per market and strategy. | LOCKED |
+| DEC-067 | Cross-device determinism uses canonical serialization, pinned time-zone data, versioned metadata, and exact replay fixtures as specified in the delegated profile. | LOCKED |
+| DEC-068 | The owner formally accepts Roadmap Phase 1 after review of the delegated P0/P1 planning resolutions. Phase 1 is complete. This acceptance does not authorize Roadmap Phase 2, dependencies, schemas, source code, connectors, secrets, AI calls, model downloads, paper/demo, live trading, or execution. | LOCKED |
+
+## Open ambiguities and conflicts
+
+| ID | Priority | Area | Ambiguity or conflict | Unsafe assumption to avoid / required resolution |
+| --- | --- | --- | --- | --- |
+| OPEN-001 | P0 | Feature definitions | BOS, CHoCH, order block, FVG, sweep/raid, displacement, mitigation, absorption, liquidity wall, OFI, CVD, and grading thresholds are not numerically defined. | Do not implement from trader folklore. Approve versioned definitions and golden datasets first. |
+| OPEN-002 | P0 | Policy | “Material conflict,” the A+ criteria, Judge invocation details, `REANALYZE` limits, and the final handling of Analyst/Critic agreement are unspecified. | Default to no new trade until deterministic policy rules and bounded state transitions are approved. |
+| OPEN-003 | P0 | Contracts | DEC-038 fixes financial wire values as decimal strings and precision as versioned symbol metadata. Units, currencies, metadata authority/change behavior, identifier formats, evidence ownership, timestamp format, nullability, target cardinality, compatibility, and other invariants remain open. | Do not infer remaining wire semantics or permit free-form AI output. |
+| OPEN-004 | P0 | Risk | The mapping from candidate quality to adaptive 0.25%-0.75% risk, correlation groups/budgets, portfolio equity definition, and account aggregation are unspecified. | Use no sizing implementation until formulas and fixtures are approved. |
+| OPEN-005 | P0 | Drawdown | High-water mark, realized/unrealized treatment, reset timezone, daily boundary, deposits/withdrawals, and recovery from the 3%/5% states are unspecified. | Never silently reset drawdown or daily-stop state. |
+| OPEN-006 | P0 | Currency/math | DEC-038/DEC-040 select decimal representation and internal Decimal; DEC-041 defines initial quantity rounding down; DEC-042 permits a minimum-venue quantity increase only after full revalidation. AUD conversion source/freshness, contract value, rounding for price/fee/FX/risk amount, minimum-quantity formula inputs, margin, and metadata authority remain open. | Do not infer the Decimal package, remaining rounding policy, FX source, or metadata authority. |
+| OPEN-007 | P0 | Market data | Per-feed stale thresholds, clock-drift tolerance, packet-gap policy, sequence semantics, snapshot reconciliation, and out-of-order windows are unspecified. | Any undetected gap or stale feed must not produce a candidate. |
+| OPEN-008 | P0 | OMS | Order-state transitions, partial fills, cancel/replace races, idempotency lifetime, reconciliation precedence, protective-order semantics, and emergency flatten are undefined. | Broker semantics cannot be assumed equivalent. No connector or OMS implementation yet. |
+| OPEN-009 | P0 | Device authority | Lease acquisition, renewal, fencing token, split-brain prevention, failover timing, and recovery after cloud loss are not defined. | Never permit two executors based only on heartbeat timing. |
+| OPEN-010 | P1 | Market scope | The document speaks of “three markets” while listing Forex, metals, Spot, and Futures; exact Forex majors, metals, and venue symbol mappings are absent. | Establish a canonical instrument registry before feeds or storage schemas. |
+| OPEN-011 | P1 | Sessions | Per-symbol schedules, silence windows, Sydney/DST conversion, exchange-time authority, holidays, and daily-risk reset boundaries are absent. | Do not use local wall-clock time as trading truth. |
+| OPEN-012 | P1 | News | Calendar provider, revisions, event-to-asset mapping, impact levels, duplicate events, and stale thresholds are undecided. | Calendar failure affects only mapped assets, but mapping must first be deterministic. |
+| OPEN-013 | P1 | Candidate lifecycle | Which timeframe owns the three-candle expiry, reanalysis count, order-type selection, reprice behavior, and exact no-chase boundary are unclear. | Expired or changed-price approval must never be reusable. |
+| OPEN-014 | P1 | Execution costs | Spread, commission, funding, slippage, latency, reject, partial-fill, and net R:R models are not calibrated. | Paper/backtest profitability must not be presented without explicit cost assumptions. |
+| OPEN-015 | P1 | Position management | Default selection among fixed SL/TP, partial-at-TP1, and trailing after 1R - and gap/failure behavior for each - is undecided. | Do not invent a default exit policy. |
+| OPEN-016 | P1 | AI boundary | AI proposals contain price concepts, but deterministic ownership of authoritative entry/stop/targets and their validation needs a precise contract. | AI-proposed numbers are never executable or authoritative. |
+| OPEN-017 | P1 | Human revisions | Scope, versioning, authorization, rollback, and deterministic effect of current-analysis, symbol/timeframe, and permanent-rule edits are underspecified. | A human annotation must not become a risk or execution bypass. |
+| OPEN-018 | P1 | Event model | Event taxonomy, payloads, compatibility policy, ordering, deduplication, replay checkpoints, and audit retention are unspecified. | Treat the listed envelope fields as minimum metadata, not a complete contract. |
+| OPEN-019 | P1 | Local transport | PWA-to-Local-Node protocol, authentication, origins, encryption, discovery, version negotiation, and offline behavior are undecided. | Loopback location alone is not an authentication mechanism. |
+| OPEN-020 | P1 | Android | “Full capability” conflicts with the PWA restrictions and the native bridge being deferred. Background, thermal, battery, and local-model limits are unresolved. | Do not promise Android executor parity or 24/7 failover without native tests. |
+| OPEN-021 | P1 | Cloud/security | Cloud provider, sync payloads, encryption/key ownership, recovery, revocation, device trust, and data classification are undecided. | A shared future exchange credential creates correlated compromise risk and is not approved here. |
+| OPEN-022 | P1 | Storage | Long-lived derived data is unbounded; disk-pressure ordering, retention exceptions, backup encryption, restore authority, and integrity policy are incomplete. | Never delete state required to manage an open position or audit an incident. |
+| OPEN-023 | P1 | Statistical gate | “500 total” and “100 per market/path” overlap ambiguously; confidence intervals, stability windows, OOS rules, calibration, and Profit Factor 1.2 treatment are undefined. | Sample count or Profit Factor alone is not evidence of readiness. |
+| OPEN-024 | P1 | Determinism | Cross-device numeric representation, canonical serialization, timezone database version, and replay equivalence are unspecified. | “Same result on two devices” needs byte-level fixtures and tolerance rules. |
+| OPEN-025 | P2 | Data availability | Two years of free scalp data, five years of context data, and historical tick/trade quality may not exist uniformly. Full historical L2 is explicitly absent. | Backtest claims must disclose coverage and missing data. |
+| OPEN-026 | P2 | External availability | Free AI quotas, model names, runtime compatibility, model deprecation, and NPU performance can change. | No model/provider belongs on a production allowlist without current benchmark and regression evidence. |
+| OPEN-027 | P2 | Notifications | Telegram/email/Windows notification providers, privacy, delivery guarantees, and silence exceptions are undecided. | Notifications are informational only; approval must remain inside the trusted application. |
+| OPEN-028 | P2 | Reporting | Counterfactual fill assumptions, attribution to AI model/strategy/user decisions, and report retention are undefined. | Post-Trade Auditor reports cannot tune or mutate the system. |
+
+## Phase 1 P0/P1 blocker matrix
+
+Historical baseline: this table records the unresolved state before DEC-043. It is retained for traceability; the authoritative resolution ledger follows it.
+
+| Issue | Priority | Blocks roadmap phases | Blocking reason | Required owner decision |
+| --- | --- | --- | --- | --- |
+| OPEN-001 | P0 | 1, 4, 5, 6, 7, 9, 13 | Deterministic feature and grade behavior cannot be specified or tested. | Approve versioned numeric definitions and golden datasets. |
+| OPEN-002 | P0 | 1, 5, 6, 7, 13 | Material conflict, A+, Judge invocation, and `REANALYZE` transitions are undefined. | Approve bounded deterministic council-policy rules. |
+| OPEN-003 | P0 | 1, 2, 6, 7, 8, 10, 13 | DEC-038 answers financial wire representation and precision versioning, but remaining wire invariants and AI output validity are incomplete. | Approve units/currencies, metadata authority/change behavior, IDs, nullability, timestamps, evidence, targets, and compatibility rules. |
+| OPEN-004 | P0 | 1, 7, 9, 13 | Adaptive risk and portfolio/correlation allocation are undefined. | Approve risk mapping, equity/account aggregation, and correlation budgets. |
+| OPEN-005 | P0 | 1, 7, 9, 10, 13 | Daily loss and drawdown state cannot be calculated or recovered deterministically. | Approve accounting basis, high-water mark, reset, cash-flow treatment, and recovery transitions. |
+| OPEN-006 | P0 | 1, 2, 7, 8, 9, 13 | DEC-038/DEC-040 select wire representation and internal Decimal category; DEC-041/DEC-042 define quantity quantization and the revalidated minimum-order exception; other monetary math and venue ordering remain incomplete. | Approve Decimal package/runtime, FX source/freshness, contract value, price/fee/FX/risk rounding, minimum-quantity formula inputs, margin, and metadata authority. |
+| OPEN-007 | P0 | 1, 2, 3, 4, 5, 9, 13 | Invalid market data cannot be detected with approved tolerances. | Approve freshness, drift, gap, sequence, snapshot, and out-of-order policy per feed/timeframe. |
+| OPEN-008 | P0 | 1, 2, 8, 9, 10, 13 | OMS state, protective behavior, reconciliation, and duplicate prevention are undefined. | Approve state machine, partial fills, races, idempotency lifetime, reconciliation, and emergency handling. |
+| OPEN-009 | P0 | 1, 2, 8, 12, 13 | Single-executor safety and failover cannot be guaranteed. | Approve fenced lease, renewal, epoch, split-brain prevention, timeout, and cloud-loss behavior. |
+| OPEN-010 | P1 | 1, 2, 3, 4, 5, 7, 9, 13 | Canonical market/instrument scope is ambiguous. | Approve market count, Forex majors, metals, venue symbols, and instrument identity. |
+| OPEN-011 | P1 | 1, 2, 5, 7, 9, 11, 12, 13 | Session, silence, expiry, and daily reset time authority are undefined. | Approve per-symbol schedules, exchange time, Sydney/DST display, holidays, and reset boundary. |
+| OPEN-012 | P1 | 1, 2, 3, 5, 7, 13 | News safety behavior lacks provider and deterministic mapping. | Approve provider, impact taxonomy, revisions, duplicates, asset mapping, and stale threshold. |
+| OPEN-013 | P1 | 1, 2, 5, 7, 8, 9, 13 | Approval/order expiry and no-chase transitions are incomplete. | Approve owning timeframe, reanalysis count, order selection, repricing, and fill/cancel boundaries. |
+| OPEN-014 | P1 | 1, 5, 7, 8, 9, 13 | Net R:R, backtest, and execution acceptance lack calibrated costs. | Approve spread, commission, funding, slippage, latency, reject, and partial-fill models. |
+| OPEN-015 | P1 | 1, 7, 8, 9, 13 | Position exit/protection behavior has no approved default. | Approve exit method selection, gaps, failures, and protective-order transitions. |
+| OPEN-016 | P1 | 1, 2, 5, 6, 7, 13 | AI price concepts may be confused with authoritative deterministic values. | Approve proposal versus authoritative price ownership and validation contract. |
+| OPEN-017 | P1 | 1, 2, 5, 6, 7, 11, 12, 13 | Human revisions and sensitive changes lack scope and authorization rules. | Approve edit scope, versioning, authorization, rollback, and deterministic effect. |
+| OPEN-018 | P1 | 1, 2, 3, 8, 9, 10, 12, 13 | Event ordering, replay, deduplication, and audit compatibility are incomplete. | Approve taxonomy, payload ownership, compatibility, ordering, checkpoints, and retention. |
+| OPEN-019 | P1 | 1, 2, 11, 12, 13 | PWA-to-Local-Node trust and version boundary is undefined. | Approve protocol, authentication, origins, encryption, discovery, version negotiation, and offline behavior. |
+| OPEN-020 | P1 | 1, 2, 11, 12, 13 | Android capability claims conflict with PWA and device constraints. | Approve native-bridge scope, background behavior, resource gates, and failover responsibilities. |
+| OPEN-021 | P1 | 1, 2, 8, 10, 11, 12, 13 | Cloud, pairing, key custody, trust, recovery, and classification controls are undecided. | Approve provider boundaries, data classes, encryption, keys, device trust, recovery, and revocation. |
+| OPEN-022 | P1 | 1, 2, 3, 10, 11, 12, 13 | Retention, disk pressure, backup, restore, and deletion may lose safety/audit state. | Approve retention, priority, encryption, restore authority, integrity, and open-position exceptions. |
+| OPEN-023 | P1 | 1, 5, 6, 7, 9, 10, 13 | Live-gate statistical evidence and sample allocation are ambiguous. | Approve sample accounting, intervals, stability, OOS, calibration, and Profit Factor treatment. |
+| OPEN-024 | P1 | 1, 2, 4, 5, 7, 8, 9, 12, 13 | Cross-device/replay equivalence lacks canonical numeric and serialization rules. | Approve numeric representation, canonical serialization, timezone data, and comparison tolerances. |
+
+## Current phase gate
+
+Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Roadmap Phase 2 remains unstarted and requires separate explicit approval after its scope, remaining decisions, and unsafe assumptions are stated. External-capability flags remain disabled, and no source code, dependency, lockfile, credential placeholder, network client, connector, AI call, or model artifact is permitted.
+
+## Phase 1 P0/P1 resolution ledger
+
+The owner delegated the safe-default resolution of the originally open P0/P1 questions through DEC-043. `RESOLVED` means the requirement decision is locked, **not** that later implementation, integration, validation, or a live gate has passed. Normative detail is in [phase-1-delegated-decisions-fa.md](phase-1-delegated-decisions-fa.md).
+
+| Issue | Priority | Resolution decision | Affected phases | Status / implementation boundary |
+| --- | --- | --- | --- | --- |
+| OPEN-001 | P0 | DEC-047 | 1, 4, 5, 6, 7, 9, 13 | RESOLVED; no feature engine before Phase 4. |
+| OPEN-002 | P0 | DEC-048 | 1, 5, 6, 7, 13 | RESOLVED; no AI/Judge before Phase 6. |
+| OPEN-003 | P0 | DEC-045 | 1, 2, 6, 7, 8, 10, 13 | RESOLVED; schemas/contracts begin only in Phase 2. |
+| OPEN-004 | P0 | DEC-049 | 1, 7, 9, 13 | RESOLVED; risk core begins only in Phase 7. |
+| OPEN-005 | P0 | DEC-050 | 1, 7, 9, 10, 13 | RESOLVED; drawdown logic begins only in Phase 7. |
+| OPEN-006 | P0 | DEC-044 | 1, 2, 7, 8, 9, 13 | RESOLVED; no Decimal package/financial code before Phase 2 approval. |
+| OPEN-007 | P0 | DEC-046 | 1, 3, 4, 5, 7, 8, 9, 13 | RESOLVED; no market-data client before Phase 3 approval. |
+| OPEN-008 | P0 | DEC-051 | 1, 8, 9, 10, 13 | RESOLVED; no OMS/adapter before Phase 8 approval. |
+| OPEN-009 | P0 | DEC-052 | 1, 8, 11, 12, 13 | RESOLVED; no cloud/device authority before Phase 12 approval. |
+| OPEN-010 | P1 | DEC-053 | 2, 3, 4, 5, 7, 8, 9, 13 | RESOLVED; registry implementation is later work. |
+| OPEN-011 | P1 | DEC-054, DEC-050 | 2, 3, 5, 7, 9, 11, 12, 13 | RESOLVED; unscheduled entry is fail-closed. |
+| OPEN-012 | P1 | DEC-055 | 3, 5, 7, 9, 13 | RESOLVED; no calendar client before Phase 3 approval. |
+| OPEN-013 | P1 | DEC-056 | 5, 7, 8, 9, 13 | RESOLVED; lifecycle implementation is later work. |
+| OPEN-014 | P1 | DEC-057 | 5, 7, 8, 9, 13 | RESOLVED; no profitability claim or connector follows. |
+| OPEN-015 | P1 | DEC-058, DEC-051 | 7, 8, 9, 13 | RESOLVED; execution behavior remains prohibited. |
+| OPEN-016 | P1 | DEC-059 | 2, 5, 6, 7, 8, 13 | RESOLVED; AI remains disabled. |
+| OPEN-017 | P1 | DEC-060 | 5, 6, 7, 10, 11, 12, 13 | RESOLVED; user-edit UI is later work. |
+| OPEN-018 | P1 | DEC-045, DEC-061 | 2, 3, 4, 5, 7, 8, 9, 10, 11, 12, 13 | RESOLVED; event schemas are Phase 2 work. |
+| OPEN-019 | P1 | DEC-062 | 2, 11, 12, 13 | RESOLVED; no network client/transport is added. |
+| OPEN-020 | P1 | DEC-063 | 11, 12, 13 | RESOLVED; Android executor remains prohibited. |
+| OPEN-021 | P1 | DEC-064 | 2, 8, 10, 11, 12, 13 | RESOLVED; secrets/cloud remain prohibited. |
+| OPEN-022 | P1 | DEC-065 | 2, 3, 9, 10, 11, 12, 13 | RESOLVED; storage is later work. |
+| OPEN-023 | P1 | DEC-066 | 5, 6, 7, 9, 10, 13 | RESOLVED; no live eligibility is granted. |
+| OPEN-024 | P1 | DEC-067 | 2, 4, 5, 7, 8, 9, 10, 11, 12, 13 | RESOLVED; cross-device validation is later work. |
