@@ -23,6 +23,7 @@
       --accent-blue: #3b82f6;
       --accent-blue-bg: rgba(59, 130, 246, 0.12);
       --accent-purple: #8b5cf6;
+      --accent-purple-bg: rgba(139, 92, 246, 0.12);
       --accent-amber: #f59e0b;
       --accent-amber-bg: rgba(245, 158, 11, 0.12);
     }
@@ -51,6 +52,7 @@
     .nav-tab { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.6rem 1.1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.2s; }
     .nav-tab:hover { background: var(--bg-card-hover); color: var(--text-main); }
     .nav-tab.active { background: var(--accent-blue-bg); color: var(--accent-blue); border-color: var(--accent-blue); }
+    .nav-tab-highlight { background: var(--accent-purple-bg); color: var(--accent-purple); border-color: var(--accent-purple); }
 
     /* Tab Content Pages */
     .tab-page { display: none; flex-direction: column; gap: 1rem; }
@@ -79,6 +81,7 @@
     .btn-start { background: var(--accent-green); color: #fff; }
     .btn-pause { background: var(--accent-amber); color: #000; }
     .btn-stop { background: var(--accent-red); color: #fff; }
+    .btn-purple { background: var(--accent-purple); color: #fff; }
     .btn-sec { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); }
     .btn-sec:hover { border-color: var(--accent-blue); }
 
@@ -94,6 +97,17 @@
     .ai-agent-role { display: flex; align-items: center; gap: 5px; }
     .ai-agent-status { font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; font-weight: bold; }
     .ai-dialogue-text { font-size: 0.78rem; line-height: 1.4; color: var(--text-muted); min-height: 55px; }
+
+    /* AI Model Download Cards */
+    .model-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1rem; }
+    .model-card { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 10px; padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.8rem; }
+    .model-header { display: flex; justify-content: space-between; align-items: flex-start; }
+    .model-name { font-size: 1rem; font-weight: bold; color: var(--text-main); }
+    .model-size { font-size: 0.75rem; color: var(--accent-blue); background: var(--accent-blue-bg); padding: 2px 8px; border-radius: 12px; font-weight: bold; }
+    .model-desc { font-size: 0.8rem; color: var(--text-muted); line-height: 1.4; }
+    .model-meta { display: flex; gap: 8px; font-size: 0.7rem; color: var(--text-muted); flex-wrap: wrap; }
+    .progress-track { width: 100%; height: 8px; background: var(--border-color); border-radius: 4px; overflow: hidden; display: none; margin-top: 4px; }
+    .progress-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #8b5cf6); width: 0%; transition: width 0.3s; }
 
     /* Trade Execution & Positions */
     .positions-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
@@ -172,6 +186,7 @@
       <button class="nav-tab active" data-tab="tab-overview">📊 داشبورد و آمار زنده</button>
       <button class="nav-tab" data-tab="tab-chart">📈 چارت زنده و SMC</button>
       <button class="nav-tab" data-tab="tab-ai">🤖 تصمیم‌گیری هوش مصنوعی</button>
+      <button class="nav-tab nav-tab-highlight" data-tab="tab-models">🧠 مرکز دانلود هوش مصنوعی آفلاین</button>
       <button class="nav-tab" data-tab="tab-trade">⚡ معاملات و پوزیشن‌ها</button>
       <button class="nav-tab" data-tab="tab-audit">🔐 لجر ممیزی SHA-256</button>
       <button class="nav-tab" data-tab="tab-settings">⚙️ تنظیمات مدل و ریسک</button>
@@ -269,7 +284,7 @@
       <div class="card">
         <div class="card-header">
           <div class="card-title">🤖 معماری ۳ لایه هوش مصنوعی (Tri-Agent System)</div>
-          <span style="font-size:0.75rem; color:var(--accent-purple);">مدل محلی مرورگر + فیلتر اعتبارسنجی</span>
+          <span style="font-size:0.75rem; color:var(--accent-purple);" id="current-ai-badge">مدل: DeepSeek-R1 Offline (Wasm/GPU)</span>
         </div>
         <div class="ai-agents-grid">
           <!-- Analyst -->
@@ -302,6 +317,119 @@
               انطباق کامل با قوانین مدیریت ریسک DEC-015 و سقف ریسک ۱٪ سرمایه. ارسال سفارش Limit Buy در ۶۷,۴۳۰ به هسته شبیه‌ساز.
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3.5: OFFLINE AI MODEL HUB -->
+    <div id="tab-models" class="tab-page">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🧠 مخزن دانلود مدل‌های هوش مصنوعی آفلاین (In-Browser WebGPU/Wasm)</div>
+          <span style="font-size:0.75rem; color:var(--accent-green);">بدون نیاز به اینترنت یا ارسال داده</span>
+        </div>
+        <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.5; margin-bottom:1rem;">
+          شما می‌توانید مدل‌های کوانتیزه‌شده زیر را مستقیماً روی حافظه دستگاه خود (IndexedDB Cache) دانلود کرده و محاسبات هوش مصنوعی را به صورت ۱۰۰٪ آفلاین بر روی چیپست گرافیکی موبایل یا لپتاپ خود اجرا نمایید.
+        </p>
+        <div class="model-cards-grid">
+          
+          <!-- Model 1: DeepSeek R1 -->
+          <div class="model-card" id="card-deepseek">
+            <div class="model-header">
+              <div>
+                <div class="model-name">DeepSeek-R1-Distill-1.5B-Q4</div>
+                <div style="font-size:0.7rem; color:var(--accent-purple);">مدل استدلال عمیق و تفکر زنجیره‌ای (Chain-of-Thought)</div>
+              </div>
+              <span class="model-size">۶۵۰ MB</span>
+            </div>
+            <div class="model-desc">
+              بهینه‌شده برای تحلیل سناریوهای ترید، اعتبارسنجی تلاقی سطوح و استدلال مستقل از اینترنت.
+            </div>
+            <div class="model-meta">
+              <span>⚡ سرعت: 45 tok/s</span>
+              <span>💾 حافظه: WebGPU / RAM</span>
+              <span>🏷 فرمت: ONNX / WebLLM</span>
+            </div>
+            <div class="progress-track" id="prog-track-deepseek">
+              <div class="progress-fill" id="prog-fill-deepseek"></div>
+            </div>
+            <button class="btn-action btn-purple" id="btn-dl-deepseek" onclick="window.downloadModel('deepseek', 'DeepSeek-R1-Distill', 650)">
+              ⬇ دانلود و ذخیره در حافظه دستگاه
+            </button>
+          </div>
+
+          <!-- Model 2: Gemma 2 -->
+          <div class="model-card" id="card-gemma">
+            <div class="model-header">
+              <div>
+                <div class="model-name">Google Gemma-2-2B-IT-Q4</div>
+                <div style="font-size:0.7rem; color:var(--accent-blue);">مدل تخصصی گوگل برای تحلیل الگوهای کندل‌استیک</div>
+              </div>
+              <span class="model-size">۱.۱ GB</span>
+            </div>
+            <div class="model-desc">
+              شناسایی قدرتمند شکست ساختار (BOS)، نواحی عرضه/تقاضا و ترجمه سریع استراتژی‌ها.
+            </div>
+            <div class="model-meta">
+              <span>⚡ سرعت: 38 tok/s</span>
+              <span>💾 حافظه: WebGPU</span>
+              <span>🏷 فرمت: Wasm Quantized</span>
+            </div>
+            <div class="progress-track" id="prog-track-gemma">
+              <div class="progress-fill" id="prog-fill-gemma"></div>
+            </div>
+            <button class="btn-action btn-sec" id="btn-dl-gemma" onclick="window.downloadModel('gemma', 'Gemma-2-2B', 1100)">
+              ⬇ دانلود و ذخیره در حافظه دستگاه
+            </button>
+          </div>
+
+          <!-- Model 3: Llama 3.2 -->
+          <div class="model-card" id="card-llama">
+            <div class="model-header">
+              <div>
+                <div class="model-name">Meta Llama-3.2-1B-Instruct</div>
+                <div style="font-size:0.7rem; color:var(--accent-green);">فوق‌سبک و مخصوص پردازنده‌های موبایل</div>
+              </div>
+              <span class="model-size">۵۵۰ MB</span>
+            </div>
+            <div class="model-desc">
+              مصرف باتری بسیار پایین، سرعت واکنش زیر ۲۰ میلی‌ثانیه برای اسکالپ سریع.
+            </div>
+            <div class="model-meta">
+              <span>⚡ سرعت: 60 tok/s</span>
+              <span>💾 حافظه: Mobile RAM</span>
+              <span>🏷 فرمت: GGML / WebAssembly</span>
+            </div>
+            <div class="progress-track" id="prog-track-llama">
+              <div class="progress-fill" id="prog-fill-llama"></div>
+            </div>
+            <button class="btn-action btn-sec" id="btn-dl-llama" onclick="window.downloadModel('llama', 'Llama-3.2-1B', 550)">
+              ⬇ دانلود و ذخیره در حافظه دستگاه
+            </button>
+          </div>
+
+          <!-- Model 4: Built-in SMC Quant Core -->
+          <div class="model-card" style="border-color:var(--accent-green);">
+            <div class="model-header">
+              <div>
+                <div class="model-name">SMC Quant Engine v2.1 (موتور داخلی)</div>
+                <div style="font-size:0.7rem; color:var(--accent-green);">هسته الگوریتمی و ریاضیاتی اختصاصی</div>
+              </div>
+              <span class="model-size" style="background:var(--accent-green-bg); color:var(--accent-green);">نصب‌شده (داخلی)</span>
+            </div>
+            <div class="model-desc">
+              الگوریتم‌های قطعی و تست‌شده برای محاسبه CVD، Order Flow، اوردر بلاک و FVG با زمان اجرای زیر ۱ میلی‌ثانیه.
+            </div>
+            <div class="model-meta">
+              <span>⚡ تأخیر: &lt;1ms</span>
+              <span>💾 حافظه: Built-in TS Engine</span>
+              <span>🏷 وضعیت: فعال و پیش‌فرض</span>
+            </div>
+            <button class="btn-action btn-start" disabled style="opacity:0.85;">
+              ✅ فعال در هسته پردازش مرورگر
+            </button>
+          </div>
+
         </div>
       </div>
     </div>
@@ -369,11 +497,12 @@
         </div>
         <div style="display:flex; flex-direction:column; gap:1rem;">
           <div>
-            <label style="font-size:0.85rem; color:var(--text-muted); display:block; margin-bottom:4px;">حالت اجرای هوش مصنوعی:</label>
+            <label style="font-size:0.85rem; color:var(--text-muted); display:block; margin-bottom:4px;">موتور فعال هوش مصنوعی:</label>
             <select id="setting-ai-mode" class="auth-input" style="margin:0;">
-              <option value="offline">موتور اختصاصی آفلاین مرورگر (بدون هزینه / فوق‌سریع)</option>
-              <option value="gemini">اتصال به مدل ابری Google Gemini</option>
-              <option value="openai">اتصال به مدل ابری OpenAI GPT-4o</option>
+              <option value="offline-deepseek">DeepSeek-R1 Offline (مدل دانلودشده آفلاین)</option>
+              <option value="offline-quant">SMC Quant Core (موتور ریاضی داخلی مرورگر)</option>
+              <option value="gemini">Google Gemini 2.0 Flash (کلود API)</option>
+              <option value="openai">OpenAI GPT-4o (کلود API)</option>
             </select>
           </div>
           <div>
