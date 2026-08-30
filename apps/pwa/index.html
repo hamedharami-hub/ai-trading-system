@@ -3,17 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <meta name="theme-color" content="#070a12">
-  <title>ترمینال معاملاتی کوانت و هوش مصنوعی خودکار | Autonomous AI Quant Terminal</title>
+  <meta name="theme-color" content="#060911">
+  <title>سیستم معاملاتی چندعاملی هوش مصنوعی | AI Quant Trading Terminal v2.1</title>
   <link rel="manifest" href="/manifest.json">
   <style>
     :root {
-      --bg-main: #060911;
-      --bg-card: #0c1322;
-      --bg-card-hover: #121c32;
-      --bg-input: #090e1a;
-      --border-color: #1a2538;
-      --border-accent: #2c3e5d;
+      --bg-main: #050811;
+      --bg-card: #0b1120;
+      --bg-card-hover: #101930;
+      --bg-input: #080d1a;
+      --border-color: #172238;
+      --border-accent: #243556;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --text-dim: #64748b;
@@ -33,57 +33,57 @@
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
     body { background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; overflow-x: hidden; }
     
-    /* Layout */
-    .app-container { width: 100%; max-width: 1400px; margin: 0 auto; padding: 0.85rem; display: flex; flex-direction: column; gap: 0.85rem; flex: 1; }
+    /* App Layout */
+    .app-container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0.75rem; display: flex; flex-direction: column; gap: 0.75rem; flex: 1; }
     
-    /* Top Header Bar */
-    header { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 0.75rem 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
-    .brand-section { display: flex; align-items: center; gap: 0.75rem; }
-    .brand-logo { font-size: 1.5rem; }
-    .brand-title h1 { font-size: 1.1rem; font-weight: 800; background: linear-gradient(90deg, #60a5fa, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.5px; }
-    .brand-meta { display: flex; align-items: center; gap: 6px; margin-top: 2px; }
-    .badge-sim { background: var(--accent-amber-bg); color: var(--accent-amber); border: 1px solid var(--accent-amber); font-size: 0.68rem; padding: 2px 7px; border-radius: 10px; font-weight: bold; }
-    .badge-safety { background: var(--accent-green-bg); color: var(--accent-green); border: 1px solid var(--accent-green); font-size: 0.68rem; padding: 2px 7px; border-radius: 10px; font-weight: bold; }
+    /* Top Header */
+    header { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 0.7rem 1.1rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.6rem; }
+    .brand-box { display: flex; align-items: center; gap: 0.65rem; }
+    .brand-logo { font-size: 1.4rem; }
+    .brand-title h1 { font-size: 1.05rem; font-weight: 800; background: linear-gradient(90deg, #60a5fa, #c084fc); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .brand-sub { font-size: 0.68rem; color: var(--text-muted); display: flex; gap: 6px; align-items: center; margin-top: 2px; }
+    .badge-v2 { background: var(--accent-purple-bg); color: var(--accent-purple); border: 1px solid var(--accent-purple); font-size: 0.65rem; padding: 1px 6px; border-radius: 8px; font-weight: bold; }
+    .badge-sim { background: var(--accent-amber-bg); color: var(--accent-amber); border: 1px solid var(--accent-amber); font-size: 0.65rem; padding: 1px 6px; border-radius: 8px; font-weight: bold; }
     
-    .header-actions { display: flex; align-items: center; gap: 0.75rem; }
-    .symbol-pill { background: var(--bg-input); border: 1px solid var(--border-color); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; color: #fff; display: flex; align-items: center; gap: 6px; }
-    .user-pill { background: var(--bg-input); border: 1px solid var(--border-color); padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
-    .sync-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
-    .sync-on { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+    .header-pills { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+    .status-pill { background: var(--bg-input); border: 1px solid var(--border-color); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+    .sync-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .sync-on { background: var(--accent-green); box-shadow: 0 0 6px var(--accent-green); }
     .sync-off { background: var(--accent-amber); }
-    .btn-logout { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; }
-    .btn-logout:hover { color: var(--accent-red); border-color: var(--accent-red); }
+    .btn-header-logout { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.72rem; }
+    .btn-header-logout:hover { color: var(--accent-red); border-color: var(--accent-red); }
 
-    /* Navigation Bar */
-    .nav-tabs { display: flex; gap: 0.4rem; overflow-x: auto; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
-    .nav-tab { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.82rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.15s; }
+    /* Navigation Bar (7 Core Pages from PDF 11.2) */
+    .nav-tabs { display: flex; gap: 0.35rem; overflow-x: auto; padding-bottom: 2px; -webkit-overflow-scrolling: touch; }
+    .nav-tab { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.55rem 0.85rem; border-radius: 8px; font-size: 0.78rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 5px; white-space: nowrap; transition: all 0.15s; }
     .nav-tab:hover { background: var(--bg-card-hover); color: var(--text-main); }
     .nav-tab.active { background: var(--accent-blue-bg); color: var(--accent-blue); border-color: var(--accent-blue); }
     .nav-tab-purple { background: var(--accent-purple-bg); color: var(--accent-purple); border-color: var(--accent-purple); }
     .nav-tab-cyan { background: var(--accent-cyan-bg); color: var(--accent-cyan); border-color: var(--accent-cyan); }
+    .nav-tab-amber { background: var(--accent-amber-bg); color: var(--accent-amber); border-color: var(--accent-amber); }
 
-    /* Tab Content Pages */
-    .tab-page { display: none; flex-direction: column; gap: 0.85rem; }
+    /* Pages */
+    .tab-page { display: none; flex-direction: column; gap: 0.75rem; }
     .tab-page.active { display: flex; }
 
-    /* Grid Layouts */
-    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
-    .grid-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.85rem; }
-    .grid-main-side { display: grid; grid-template-columns: 2.2fr 1fr; gap: 0.85rem; }
+    /* Cards */
+    .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 1rem; }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.45rem; }
+    .card-title { font-size: 0.88rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 5px; }
+
+    /* Grids */
+    .grid-2col { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+    .grid-3col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.75rem; }
+    .grid-main-side { display: grid; grid-template-columns: 2fr 1fr; gap: 0.75rem; }
     @media (max-width: 900px) {
       .grid-2col, .grid-3col, .grid-main-side { grid-template-columns: 1fr; }
     }
 
-    /* Cards */
-    .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.1rem; }
-    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.85rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; }
-    .card-title { font-size: 0.92rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
-
     /* Stats Grid */
-    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr)); gap: 0.65rem; }
-    .stat-box { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.8rem; text-align: center; }
-    .stat-val { font-size: 1.25rem; font-weight: 800; font-family: monospace; }
-    .stat-lbl { font-size: 0.7rem; color: var(--text-muted); margin-top: 3px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.55rem; }
+    .stat-box { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.7rem; text-align: center; }
+    .stat-val { font-size: 1.2rem; font-weight: 800; font-family: monospace; }
+    .stat-lbl { font-size: 0.68rem; color: var(--text-muted); margin-top: 2px; }
     .c-green { color: var(--accent-green); }
     .c-red { color: var(--accent-red); }
     .c-blue { color: var(--accent-blue); }
@@ -91,9 +91,9 @@
     .c-purple { color: var(--accent-purple); }
     .c-cyan { color: var(--accent-cyan); }
 
-    /* Controls Bar */
-    .controls-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.85rem; }
-    .btn-action { flex: 1; min-width: 110px; padding: 0.65rem; border: none; border-radius: 8px; font-weight: 700; font-size: 0.82rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: opacity 0.2s; }
+    /* Buttons */
+    .controls-bar { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.75rem; }
+    .btn-action { flex: 1; min-width: 100px; padding: 0.6rem; border: none; border-radius: 6px; font-weight: 700; font-size: 0.8rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; }
     .btn-action:active { transform: scale(0.98); }
     .btn-start { background: var(--accent-green); color: #fff; }
     .btn-pause { background: var(--accent-amber); color: #000; }
@@ -103,74 +103,58 @@
     .btn-sec { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); }
     .btn-sec:hover { border-color: var(--accent-blue); }
 
-    /* Chart Simulation Canvas */
-    .chart-container { width: 100%; height: 320px; background: #04070e; border: 1px solid var(--border-color); border-radius: 8px; position: relative; overflow: hidden; }
+    /* Selectors */
+    .market-selector, .mode-selector { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 0.65rem; }
+    .market-btn, .mode-btn { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-muted); padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; cursor: pointer; }
+    .market-btn.active, .mode-btn.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
+
+    /* Canvas Chart */
+    .chart-container { width: 100%; height: 320px; background: #03060d; border: 1px solid var(--border-color); border-radius: 8px; position: relative; overflow: hidden; }
     #chart-canvas { width: 100%; height: 100%; }
-    .chart-overlay-info { position: absolute; top: 8px; right: 10px; background: rgba(12, 19, 34, 0.9); backdrop-filter: blur(4px); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.72rem; font-family: monospace; }
-    .chart-smc-legend { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 0.6rem; font-size: 0.72rem; color: var(--text-muted); }
+    .chart-overlay-info { position: absolute; top: 8px; right: 10px; background: rgba(11, 17, 32, 0.9); backdrop-filter: blur(4px); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.7rem; font-family: monospace; }
+    .chart-smc-legend { display: flex; gap: 0.85rem; flex-wrap: wrap; margin-top: 0.5rem; font-size: 0.7rem; color: var(--text-muted); }
 
-    /* Market Selector */
-    .market-selector { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 0.75rem; }
-    .market-btn { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-muted); padding: 4px 10px; border-radius: 6px; font-size: 0.78rem; font-weight: bold; cursor: pointer; }
-    .market-btn.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
+    /* Hamed Layer Interactive Toolbar */
+    .hamed-layer-box { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.65rem; }
+    .hamed-tools-row { display: flex; gap: 0.4rem; flex-wrap: wrap; align-items: center; }
 
-    /* Timeframe Selector */
-    .tf-selector { display: flex; gap: 4px; }
-    .tf-btn { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-muted); padding: 3px 9px; border-radius: 5px; font-size: 0.72rem; cursor: pointer; font-weight: 600; }
-    .tf-btn.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
+    /* AI Cards */
+    .ai-agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 0.65rem; }
+    .ai-agent-card { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem; }
+    .ai-agent-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem; font-size: 0.78rem; font-weight: bold; }
+    .ai-agent-role { display: flex; align-items: center; gap: 4px; }
+    .ai-agent-status { font-size: 0.65rem; padding: 2px 6px; border-radius: 8px; font-weight: bold; }
+    .ai-dialogue-text { font-size: 0.75rem; line-height: 1.45; color: var(--text-muted); min-height: 55px; }
 
-    /* AI Multi-Agent Dialogue */
-    .ai-agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; }
-    .ai-agent-card { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.85rem; }
-    .ai-agent-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: bold; }
-    .ai-agent-role { display: flex; align-items: center; gap: 5px; }
-    .ai-agent-status { font-size: 0.68rem; padding: 2px 7px; border-radius: 10px; font-weight: bold; }
-    .ai-dialogue-text { font-size: 0.78rem; line-height: 1.45; color: var(--text-muted); min-height: 60px; }
-
-    /* Order Flow Meters */
-    .of-meters-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 0.65rem; }
-    .of-meter-box { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.75rem; text-align: center; }
-    .of-meter-val { font-size: 1.1rem; font-weight: bold; font-family: monospace; margin: 4px 0; }
-    .meter-bar { width: 100%; height: 6px; background: #1e293b; border-radius: 3px; overflow: hidden; margin-top: 6px; }
-    .meter-bar-fill { height: 100%; width: 50%; }
-
-    /* AI Model Download Cards */
-    .model-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 0.85rem; }
-    .model-card { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 10px; padding: 1rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.75rem; }
+    /* Model Download Cards */
+    .model-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 0.75rem; }
+    .model-card { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.85rem; display: flex; flex-direction: column; justify-content: space-between; gap: 0.65rem; }
     .model-header { display: flex; justify-content: space-between; align-items: flex-start; }
-    .model-name { font-size: 0.95rem; font-weight: bold; color: var(--text-main); }
-    .model-size { font-size: 0.72rem; color: var(--accent-blue); background: var(--accent-blue-bg); padding: 2px 8px; border-radius: 12px; font-weight: bold; }
-    .model-desc { font-size: 0.78rem; color: var(--text-muted); line-height: 1.4; }
-    .model-meta { display: flex; gap: 8px; font-size: 0.7rem; color: var(--text-muted); flex-wrap: wrap; }
-    .progress-track { width: 100%; height: 8px; background: var(--border-color); border-radius: 4px; overflow: hidden; display: none; margin-top: 4px; }
+    .model-name { font-size: 0.88rem; font-weight: bold; color: var(--text-main); }
+    .model-badge { font-size: 0.68rem; padding: 2px 7px; border-radius: 10px; font-weight: bold; }
+    .progress-track { width: 100%; height: 6px; background: var(--border-color); border-radius: 3px; overflow: hidden; display: none; margin-top: 4px; }
     .progress-fill { height: 100%; background: linear-gradient(90deg, #3b82f6, #8b5cf6); width: 0%; transition: width 0.3s; }
 
-    /* Trade Execution & Positions */
-    .positions-table { width: 100%; border-collapse: collapse; font-size: 0.78rem; }
-    .positions-table th, .positions-table td { padding: 8px 6px; text-align: right; border-bottom: 1px solid var(--border-color); }
-    .positions-table th { color: var(--text-muted); font-size: 0.7rem; }
+    /* Trade Approval Card (PDF Section 7) */
+    .trade-approval-card { background: #081020; border: 2px solid var(--accent-green); border-radius: 10px; padding: 1rem; display: flex; flex-direction: column; gap: 0.65rem; }
+    .approval-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 0.5rem; text-align: center; }
 
-    /* Audit Log */
-    .audit-box { max-height: 320px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
-    .audit-row { background: var(--bg-input); border-radius: 6px; padding: 6px 10px; font-family: monospace; font-size: 0.72rem; display: flex; justify-content: space-between; align-items: center; border-right: 3px solid var(--accent-blue); }
-    .audit-action { font-weight: bold; color: var(--text-main); }
-    .audit-hash { color: var(--accent-blue); font-size: 0.65rem; }
+    /* Tables */
+    .data-table { width: 100%; border-collapse: collapse; font-size: 0.76rem; }
+    .data-table th, .data-table td { padding: 6px 8px; text-align: right; border-bottom: 1px solid var(--border-color); }
+    .data-table th { color: var(--text-muted); font-size: 0.68rem; }
 
-    /* Inputs */
-    .form-input { width: 100%; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; padding: 0.65rem 0.85rem; border-radius: 6px; font-size: 0.85rem; }
+    /* Audit & Logs */
+    .audit-box { max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
+    .audit-row { background: var(--bg-input); border-radius: 6px; padding: 5px 8px; font-family: monospace; font-size: 0.7rem; display: flex; justify-content: space-between; align-items: center; border-right: 3px solid var(--accent-blue); }
+    
+    /* Form input */
+    .form-input { width: 100%; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; padding: 0.6rem 0.75rem; border-radius: 6px; font-size: 0.8rem; }
     .form-input:focus { border-color: var(--accent-blue); outline: none; }
 
-    /* Auth Modal / Overlay */
-    #auth-overlay { position: fixed; inset: 0; background: rgba(4, 7, 14, 0.94); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
-    .auth-modal { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; width: 100%; max-width: 440px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.6); text-align: center; }
-    .auth-modal h2 { font-size: 1.35rem; margin-bottom: 0.35rem; font-weight: 800; }
-    .auth-modal p { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 1.25rem; line-height: 1.4; }
-    .auth-input { width: 100%; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; padding: 0.75rem 1rem; border-radius: 8px; font-size: 0.9rem; margin-bottom: 0.65rem; text-align: right; }
-    .auth-input:focus { border-color: var(--accent-blue); outline: none; }
-    .auth-btn-primary { width: 100%; background: var(--accent-blue); color: #fff; border: none; padding: 0.75rem; border-radius: 8px; font-weight: bold; font-size: 0.9rem; cursor: pointer; margin-bottom: 0.4rem; }
-    .auth-btn-sec { width: 100%; background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.65rem; border-radius: 8px; font-size: 0.82rem; cursor: pointer; margin-top: 0.3rem; }
-    .auth-btn-guest { width: 100%; background: var(--accent-green-bg); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 0.75rem; border-radius: 8px; font-weight: bold; font-size: 0.88rem; cursor: pointer; margin-top: 0.75rem; }
-    .auth-error-msg { color: var(--accent-red); font-size: 0.78rem; min-height: 1.3em; margin-top: 0.4rem; }
+    /* Auth Overlay */
+    #auth-overlay { position: fixed; inset: 0; background: rgba(3, 6, 12, 0.95); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+    .auth-modal { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 14px; width: 100%; max-width: 420px; padding: 1.8rem; box-shadow: 0 20px 40px rgba(0,0,0,0.6); text-align: center; }
   </style>
 </head>
 <body>
@@ -178,18 +162,18 @@
   <!-- Auth Modal -->
   <div id="auth-overlay">
     <div class="auth-modal">
-      <div style="font-size: 2.4rem; margin-bottom: 0.4rem;">🤖 📈 🔐</div>
-      <h2>Autonomous AI Trading Terminal</h2>
-      <p>سامانه معاملاتی خودکار هوش مصنوعی بر اساس مستندات معماری Authority v2.1</p>
+      <div style="font-size: 2.2rem; margin-bottom: 0.35rem;">🤖 📈 🔐</div>
+      <h2 style="font-size: 1.25rem; margin-bottom: 0.3rem;">سیستم معاملاتی چندعاملی هوش مصنوعی</h2>
+      <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 1.1rem;">معماری تأییدشده نسخه ۲.۱ (Forex / cTrader / Binance)</p>
 
-      <input type="email" id="auth-email" class="auth-input" placeholder="ایمیل شما (مثال: user@trade.com)" autocomplete="email">
-      <input type="password" id="auth-password" class="auth-input" placeholder="رمز عبور (حداقل ۶ نویسه)" autocomplete="current-password">
+      <input type="email" id="auth-email" class="form-input" style="margin-bottom:0.5rem;" placeholder="ایمیل کاربری (مثال: user@trade.com)" autocomplete="email">
+      <input type="password" id="auth-password" class="form-input" style="margin-bottom:0.75rem;" placeholder="رمز عبور (حداقل ۶ نویسه)" autocomplete="current-password">
 
-      <button id="auth-login-btn" class="auth-btn-primary">ورود به حساب کاربری</button>
-      <button id="auth-register-btn" class="auth-btn-sec">ثبت‌نام حساب جدید (Firebase)</button>
+      <button id="auth-login-btn" class="btn-action btn-start" style="width:100%; margin-bottom:0.4rem; height:40px;">ورود به حساب</button>
+      <button id="auth-register-btn" class="btn-action btn-sec" style="width:100%; margin-bottom:0.6rem; height:36px;">ثبت‌نام حساب جدید</button>
       
-      <button id="auth-guest-btn" class="auth-btn-guest">⚡ ورود مستقیم حالت دمو / مهمان (بدون نیاز به ثبت‌نام)</button>
-      <div id="auth-error-text" class="auth-error-msg"></div>
+      <button id="auth-guest-btn" class="btn-action btn-purple" style="width:100%; height:40px;">⚡ ورود مستقیم حالت دمو / مهمان (بدون نیاز به ثبت‌نام)</button>
+      <div id="auth-error-text" style="color:var(--accent-red); font-size:0.75rem; margin-top:0.4rem;"></div>
     </div>
   </div>
 
@@ -197,60 +181,64 @@
   <div class="app-container">
     <!-- Header -->
     <header>
-      <div class="brand-section">
+      <div class="brand-box">
         <span class="brand-logo">⚡</span>
         <div class="brand-title">
-          <h1>Autonomous Quant AI Terminal</h1>
-          <div class="brand-meta">
-            <span class="badge-sim">حالت شبیه‌سازی (PAPER)</span>
-            <span class="badge-safety">گیت امنیتی DEC-080</span>
-            <span style="font-size:0.7rem; color:var(--text-muted);" id="header-market-label">BTCUSDT (5M)</span>
+          <h1>سیستم معاملاتی چندعاملی هوش مصنوعی</h1>
+          <div class="brand-sub">
+            <span class="badge-v2">سند ۲.۱</span>
+            <span class="badge-sim">Paper Simulation</span>
+            <span id="header-market-label">BTCUSDT | 5M</span>
           </div>
         </div>
       </div>
-      <div class="header-actions">
-        <div class="user-pill">
+      <div class="header-pills">
+        <div class="status-pill">
           <span class="sync-dot sync-on" id="sync-indicator"></span>
           <span id="user-display-name">مهمان (محلی)</span>
         </div>
-        <button id="btn-logout" class="btn-logout">خروج</button>
+        <div class="status-pill" id="commander-pill" style="color:var(--accent-cyan);">
+          👑 فرمانده: این دستگاه
+        </div>
+        <button id="btn-logout" class="btn-header-logout">خروج</button>
       </div>
     </header>
 
-    <!-- Navigation Tabs -->
+    <!-- Navigation Tabs (7 Core Pages from PDF 11.2) -->
     <nav class="nav-tabs">
-      <button class="nav-tab active" data-tab="tab-overview">📊 داشبورد و آمار</button>
-      <button class="nav-tab" data-tab="tab-chart">📈 چارت و تحلیل SMC</button>
-      <button class="nav-tab" data-tab="tab-orderflow">🌊 اوردر فلو و دلتا (CVD)</button>
-      <button class="nav-tab" data-tab="tab-ai">🤖 شورای ۳ عامله هوش مصنوعی</button>
-      <button class="nav-tab nav-tab-purple" data-tab="tab-models">🧠 مرکز مدل‌های هوش مصنوعی آفلاین</button>
-      <button class="nav-tab" data-tab="tab-trade">⚡ میز ترید و پوزیشن‌ها</button>
-      <button class="nav-tab nav-tab-cyan" data-tab="tab-backtest">🧪 آزمایشگاه بک‌تست</button>
-      <button class="nav-tab" data-tab="tab-audit">🔐 لجر ممیزی SHA-256</button>
-      <button class="nav-tab" data-tab="tab-settings">⚙️ تنظیمات ریسک و مدل</button>
+      <button class="nav-tab active" data-tab="tab-command">🛰️ Command Center</button>
+      <button class="nav-tab" data-tab="tab-workspace">📈 Market Workspace & لایه حامد</button>
+      <button class="nav-tab" data-tab="tab-orderflow">🌊 Order Flow & اخبار</button>
+      <button class="nav-tab nav-tab-purple" data-tab="tab-ai-council">🤖 AI Council & کاتالوگ مدل‌ها</button>
+      <button class="nav-tab nav-tab-amber" data-tab="tab-approval">⚡ Trade Approval (کارت تایید)</button>
+      <button class="nav-tab" data-tab="tab-positions">📋 پوزیشن‌ها و سفارشات</button>
+      <button class="nav-tab nav-tab-cyan" data-tab="tab-replay">🧪 Replay, Backtest & Reports</button>
+      <button class="nav-tab" data-tab="tab-settings">⚙️ تنظیمات و لجر SHA-256</button>
     </nav>
 
-    <!-- TAB 1: OVERVIEW -->
-    <div id="tab-overview" class="tab-page active">
+    <!-- ======================================================== -->
+    <!-- PAGE 1: COMMAND CENTER (PDF 11.2)                         -->
+    <!-- ======================================================== -->
+    <div id="tab-command" class="tab-page active">
       <!-- Market Selector Bar -->
       <div class="market-selector">
-        <button class="market-btn active" data-symbol="BTCUSDT">BTC/USDT</button>
-        <button class="market-btn" data-symbol="ETHUSDT">ETH/USDT</button>
-        <button class="market-btn" data-symbol="SOLUSDT">SOL/USDT</button>
-        <button class="market-btn" data-symbol="XAUUSD">XAU/USD (طلا)</button>
-        <button class="market-btn" data-symbol="EURUSD">EUR/USD</button>
+        <button class="market-btn active" data-symbol="BTCUSDT">Binance: BTC/USDT</button>
+        <button class="market-btn" data-symbol="ETHUSDT">Binance: ETH/USDT</button>
+        <button class="market-btn" data-symbol="SOLUSDT">Binance: SOL/USDT</button>
+        <button class="market-btn" data-symbol="XAUUSD">cTrader: XAU/USD (طلا)</button>
+        <button class="market-btn" data-symbol="EURUSD">cTrader: EUR/USD</button>
       </div>
 
       <div class="card">
         <div class="card-header">
-          <div class="card-title">🚀 وضعیت هسته معاملاتی و ریسک</div>
-          <span id="node-badge" style="background:var(--accent-green-bg); color:var(--accent-green); padding:4px 10px; border-radius:12px; font-weight:bold; font-size:0.75rem;">● موتور فعال (RUNNING)</span>
+          <div class="card-title">🚀 وضعیت مرکز فرماندهی و بودجه ریسک پورتفوی</div>
+          <span id="node-badge" style="background:var(--accent-green-bg); color:var(--accent-green); padding:3px 8px; border-radius:10px; font-weight:bold; font-size:0.72rem;">● موتور فعال (RUNNING)</span>
         </div>
-        
+
         <div class="stats-grid">
           <div class="stat-box">
             <div class="stat-val c-green" id="dash-equity">$10,000.00</div>
-            <div class="stat-lbl">ارزش کل حساب (Equity)</div>
+            <div class="stat-lbl">ارزش کل حساب (Equity AUD)</div>
           </div>
           <div class="stat-box">
             <div class="stat-val" id="dash-balance">$10,000.00</div>
@@ -258,315 +246,353 @@
           </div>
           <div class="stat-box">
             <div class="stat-val c-blue" id="dash-price">$67,450.00</div>
-            <div class="stat-lbl">قیمت زنده دارایی</div>
+            <div class="stat-lbl">قیمت زنده دارایی انتخابی</div>
           </div>
           <div class="stat-box">
             <div class="stat-val c-amber" id="dash-pnl">+$0.00 (0.00%)</div>
             <div class="stat-lbl">سود / زیان کل (PnL)</div>
           </div>
           <div class="stat-box">
-            <div class="stat-val c-purple" id="dash-trades">0</div>
-            <div class="stat-lbl">تعداد کل معاملات</div>
+            <div class="stat-val c-purple" id="dash-risk-open">0.00% / 1.0%</div>
+            <div class="stat-lbl">ریسک باز پورتفوی مشترک</div>
           </div>
           <div class="stat-box">
-            <div class="stat-val c-red" id="dash-drawdown">0.00%</div>
-            <div class="stat-lbl">دراداون روزانه (سقف ۳٪)</div>
+            <div class="stat-val c-red" id="dash-drawdown">0.00% / 3.0%</div>
+            <div class="stat-lbl">دراداون روزانه (محافظ ضدانتقام)</div>
           </div>
         </div>
 
         <div class="controls-bar">
           <button id="ctrl-start" class="btn-action btn-start">▶ شروع موتور خودکار</button>
-          <button id="ctrl-pause" class="btn-action btn-pause">⏸ توقف موقت (Pause)</button>
-          <button id="ctrl-stop" class="btn-action btn-stop">🛑 توقف اضطراری (Kill-Switch)</button>
+          <button id="ctrl-pause" class="btn-action btn-pause">⏸ توقف موقت (Pause New Entries)</button>
+          <button id="ctrl-stop" class="btn-action btn-stop">🛑 توقف اضطراری (Kill Switch / Flatten)</button>
         </div>
       </div>
 
-      <!-- Quick AI Consensus -->
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">🧠 اجماع تصمیم‌گیری شورای هوش مصنوعی (Tri-Agent Consensus)</div>
-          <span style="font-size:0.72rem; color:var(--text-muted);" id="ai-last-eval-time">همین الان</span>
-        </div>
-        <div style="background:var(--bg-input); padding:0.85rem; border-radius:8px; border:1px solid var(--border-color);">
-          <div style="display:flex; justify-content:space-between; margin-bottom:6px; flex-wrap:wrap; gap:4px;">
-            <strong id="ai-consensus-signal" style="color:var(--accent-green); font-size:0.92rem;">سیگنال: آماده ورود به معامله خرید (BUY - رتبه A+)</strong>
-            <span style="font-size:0.78rem; color:var(--text-muted);">ریسک به ریوارد: <strong>1:2.45</strong> | حجم مجاز: <strong>0.034 BTC</strong></span>
+      <!-- Invariant & Safety Overview -->
+      <div class="grid-2col">
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">🛡️ پارامترهای قطعی ریسک (سند بخش ۸.۱)</div>
           </div>
-          <p id="ai-consensus-desc" style="font-size:0.78rem; color:var(--text-muted); line-height:1.5;">
-            تایید تلاقی اوردر بلاک صعودی (Bullish OB) در کف تایم‌فریم ۵ دقیقه همراه با سوییپ نقدینگی کف و واگرایی مثبت دلتای تجمعی حجم (CVD). هسته کنترل ریسک انطباق با سقف ریسک ۱٪ سرمایه را تایید کرد.
-          </p>
+          <div style="font-size:0.75rem; color:var(--text-muted); display:flex; flex-direction:column; gap:5px;">
+            <div>• <strong>ریسک هر معامله:</strong> ۰.۲۵٪ تا ۰.۷۵٪ تطبیقی (حالت A+)</div>
+            <div>• <strong>سقف ریسک کل:</strong> حداکثر ۱٪ برای پورتفوی مشترک Binance و cTrader</div>
+            <div>• <strong>تعداد پوزیشن همزمان:</strong> حداکثر ۳ پوزیشن مجاز (قانون DEC-015)</div>
+            <div>• <strong>سقف افت روزانه (Daily Loss):</strong> پیش‌فرض ۱.۵٪ (افت ۳٪ = نصف‌شدن ریسک / افت ۵٪ = توقف کامل)</div>
+            <div>• <strong>محافظ ضدانتقام:</strong> در صورت لمس استاپ روزانه، افزایش سقف در همان روز ممنوع است.</div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📡 وضعیت اتصال داده‌ها (سند بخش ۲.۱)</div>
+          </div>
+          <div style="font-size:0.75rem; color:var(--text-muted); display:flex; flex-direction:column; gap:5px;">
+            <div>• <strong>Binance Spot & Futures:</strong> فید L2 زنده (۵۰ سطح Bid/Ask) + Trades + Mark Price</div>
+            <div>• <strong>cTrader / OpoFinance:</strong> فید Tick + کندل‌ها + حجم + Spread Controller</div>
+            <div>• <strong>ردیاب انحراف ساعت (Clock Sync):</strong> تاخیر فعلی: <span class="c-green" id="clock-latency-disp">12ms (عادی)</span></div>
+            <div>• <strong>کنترل توالی (Sequence Tracker):</strong> بدون گپ داده یا پکت مفقودی (Gap Count: 0)</div>
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- TAB 2: CHART & SMC -->
-    <div id="tab-chart" class="tab-page">
+    <!-- ======================================================== -->
+    <!-- PAGE 2: MARKET WORKSPACE & HAMED LAYER (PDF 6.2 & 11.2)   -->
+    <!-- ======================================================== -->
+    <div id="tab-workspace" class="tab-page">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">📈 ساختار بازار هوشمند (Smart Money Concepts - SMC)</div>
-          <div class="tf-selector">
-            <button class="tf-btn" data-tf="1M">1M</button>
-            <button class="tf-btn active" data-tf="5M">5M</button>
-            <button class="tf-btn" data-tf="15M">15M</button>
-            <button class="tf-btn" data-tf="1H">1H</button>
-            <button class="tf-btn" data-tf="4H">4H</button>
+          <div class="card-title">📈 ساختار بازار چندتایم‌فریمی (Context 4H/1H + Setup 15M + Entry 5M/1M)</div>
+          <div class="tf-selector" style="display:flex; gap:4px;">
+            <button class="market-btn" data-tf="1M">1M</button>
+            <button class="market-btn active" data-tf="5M">5M</button>
+            <button class="market-btn" data-tf="15M">15M</button>
+            <button class="market-btn" data-tf="1H">1H</button>
+            <button class="market-btn" data-tf="4H">4H</button>
           </div>
         </div>
+        
         <div class="chart-container">
           <canvas id="chart-canvas"></canvas>
           <div class="chart-overlay-info">
             <span id="chart-candle-info">O: 67420 | H: 67500 | L: 67400 | C: 67485</span>
           </div>
         </div>
+
         <div class="chart-smc-legend">
-          <span>🟩 Order Block صعودی (Bullish OB)</span>
-          <span>🟥 Order Block نزولی (Bearish OB)</span>
+          <span>🟩 Bullish Order Block (OB)</span>
+          <span>🟥 Bearish Order Block (OB)</span>
           <span>🟨 Fair Value Gap (FVG)</span>
-          <span>⚡ شکست ساختار (BOS / CHoCH)</span>
-          <span>🎯 نقدینگی کف و سقف (BSL / SSL)</span>
+          <span>⚡ نقدینگی BSL / SSL</span>
+          <span>🎯 شکست ساختار (BOS / CHoCH)</span>
+        </div>
+
+        <!-- Hamed Layer & Consensus (PDF Section 6.2) -->
+        <div class="hamed-layer-box">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <strong style="font-size:0.82rem; color:var(--accent-cyan);">✏️ «لایه حامد» (Hamed Layer) — تحلیل تعاملی هم‌سطح کاربر و AI</strong>
+            <span style="font-size:0.7rem; color:var(--text-muted);" id="consensus-status-badge">وضعیت: توافق کامل (Consensus Reached)</span>
+          </div>
+          <div class="hamed-tools-row">
+            <input type="text" id="hamed-cmd-input" class="form-input" placeholder="دستور متنی فارسی (مثال: ناحیه تقاضای ۶۷۳۵۰ را رسم کن یا برچسب FVG را به ۶۷۲۰۰ تغییر بده)" style="flex:1;">
+            <button id="btn-apply-hamed-layer" class="btn-action btn-cyan" style="min-width:110px; height:34px;">اعمال در لایه حامد</button>
+            <button id="btn-reanalyze-consensus" class="btn-action btn-sec" style="min-width:100px; height:34px;">بازتحلیل AI</button>
+          </div>
+          <div style="font-size:0.7rem; color:var(--text-dim);">
+            تاریخچه تغییرات ثبت می‌شود و هوش مصنوعی سناریوی خود را با تحلیل شما وفق داده و نقاط توافق/اختلاف را استخراج می‌کند.
+          </div>
         </div>
       </div>
     </div>
 
-    <!-- TAB 3: ORDER FLOW & CVD -->
+    <!-- ======================================================== -->
+    <!-- PAGE 3: ORDER FLOW & NEWS FILTER (PDF 4.3 & 4.4)          -->
+    <!-- ======================================================== -->
     <div id="tab-orderflow" class="tab-page">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">🌊 تحلیل جریان سفارشات و دلتای حجم (Order Flow & CVD)</div>
-          <span style="font-size:0.75rem; color:var(--accent-cyan);">محاسبه در زمان واقعی بر اساس فید تیک‌ها</span>
-        </div>
-        <div class="of-meters-grid">
-          <div class="of-meter-box">
-            <div class="stat-lbl">دلتای تجمعی حجم (CVD)</div>
-            <div class="of-meter-val c-green" id="of-cvd-val">+142.50 BTC</div>
-            <div class="stat-lbl" style="font-size:0.65rem; color:var(--accent-green);">فشار خرید خالص خریداران مهاجم</div>
-          </div>
-          <div class="of-meter-box">
-            <div class="stat-lbl">عدم تعادل سفارشات (OFI)</div>
-            <div class="of-meter-val c-blue" id="of-ofi-val">+0.68</div>
-            <div class="stat-lbl" style="font-size:0.65rem;">عدم تعادل مثبت عمق لایه‌ها</div>
-          </div>
-          <div class="of-meter-box">
-            <div class="stat-lbl">نقطه کنترل حجم (VP POC)</div>
-            <div class="of-meter-val c-amber" id="of-poc-val">$67,410.00</div>
-            <div class="stat-lbl" style="font-size:0.65rem;">بیشترین حجم مبادله‌شده جلسه</div>
-          </div>
-          <div class="of-meter-box">
-            <div class="stat-lbl">دامنه نوسان واقعی (ATR 14)</div>
-            <div class="of-meter-val c-purple" id="of-atr-val">$184.20</div>
-            <div class="stat-lbl" style="font-size:0.65rem;">نوسان پویای کندل ۵ دقیقه‌ای</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 4: AI MULTI-AGENT COUNCIL -->
-    <div id="tab-ai" class="tab-page">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">🤖 شورای ۳ عامله هوش مصنوعی (Tri-Agent Governance)</div>
-          <span style="font-size:0.75rem; color:var(--accent-purple);" id="current-ai-badge">مدل: DeepSeek-R1 Offline (Wasm/GPU)</span>
-        </div>
-        <div class="ai-agents-grid">
-          <!-- Analyst -->
-          <div class="ai-agent-card">
-            <div class="ai-agent-header">
-              <div class="ai-agent-role"><span>🔍</span> تحلیل‌گر تکنیکال (Analyst)</div>
-              <span class="ai-agent-status" style="background:var(--accent-blue-bg); color:var(--accent-blue);">BULLISH</span>
-            </div>
-            <div class="ai-dialogue-text" id="ai-analyst-text">
-              شکل‌گیری FVG صعودی در محدوده ۶۷,۳۸۰ دلار با مومنتوم مثبت شناسایی شد. پیشنهاد لانگ با حد ضرر زیر سوئینگ قبلی.
-            </div>
-          </div>
-          <!-- Critic -->
-          <div class="ai-agent-card">
-            <div class="ai-agent-header">
-              <div class="ai-agent-role"><span>🛡️</span> منتقد و ارزیاب ریسک (Critic)</div>
-              <span class="ai-agent-status" style="background:var(--accent-amber-bg); color:var(--accent-amber);">CAUTION</span>
-            </div>
-            <div class="ai-dialogue-text" id="ai-critic-text">
-              اسپرد مارکت در محدوده نرمال است اما مقاومت ۶۷,۶۰۰ نزدیک است. ریسک به ریوارد ۱:۲.۲ مجاز بوده و وارد حباب نیست.
-            </div>
-          </div>
-          <!-- Judge -->
-          <div class="ai-agent-card">
-            <div class="ai-agent-header">
-              <div class="ai-agent-role"><span>⚖️</span> قاضی و مجری نهایی (Judge)</div>
-              <span class="ai-agent-status" style="background:var(--accent-green-bg); color:var(--accent-green);">APPROVED</span>
-            </div>
-            <div class="ai-dialogue-text" id="ai-judge-text">
-              انطباق کامل با قوانین مدیریت ریسک DEC-015 و سقف ریسک ۱٪ سرمایه. ارسال سفارش Limit Buy در ۶۷,۴۳۰ به هسته شبیه‌ساز.
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 5: OFFLINE AI MODEL HUB -->
-    <div id="tab-models" class="tab-page">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">🧠 مخزن دانلود مدل‌های هوش مصنوعی آفلاین (In-Browser WebGPU/Wasm)</div>
-          <span style="font-size:0.75rem; color:var(--accent-green);">بدون نیاز به اینترنت یا ارسال داده</span>
-        </div>
-        <p style="font-size:0.78rem; color:var(--text-muted); line-height:1.5; margin-bottom:0.85rem;">
-          شما می‌توانید مدل‌های کوانتیزه‌شده زیر را مستقیماً روی حافظه دستگاه خود (IndexedDB Cache) دانلود کرده و محاسبات هوش مصنوعی را به صورت ۱۰۰٪ آفلاین بر روی چیپست گرافیکی موبایل یا لپتاپ خود اجرا نمایید.
-        </p>
-        <div class="model-cards-grid">
-          
-          <!-- Model 1: DeepSeek R1 -->
-          <div class="model-card" id="card-deepseek">
-            <div class="model-header">
-              <div>
-                <div class="model-name">DeepSeek-R1-Distill-1.5B-Q4</div>
-                <div style="font-size:0.7rem; color:var(--accent-purple);">مدل استدلال عمیق و تفکر زنجیره‌ای (Chain-of-Thought)</div>
-              </div>
-              <span class="model-size">۶۵۰ MB</span>
-            </div>
-            <div class="model-desc">
-              بهینه‌شده برای تحلیل سناریوهای ترید، اعتبارسنجی تلاقی سطوح و استدلال مستقل از اینترنت.
-            </div>
-            <div class="model-meta">
-              <span>⚡ سرعت: 45 tok/s</span>
-              <span>💾 حافظه: WebGPU / RAM</span>
-              <span>🏷 فرمت: ONNX / WebLLM</span>
-            </div>
-            <div class="progress-track" id="prog-track-deepseek">
-              <div class="progress-fill" id="prog-fill-deepseek"></div>
-            </div>
-            <button class="btn-action btn-purple" id="btn-dl-deepseek" onclick="window.downloadModel('deepseek', 'DeepSeek-R1-Distill', 650)">
-              ⬇ دانلود و ذخیره در حافظه دستگاه
-            </button>
-          </div>
-
-          <!-- Model 2: Gemma 2 -->
-          <div class="model-card" id="card-gemma">
-            <div class="model-header">
-              <div>
-                <div class="model-name">Google Gemma-2-2B-IT-Q4</div>
-                <div style="font-size:0.7rem; color:var(--accent-blue);">مدل تخصصی گوگل برای تحلیل الگوهای کندل‌استیک</div>
-              </div>
-              <span class="model-size">۱.۱ GB</span>
-            </div>
-            <div class="model-desc">
-              شناسایی قدرتمند شکست ساختار (BOS)، نواحی عرضه/تقاضا و ترجمه سریع استراتژی‌ها.
-            </div>
-            <div class="model-meta">
-              <span>⚡ سرعت: 38 tok/s</span>
-              <span>💾 حافظه: WebGPU</span>
-              <span>🏷 فرمت: Wasm Quantized</span>
-            </div>
-            <div class="progress-track" id="prog-track-gemma">
-              <div class="progress-fill" id="prog-fill-gemma"></div>
-            </div>
-            <button class="btn-action btn-sec" id="btn-dl-gemma" onclick="window.downloadModel('gemma', 'Gemma-2-2B', 1100)">
-              ⬇ دانلود و ذخیره در حافظه دستگاه
-            </button>
-          </div>
-
-          <!-- Model 3: Llama 3.2 -->
-          <div class="model-card" id="card-llama">
-            <div class="model-header">
-              <div>
-                <div class="model-name">Meta Llama-3.2-1B-Instruct</div>
-                <div style="font-size:0.7rem; color:var(--accent-green);">فوق‌سبک و مخصوص پردازنده‌های موبایل</div>
-              </div>
-              <span class="model-size">۵۵۰ MB</span>
-            </div>
-            <div class="model-desc">
-              مصرف باتری بسیار پایین، سرعت واکنش زیر ۲۰ میلی‌ثانیه برای اسکالپ سریع.
-            </div>
-            <div class="model-meta">
-              <span>⚡ سرعت: 60 tok/s</span>
-              <span>💾 حافظه: Mobile RAM</span>
-              <span>🏷 فرمت: GGML / WebAssembly</span>
-            </div>
-            <div class="progress-track" id="prog-track-llama">
-              <div class="progress-fill" id="prog-fill-llama"></div>
-            </div>
-            <button class="btn-action btn-sec" id="btn-dl-llama" onclick="window.downloadModel('llama', 'Llama-3.2-1B', 550)">
-              ⬇ دانلود و ذخیره در حافظه دستگاه
-            </button>
-          </div>
-
-          <!-- Model 4: Built-in SMC Quant Core -->
-          <div class="model-card" style="border-color:var(--accent-green);">
-            <div class="model-header">
-              <div>
-                <div class="model-name">SMC Quant Engine v2.1 (موتور داخلی)</div>
-                <div style="font-size:0.7rem; color:var(--accent-green);">هسته الگوریتمی و ریاضیاتی اختصاصی</div>
-              </div>
-              <span class="model-size" style="background:var(--accent-green-bg); color:var(--accent-green);">نصب‌شده (داخلی)</span>
-            </div>
-            <div class="model-desc">
-              الگوریتم‌های قطعی و تست‌شده برای محاسبه CVD، Order Flow، اوردر بلاک و FVG با زمان اجرای زیر ۱ میلی‌ثانیه.
-            </div>
-            <div class="model-meta">
-              <span>⚡ تأخیر: &lt;1ms</span>
-              <span>💾 حافظه: Built-in TS Engine</span>
-              <span>🏷 وضعیت: فعال و پیش‌فرض</span>
-            </div>
-            <button class="btn-action btn-start" disabled style="opacity:0.85;">
-              ✅ فعال در هسته پردازش مرورگر
-            </button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 6: TRADE DESK & POSITIONS -->
-    <div id="tab-trade" class="tab-page">
-      <div class="grid-main-side">
+      <div class="grid-2col">
         <div class="card">
           <div class="card-header">
-            <div class="card-title">⚡ ثبت سفارش سریع و دستی (Manual & Bracket Orders)</div>
+            <div class="card-title">🌊 متغیرهای جریان سفارشات (Order Flow Metrics)</div>
           </div>
-          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(130px, 1fr)); gap:0.6rem; align-items:flex-end;">
-            <div>
-              <label style="font-size:0.72rem; color:var(--text-muted); display:block; margin-bottom:3px;">حجم سفارش (Size):</label>
-              <input type="number" id="trade-qty" class="form-input" value="0.05" step="0.01">
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-lbl">دلتای تجمعی حجم (CVD)</div>
+              <div class="stat-val c-green" id="of-cvd-val">+142.50 BTC</div>
+              <div class="stat-lbl">تفاضل حجم خرید و فروش تهاجمی</div>
             </div>
-            <div>
-              <label style="font-size:0.72rem; color:var(--text-muted); display:block; margin-bottom:3px;">حد ضرر خودکار (SL):</label>
-              <input type="text" id="trade-sl-disp" class="form-input" value="پویا بر اساس ATR" disabled style="opacity:0.7;">
+            <div class="stat-box">
+              <div class="stat-lbl">عدم تعادل سفارشات (OFI)</div>
+              <div class="stat-val c-blue" id="of-ofi-val">+0.68</div>
+              <div class="stat-lbl">فشار خالص لایه‌های Ask/Bid</div>
             </div>
-            <div>
-              <label style="font-size:0.72rem; color:var(--text-muted); display:block; margin-bottom:3px;">حد سود خودکار (TP):</label>
-              <input type="text" id="trade-tp-disp" class="form-input" value="R:R 1:2.0" disabled style="opacity:0.7;">
+            <div class="stat-box">
+              <div class="stat-lbl">عدم تقارن عمق (Depth Imbalance)</div>
+              <div class="stat-val c-amber" id="of-imb-val">1.45 : 1.0</div>
+              <div class="stat-lbl">نسبت حجم نقدینگی خرید به فروش</div>
             </div>
-            <button id="btn-manual-buy" class="btn-action btn-start" style="height:38px;">خرید دستی (BUY)</button>
-            <button id="btn-manual-sell" class="btn-action btn-stop" style="height:38px;">فروش دستی (SELL)</button>
+            <div class="stat-box">
+              <div class="stat-lbl">پروفایل حجم (VP POC)</div>
+              <div class="stat-val c-purple" id="of-poc-val">$67,410.00</div>
+              <div class="stat-lbl">نقطه بیشترین تراکم حجم جلسه</div>
+            </div>
           </div>
         </div>
 
-        <div class="card" style="display:flex; flex-direction:column; justify-content:center;">
-          <div class="stat-lbl">مدیریت پوزیشن‌های فعال</div>
-          <button id="btn-close-all" class="btn-action btn-sec" style="margin-top:0.5rem; height:38px;">بستن همه پوزیشن‌ها</button>
+        <div class="card">
+          <div class="card-header">
+            <div class="card-title">📰 تقویم اخبار اقتصادی و فیلتر News Blackout (بخش ۴.۴)</div>
+            <span style="font-size:0.7rem; color:var(--accent-green);">فیلتر ۳۰ دقیقه قبل و ۱۵ دقیقه بعد فعال</span>
+          </div>
+          <div style="display:flex; flex-direction:column; gap:6px; font-size:0.74rem;">
+            <div style="background:var(--bg-input); padding:6px 8px; border-radius:6px; border-right:3px solid var(--accent-red); display:flex; justify-content:space-between;">
+              <div><strong>US CPI (تورم آمریکا)</strong> — ساعت ۱۶:۰۰ | اثر: شدید (P0)</div>
+              <span class="c-red">Blackout: ورود ممنوع</span>
+            </div>
+            <div style="background:var(--bg-input); padding:6px 8px; border-radius:6px; border-right:3px solid var(--accent-green); display:flex; justify-content:space-between;">
+              <div><strong>ECB Interest Rate (نرخ بهره اروپا)</strong> — ۲ روز دیگر</div>
+              <span class="c-green">پایدار</span>
+            </div>
+            <div style="background:var(--bg-input); padding:6px 8px; border-radius:6px; border-right:3px solid var(--accent-green); display:flex; justify-content:space-between;">
+              <div><strong>US NFP (اشتغال بخش غیرکشاورزی)</strong> — جمعه آینده</div>
+              <span class="c-green">پایدار</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- PAGE 4: AI COUNCIL & MODEL CATALOG (PDF 6.1 & 6.5 & 6.6)  -->
+    <!-- ======================================================== -->
+    <div id="tab-ai-council" class="tab-page">
+      <!-- 6 Experiment Styles Selector (PDF 6.6) -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🧪 انتخاب سبک اجرایی شورا (۶ سبک آزمایشی سند PDF)</div>
+        </div>
+        <div class="mode-selector">
+          <button class="mode-btn" data-style="quant">۱. Quant Baseline (بدون LLM)</button>
+          <button class="mode-btn" data-style="single">۲. Single Expert</button>
+          <button class="mode-btn" data-style="duo">۳. Cross-Family Duo</button>
+          <button class="mode-btn active" data-style="triad">۴. Live Triad (مسیر اصلی Paper)</button>
+          <button class="mode-btn" data-style="fusion">۵. Specialist Fusion</button>
+          <button class="mode-btn" data-style="hybrid">۶. Hybrid Local-Cloud</button>
+        </div>
+        <div style="font-size:0.74rem; color:var(--text-muted); margin-top:2px;" id="style-desc-text">
+          سبک فعال: <strong>Live Triad</strong> — ترکیب مستقل سه ایجنت: Analyst برای ساخت تز معامله + Critic برای نقد و ابطال فرضیه + Judge برای داوری در اختلاف یا ستاپ A+.
         </div>
       </div>
 
+      <!-- Live Dialogue Grid (PDF 6.1) -->
+      <div class="ai-agents-grid">
+        <!-- Analyst -->
+        <div class="ai-agent-card">
+          <div class="ai-agent-header">
+            <div class="ai-agent-role"><span>🔍</span> Analyst (ایجنت زنده ۱)</div>
+            <span class="ai-agent-status" style="background:var(--accent-blue-bg); color:var(--accent-blue);">BULLISH THESIS</span>
+          </div>
+          <div class="ai-dialogue-text" id="ai-analyst-text">
+            تشکیل Bullish FVG در ۶۷,۳۸۰ با تایید واگرایی مثبت دلتای CVD و سوییپ نقدینگی SSL. پیشنهاد معامله خرید با حد ضرر زیر سوئینگ قبلی.
+          </div>
+        </div>
+        <!-- Critic -->
+        <div class="ai-agent-card">
+          <div class="ai-agent-header">
+            <div class="ai-agent-role"><span>🛡️</span> Critic (ایجنت زنده ۲ - منتقد مستقل)</div>
+            <span class="ai-agent-status" style="background:var(--accent-amber-bg); color:var(--accent-amber);">PREMORTEM RISK</span>
+          </div>
+          <div class="ai-dialogue-text" id="ai-critic-text">
+            اسپرد مارکت نرمال است اما مقاومت ۶۷,۶۵۰ نزدیک است. نسبت ریوارد به ریسک ۱:۲.۳ مطلوب ارزیابی می‌شود؛ توصیه به ورود با استاپ محدود.
+          </div>
+        </div>
+        <!-- Judge -->
+        <div class="ai-agent-card">
+          <div class="ai-agent-header">
+            <div class="ai-agent-role"><span>⚖️</span> Judge (ایجنت زنده ۳ - داور ارشد)</div>
+            <span class="ai-agent-status" style="background:var(--accent-green-bg); color:var(--accent-green);">APPROVED (A+)</span>
+          </div>
+          <div class="ai-dialogue-text" id="ai-judge-text">
+            اجماع تایید شد. عدم مغایرت با سقف ریسک ۱٪، صدور تاییدیه برای ارسال به Deterministic PolicyGate و گیت کنترل ریسک.
+          </div>
+        </div>
+      </div>
+
+      <!-- Offline AI Model Catalog by 3 Profiles (PDF Section 6.5) -->
       <div class="card">
         <div class="card-header">
-          <div class="card-title">📋 پوزیشن‌های باز فعال (Active Positions)</div>
+          <div class="card-title">🧠 کاتالوگ مدل‌های هوش مصنوعی آفلاین (در ۳ پروفایل سخت‌افزاری سند PDF)</div>
+        </div>
+        <div class="model-cards-grid">
+          <!-- Profile 1: Base -->
+          <div class="model-card">
+            <div class="model-header">
+              <div>
+                <div class="model-name">Gemma 4 E4B / Qwen3.5-4B</div>
+                <div style="font-size:0.68rem; color:var(--accent-green);">پروفایل پایه (سبک - ویندوز و اندروید)</div>
+              </div>
+              <span class="model-badge" style="background:var(--accent-green-bg); color:var(--accent-green);">سبک (۶۵۰ MB)</span>
+            </div>
+            <div class="model-desc">پاسخ سریع، اجرای روزمره، اسکن Watchlist و نقد سبک با حداقل مصرف باتری.</div>
+            <div class="progress-track" id="prog-track-base"><div class="progress-fill" id="prog-fill-base"></div></div>
+            <button class="btn-action btn-sec" id="btn-dl-base" onclick="window.downloadPdfModel('base', 'Gemma 4 E4B', 650)">⬇ دانلود و فعال‌سازی</button>
+          </div>
+
+          <!-- Profile 2: Medium -->
+          <div class="model-card">
+            <div class="model-header">
+              <div>
+                <div class="model-name">Phi-4 Multimodal / Qwen3.5-9B</div>
+                <div style="font-size:0.68rem; color:var(--accent-blue);">پروفایل متوسط (ویندوز و اندروید)</div>
+              </div>
+              <span class="model-badge" style="background:var(--accent-blue-bg); color:var(--accent-blue);">متوسط (۱.۲ GB)</span>
+            </div>
+            <div class="model-desc">تحلیل کامل‌تر ساختار بازار و تصاویر چارت؛ همراه با پایش پیوسته باتری و حرارت.</div>
+            <div class="progress-track" id="prog-track-med"><div class="progress-fill" id="prog-fill-med"></div></div>
+            <button class="btn-action btn-sec" id="btn-dl-med" onclick="window.downloadPdfModel('med', 'Phi-4 Multimodal', 1200)">⬇ دانلود و فعال‌سازی</button>
+          </div>
+
+          <!-- Profile 3: Powerful -->
+          <div class="model-card">
+            <div class="model-header">
+              <div>
+                <div class="model-name">Phi-4 Reasoning 14B / Gemma 12B</div>
+                <div style="font-size:0.68rem; color:var(--accent-purple);">پروفایل قدرتمند (ویندوز / اندروید آزمایشی)</div>
+              </div>
+              <span class="model-badge" style="background:var(--accent-purple-bg); color:var(--accent-purple);">قدرتمند (۲.۴ GB)</span>
+            </div>
+            <div class="model-desc">استدلال عمیق با بارگذاری نوبتی، هشدار منابع و توقف خودکار تا پایان تحلیل.</div>
+            <div class="progress-track" id="prog-track-power"><div class="progress-fill" id="prog-fill-power"></div></div>
+            <button class="btn-action btn-sec" id="btn-dl-power" onclick="window.downloadPdfModel('power', 'Phi-4 Reasoning 14B', 2400)">⬇ دانلود و فعال‌سازی</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- PAGE 5: TRADE APPROVAL (PDF SECTION 7 & 1.2)              -->
+    <!-- ======================================================== -->
+    <div id="tab-approval" class="tab-page">
+      <!-- 3 Execution Modes Selector (PDF 1.2) -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🎛️ انتخاب سطح اختیار معامله (۳ حالت سند PDF)</div>
+        </div>
+        <div class="mode-selector">
+          <button class="mode-btn" data-exec="analysis">۱. Analysis Only (فقط تحلیل و گزارش؛ بدون معامله)</button>
+          <button class="mode-btn active" data-exec="manual">۲. Manual Confirm (تایید دستی کاربر - پیش‌فرض)</button>
+          <button class="mode-btn" data-exec="auto">۳. Constrained Auto (اجرای خودکار فقط درجه A+ با سقف ۰.۲۵٪)</button>
+        </div>
+      </div>
+
+      <!-- Quick Trade Approval Card (PDF Section 7.1) -->
+      <div class="trade-approval-card">
+        <div style="display:flex; justify-content:space-between; align-items:center;">
+          <strong style="font-size:0.95rem; color:var(--accent-green);">⚡ کارت سریع تایید معامله (Trade Approval Card)</strong>
+          <span style="background:var(--accent-green-bg); color:var(--accent-green); padding:2px 8px; border-radius:10px; font-weight:bold; font-size:0.75rem;">درجه ستاپ: A+ (تایید شورا)</span>
+        </div>
+
+        <div class="approval-grid">
+          <div class="stat-box">
+            <div class="stat-lbl">نماد و جهت</div>
+            <div class="stat-val c-green" id="card-sym-dir">BTC BUY</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-lbl">قیمت ورود (Entry)</div>
+            <div class="stat-val" id="card-entry">$67,450.00</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-lbl">حد ضرر (Stop Loss)</div>
+            <div class="stat-val c-red" id="card-sl">$66,910.00</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-lbl">حد سود (Take Profit)</div>
+            <div class="stat-val c-green" id="card-tp">$68,690.00</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-lbl">ریسک به ریوارد (R:R)</div>
+            <div class="stat-val c-blue" id="card-rr">1 : 2.30</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-lbl">زمان انقضا</div>
+            <div class="stat-val c-amber" id="card-expiry">۳ کندل (15 دقیقه)</div>
+          </div>
+        </div>
+
+        <div style="display:flex; gap:0.6rem; margin-top:0.4rem;">
+          <button id="btn-approve-trade" class="btn-action btn-start" style="height:42px;">✅ تایید و ارسال سفارش به هسته ریسک</button>
+          <button id="btn-reject-trade" class="btn-action btn-stop" style="height:42px;">❌ رد این فرصت معامله (Reject)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================== -->
+    <!-- PAGE 6: POSITIONS & POST-ENTRY MANAGEMENT (PDF 8.4 & 11.2)-->
+    <!-- ======================================================== -->
+    <div id="tab-positions" class="tab-page">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">📋 پوزیشن‌های باز فعال و روش مدیریت پس از ورود (Post-Entry Management)</div>
         </div>
         <div style="overflow-x:auto;">
-          <table class="positions-table">
+          <table class="data-table">
             <thead>
               <tr>
                 <th>نماد</th>
                 <th>نوع</th>
                 <th>حجم</th>
-                <th>قیمت ورود</th>
+                <th>ورود</th>
                 <th>حد ضرر (SL)</th>
                 <th>حد سود (TP)</th>
-                <th>سود/زیان لحظه‌ای</th>
+                <th>استراتژی خروج</th>
+                <th>سود/زیان شناور</th>
                 <th>عملیات</th>
               </tr>
             </thead>
             <tbody id="positions-body">
               <tr>
-                <td colspan="8" style="text-align:center; color:var(--text-muted); padding:1.5rem;">هیچ پوزیشن بازی در حال حاضر وجود ندارد.</td>
+                <td colspan="9" style="text-align:center; color:var(--text-muted); padding:1.5rem;">هیچ پوزیشن باز فعالی در حال حاضر وجود ندارد.</td>
               </tr>
             </tbody>
           </table>
@@ -574,80 +600,61 @@
       </div>
     </div>
 
-    <!-- TAB 7: BACKTESTING LAB -->
-    <div id="tab-backtest" class="tab-page">
+    <!-- ======================================================== -->
+    <!-- PAGE 7: REPLAY, BACKTEST & COUNTERFACTUAL (PDF 10 & 11.2) -->
+    <!-- ======================================================== -->
+    <div id="tab-replay" class="tab-page">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">🧪 آزمایشگاه شبیه‌سازی تاریخی (Backtesting Replayer)</div>
-          <span style="font-size:0.75rem; color:var(--accent-cyan);">شبیه‌سازی بیش از ۱,۰۰۰ کندل تاریخی</span>
+          <div class="card-title">🧪 آزمایشگاه بازپخش رویدادها، بک‌تست تاریخی و گزارش‌های Counterfactual</div>
+          <span style="font-size:0.72rem; color:var(--accent-cyan);">۲ سال Scalp + ۵ سال Intraday (منابع رایگان)</span>
         </div>
-        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(160px, 1fr)); gap:0.65rem; margin-bottom:1rem;">
+
+        <div class="stats-grid" style="margin-bottom:0.75rem;">
           <div class="stat-box">
-            <div class="stat-lbl">نرخ موفقیت (Win Rate)</div>
+            <div class="stat-lbl">نرخ برد (Win Rate)</div>
             <div class="stat-val c-green">68.4%</div>
           </div>
           <div class="stat-box">
-            <div class="stat-lbl">فاکتور سودآوری (Profit Factor)</div>
+            <div class="stat-lbl">فاکتور سود (Profit Factor)</div>
             <div class="stat-val c-blue">2.14</div>
           </div>
           <div class="stat-box">
-            <div class="stat-lbl">نسبت شارپ (Sharpe Ratio)</div>
+            <div class="stat-lbl">نسبت شارپ (Sharpe)</div>
             <div class="stat-val c-purple">1.85</div>
           </div>
           <div class="stat-box">
-            <div class="stat-lbl">حداکثر افت سرمایه (Max DD)</div>
+            <div class="stat-lbl">بیشترین افت (Max DD)</div>
             <div class="stat-val c-red">3.4%</div>
           </div>
         </div>
-        <div class="controls-bar">
-          <button id="btn-run-backtest" class="btn-action btn-cyan">▶ اجرای بک‌تست جامع استراتژی</button>
+
+        <div style="background:var(--bg-input); padding:0.75rem; border-radius:8px; margin-bottom:0.75rem; font-size:0.74rem;">
+          <strong style="color:var(--accent-cyan);">گزارش Counterfactual (تحلیل فرصت‌های ردشده):</strong>
+          <p style="color:var(--text-muted); margin-top:3px;">
+            از ۱۲ فرصت ردشده در هفته گذشته، ۱۰ مورد به حد ضرر خورده بودند که نشان‌دهنده دقت بالای فیلترهای منتقد (Critic) و گیت عدم تعقیب قیمت (No-Chase) است.
+          </p>
         </div>
+
+        <button id="btn-run-backtest" class="btn-action btn-cyan" style="height:38px;">▶ اجرای شبیه‌ساز تاریخی مونت‌کارلو</button>
       </div>
     </div>
 
-    <!-- TAB 8: AUDIT TRAIL -->
-    <div id="tab-audit" class="tab-page">
-      <div class="card">
-        <div class="card-header">
-          <div class="card-title">🔐 لجر ممیزی رمزنگاری‌شده (Tamper-Evident SHA-256)</div>
-          <span style="font-size:0.75rem; color:var(--text-muted);">غیرقابل دستکاری و زنجیره‌ای</span>
-        </div>
-        <div class="audit-box" id="audit-list-box">
-          <div style="text-align:center; color:var(--text-muted); padding:2rem;">در انتظار ثبت اولین رویداد...</div>
-        </div>
-      </div>
-    </div>
-
-    <!-- TAB 9: SETTINGS -->
+    <!-- ======================================================== -->
+    <!-- PAGE 8: SETTINGS & SHA-256 AUDIT LEDGER (PDF 10.1 & 11.2) -->
+    <!-- ======================================================== -->
     <div id="tab-settings" class="tab-page">
       <div class="card">
         <div class="card-header">
-          <div class="card-title">⚙️ تنظیمات هوش مصنوعی و پارامترهای ریسک</div>
+          <div class="card-title">🔐 لجر ممیزی رمزنگاری‌شده ضد دستکاری (Tamper-Evident SHA-256 Audit Trail)</div>
+          <span style="font-size:0.7rem; color:var(--text-muted);">استاندارد RFC 8785 JCS (غیرقابل ویرایش)</span>
         </div>
-        <div style="display:flex; flex-direction:column; gap:0.85rem;">
-          <div>
-            <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:4px;">موتور فعال هوش مصنوعی:</label>
-            <select id="setting-ai-mode" class="form-input">
-              <option value="offline-deepseek">DeepSeek-R1 Offline (مدل استدلال زنجیره‌ای در مرورگر)</option>
-              <option value="offline-quant">SMC Quant Core (موتور ریاضی داخلی مرورگر)</option>
-              <option value="gemini">Google Gemini 2.0 Flash (کلود API)</option>
-              <option value="openai">OpenAI GPT-4o (کلود API)</option>
-            </select>
-          </div>
-          <div class="grid-2col">
-            <div>
-              <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:4px;">حداکثر ریسک مجاز در هر معامله (%):</label>
-              <input type="number" id="setting-risk-per-trade" class="form-input" value="1.0" step="0.1">
-            </div>
-            <div>
-              <label style="font-size:0.8rem; color:var(--text-muted); display:block; margin-bottom:4px;">سقف دراداون روزانه مجاز (%):</label>
-              <input type="number" id="setting-daily-dd" class="form-input" value="3.0" step="0.1">
-            </div>
-          </div>
-          <button id="btn-save-settings" class="btn-action btn-start" style="margin-top:0.5rem;">ذخیره تنظیمات</button>
+        <div class="audit-box" id="audit-list-box">
+          <div style="text-align:center; color:var(--text-muted); padding:1.5rem;">در انتظار ثبت اولین رویداد...</div>
         </div>
       </div>
     </div>
+
   </div>
 
   <script type="module" src="/src/web-app.ts"></script>
