@@ -2,153 +2,389 @@
 <html lang="fa" dir="rtl">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#0f172a">
-  <title>سامانه معاملاتی هوش مصنوعی | AI Trading System</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#090d16">
+  <title>سامانه معاملاتی هوشمند خودکار | Autonomous AI Trading Terminal</title>
   <link rel="manifest" href="/manifest.json">
   <style>
     :root {
-      --bg-main: #090d16;
-      --bg-card: #131b2e;
-      --bg-input: #0f172a;
+      --bg-main: #070a12;
+      --bg-card: #0e1526;
+      --bg-card-hover: #141f36;
+      --bg-input: #0a0f1d;
       --border-color: #1e293b;
+      --border-accent: #334155;
       --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --accent-green: #10b981;
+      --accent-green-bg: rgba(16, 185, 129, 0.12);
       --accent-red: #ef4444;
+      --accent-red-bg: rgba(239, 68, 68, 0.12);
       --accent-blue: #3b82f6;
+      --accent-blue-bg: rgba(59, 130, 246, 0.12);
+      --accent-purple: #8b5cf6;
       --accent-amber: #f59e0b;
+      --accent-amber-bg: rgba(245, 158, 11, 0.12);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; }
-    body { background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; }
-    .container { max-width: 480px; margin: 0 auto; padding: 1.5rem; display: flex; flex-direction: column; gap: 1.25rem; }
+    body { background-color: var(--bg-main); color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
+    
+    /* Layout */
+    .app-wrapper { width: 100%; max-width: 1200px; margin: 0 auto; padding: 1rem; display: flex; flex-direction: column; gap: 1rem; flex: 1; }
+    
+    /* Top Header */
+    header { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 0.85rem 1.25rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 0.75rem; }
+    .brand-title { display: flex; align-items: center; gap: 0.6rem; }
+    .brand-title h1 { font-size: 1.15rem; font-weight: 700; background: linear-gradient(90deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .badge-sim { background: var(--accent-amber-bg); color: var(--accent-amber); border: 1px solid var(--accent-amber); font-size: 0.7rem; padding: 2px 8px; border-radius: 12px; font-weight: bold; }
+    
+    .header-user { display: flex; align-items: center; gap: 0.75rem; }
+    .user-pill { background: var(--bg-input); border: 1px solid var(--border-color); padding: 4px 10px; border-radius: 20px; font-size: 0.8rem; color: var(--text-muted); display: flex; align-items: center; gap: 6px; }
+    .sync-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    .sync-on { background: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+    .sync-off { background: var(--accent-amber); }
+    .btn-logout { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; }
+    .btn-logout:hover { color: var(--accent-red); border-color: var(--accent-red); }
 
-    /* Auth Page */
-    #auth-page { display: flex; }
-    #app-page { display: none; }
-    .auth-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 2rem; text-align: center; }
-    .auth-card h1 { font-size: 1.5rem; margin-bottom: 0.5rem; }
-    .auth-card p { color: var(--text-muted); font-size: 0.85rem; margin-bottom: 1.5rem; }
-    .auth-card input { width: 100%; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; padding: 0.75rem; border-radius: 6px; margin-bottom: 0.75rem; font-size: 1rem; }
-    .auth-card input::placeholder { color: var(--text-muted); }
-    .btn { width: 100%; padding: 0.75rem; border: none; border-radius: 6px; font-weight: bold; font-size: 1rem; cursor: pointer; }
-    .btn-primary { background: var(--accent-blue); color: #fff; margin-bottom: 0.5rem; }
-    .btn-secondary { background: transparent; color: var(--accent-blue); border: 1px solid var(--accent-blue); }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .auth-error { color: var(--accent-red); font-size: 0.85rem; margin-top: 0.5rem; min-height: 1.2em; }
-    .auth-toggle { color: var(--text-muted); font-size: 0.85rem; margin-top: 1rem; }
-    .auth-toggle a { color: var(--accent-blue); cursor: pointer; text-decoration: underline; }
+    /* Navigation Bar */
+    .nav-tabs { display: flex; gap: 0.5rem; overflow-x: auto; padding-bottom: 2px; }
+    .nav-tab { background: var(--bg-card); border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.6rem 1.1rem; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 6px; white-space: nowrap; transition: all 0.2s; }
+    .nav-tab:hover { background: var(--bg-card-hover); color: var(--text-main); }
+    .nav-tab.active { background: var(--accent-blue-bg); color: var(--accent-blue); border-color: var(--accent-blue); }
 
-    /* App Page */
-    header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 1rem; }
-    header h1 { font-size: 1.25rem; }
-    .user-bar { display: flex; align-items: center; gap: 0.5rem; font-size: 0.8rem; color: var(--text-muted); }
-    .user-bar button { background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.75rem; }
+    /* Tab Content Pages */
+    .tab-page { display: none; flex-direction: column; gap: 1rem; }
+    .tab-page.active { display: flex; }
 
     /* Cards */
-    .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; padding: 1.25rem; }
-    .card h3 { margin-bottom: 0.75rem; font-size: 0.95rem; color: var(--text-muted); }
+    .card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.25rem; }
+    .card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.6rem; }
+    .card-title { font-size: 0.95rem; font-weight: 700; color: var(--text-main); display: flex; align-items: center; gap: 6px; }
 
-    /* Stats Grid */
-    .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-    .stat-item { text-align: center; }
-    .stat-value { font-size: 1.3rem; font-weight: bold; }
-    .stat-label { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
-    .stat-green { color: var(--accent-green); }
-    .stat-red { color: var(--accent-red); }
-    .stat-amber { color: var(--accent-amber); }
+    /* Stats Row */
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 0.75rem; }
+    .stat-box { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.85rem; text-align: center; }
+    .stat-val { font-size: 1.3rem; font-weight: 800; font-family: monospace; }
+    .stat-lbl { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
+    .c-green { color: var(--accent-green); }
+    .c-red { color: var(--accent-red); }
+    .c-blue { color: var(--accent-blue); }
+    .c-amber { color: var(--accent-amber); }
+    .c-purple { color: var(--accent-purple); }
 
-    /* Status Badge */
-    .status-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 14px; border-radius: 20px; font-weight: bold; font-size: 0.85rem; }
-    .status-running { background: rgba(16,185,129,0.15); color: var(--accent-green); border: 1px solid var(--accent-green); }
-    .status-idle { background: rgba(245,158,11,0.15); color: var(--accent-amber); border: 1px solid var(--accent-amber); }
-    .status-stopped { background: rgba(239,68,68,0.15); color: var(--accent-red); border: 1px solid var(--accent-red); }
-
-    /* Buttons */
-    .engine-controls { display: flex; gap: 0.5rem; margin-top: 1rem; }
-    .engine-controls button { flex: 1; padding: 0.6rem; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 0.85rem; }
+    /* Controls Bar */
+    .controls-bar { display: flex; gap: 0.6rem; flex-wrap: wrap; margin-top: 1rem; }
+    .btn-action { flex: 1; min-width: 110px; padding: 0.65rem; border: none; border-radius: 8px; font-weight: 700; font-size: 0.85rem; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 6px; transition: opacity 0.2s; }
+    .btn-action:active { transform: scale(0.98); }
     .btn-start { background: var(--accent-green); color: #fff; }
     .btn-pause { background: var(--accent-amber); color: #000; }
     .btn-stop { background: var(--accent-red); color: #fff; }
+    .btn-sec { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-main); }
+    .btn-sec:hover { border-color: var(--accent-blue); }
 
-    /* Audit Feed */
-    .audit-list { list-style: none; padding: 0; max-height: 300px; overflow-y: auto; }
-    .audit-item { font-family: monospace; font-size: 0.75rem; padding: 6px 0; border-bottom: 1px solid var(--border-color); color: var(--text-muted); }
+    /* Chart Simulation Canvas */
+    .chart-container { width: 100%; height: 260px; background: #060911; border: 1px solid var(--border-color); border-radius: 8px; position: relative; overflow: hidden; }
+    #chart-canvas { width: 100%; height: 100%; }
+    .chart-overlay-info { position: absolute; top: 10px; right: 12px; background: rgba(14, 21, 38, 0.85); backdrop-filter: blur(4px); padding: 4px 10px; border-radius: 6px; border: 1px solid var(--border-color); font-size: 0.75rem; font-family: monospace; }
+
+    /* AI Multi-Agent Dialogue */
+    .ai-agents-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 0.75rem; }
+    .ai-agent-card { background: var(--bg-input); border: 1px solid var(--border-color); border-radius: 8px; padding: 0.85rem; }
+    .ai-agent-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; font-size: 0.8rem; font-weight: bold; }
+    .ai-agent-role { display: flex; align-items: center; gap: 5px; }
+    .ai-agent-status { font-size: 0.7rem; padding: 2px 6px; border-radius: 10px; font-weight: bold; }
+    .ai-dialogue-text { font-size: 0.78rem; line-height: 1.4; color: var(--text-muted); min-height: 55px; }
+
+    /* Trade Execution & Positions */
+    .positions-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+    .positions-table th, .positions-table td { padding: 8px; text-align: right; border-bottom: 1px solid var(--border-color); }
+    .positions-table th { color: var(--text-muted); font-size: 0.72rem; }
+
+    /* Audit Log */
+    .audit-box { max-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; }
+    .audit-row { background: var(--bg-input); border-radius: 6px; padding: 6px 10px; font-family: monospace; font-size: 0.74rem; display: flex; justify-content: space-between; align-items: center; border-right: 3px solid var(--accent-blue); }
     .audit-action { font-weight: bold; color: var(--text-main); }
     .audit-hash { color: var(--accent-blue); font-size: 0.65rem; }
-    .audit-empty { color: var(--text-muted); text-align: center; padding: 2rem; font-size: 0.85rem; }
 
-    /* Sync indicator */
-    .sync-dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-left: 4px; }
-    .sync-active { background: var(--accent-green); animation: pulse 2s infinite; }
-    .sync-offline { background: var(--text-muted); }
-    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    /* Auth Modal / Overlay */
+    #auth-overlay { position: fixed; inset: 0; background: rgba(5, 8, 15, 0.92); backdrop-filter: blur(8px); display: flex; align-items: center; justify-content: center; z-index: 1000; padding: 1rem; }
+    .auth-modal { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 16px; width: 100%; max-width: 420px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.5); text-align: center; }
+    .auth-modal h2 { font-size: 1.4rem; margin-bottom: 0.4rem; }
+    .auth-modal p { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; }
+    .auth-input { width: 100%; background: var(--bg-input); border: 1px solid var(--border-color); color: #fff; padding: 0.8rem 1rem; border-radius: 8px; font-size: 0.95rem; margin-bottom: 0.75rem; text-align: right; }
+    .auth-input:focus { border-color: var(--accent-blue); outline: none; }
+    .auth-btn-primary { width: 100%; background: var(--accent-blue); color: #fff; border: none; padding: 0.8rem; border-radius: 8px; font-weight: bold; font-size: 0.95rem; cursor: pointer; margin-bottom: 0.5rem; }
+    .auth-btn-sec { width: 100%; background: transparent; border: 1px solid var(--border-color); color: var(--text-muted); padding: 0.7rem; border-radius: 8px; font-size: 0.85rem; cursor: pointer; margin-top: 0.4rem; }
+    .auth-btn-guest { width: 100%; background: var(--accent-green-bg); border: 1px solid var(--accent-green); color: var(--accent-green); padding: 0.75rem; border-radius: 8px; font-weight: bold; font-size: 0.9rem; cursor: pointer; margin-top: 0.75rem; }
+    .auth-error-msg { color: var(--accent-red); font-size: 0.8rem; min-height: 1.4em; margin-top: 0.5rem; }
+
+    /* Timeframe badges */
+    .tf-selector { display: flex; gap: 4px; }
+    .tf-btn { background: var(--bg-input); border: 1px solid var(--border-color); color: var(--text-muted); padding: 2px 8px; border-radius: 4px; font-size: 0.72rem; cursor: pointer; }
+    .tf-btn.active { background: var(--accent-blue); color: #fff; border-color: var(--accent-blue); }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- ===== AUTH PAGE ===== -->
-    <div id="auth-page">
-      <div class="auth-card">
-        <h1>🤖 سامانه معاملاتی AI</h1>
-        <p>حالت شبیه‌سازی Paper — ورود یا ثبت‌نام</p>
-        <input type="email" id="auth-email" placeholder="ایمیل" autocomplete="email">
-        <input type="password" id="auth-password" placeholder="رمز عبور" autocomplete="current-password">
-        <button class="btn btn-primary" id="auth-signin-btn">ورود</button>
-        <button class="btn btn-secondary" id="auth-signup-btn">ثبت‌نام</button>
-        <div class="auth-error" id="auth-error"></div>
+
+  <!-- Auth Modal -->
+  <div id="auth-overlay">
+    <div class="auth-modal">
+      <div style="font-size: 2.2rem; margin-bottom: 0.5rem;">🤖 📈</div>
+      <h2>سامانه معاملاتی خودکار AI</h2>
+      <p>هوش مصنوعی اختصاصی چندعامله و ترید شبیه‌ساز (Paper)</p>
+
+      <input type="email" id="auth-email" class="auth-input" placeholder="ایمیل شما (مثال: user@trade.com)" autocomplete="email">
+      <input type="password" id="auth-password" class="auth-input" placeholder="رمز عبور (حداقل ۶ نویسه)" autocomplete="current-password">
+
+      <button id="auth-login-btn" class="auth-btn-primary">ورود به حساب</button>
+      <button id="auth-register-btn" class="auth-btn-sec">ثبت‌نام حساب جدید</button>
+      
+      <button id="auth-guest-btn" class="auth-btn-guest">⚡ ورود مستقیم حالت دمو / مهمان (بدون نیاز به ثبت‌نام)</button>
+      <div id="auth-error-text" class="auth-error-msg"></div>
+    </div>
+  </div>
+
+  <!-- Main Application Wrapper -->
+  <div class="app-wrapper">
+    <!-- Header -->
+    <header>
+      <div class="brand-title">
+        <span style="font-size: 1.3rem;">⚡</span>
+        <div>
+          <h1>Autonomous AI Trading Terminal</h1>
+          <div style="display:flex; gap:6px; align-items:center; margin-top:2px;">
+            <span class="badge-sim">حالت آزمایشی شبیه‌سازی (PAPER)</span>
+            <span style="font-size:0.7rem; color:var(--text-muted);">BTC/USDT</span>
+          </div>
+        </div>
+      </div>
+      <div class="header-user">
+        <div class="user-pill">
+          <span class="sync-dot sync-on" id="sync-indicator"></span>
+          <span id="user-display-name">مهمان (محلی)</span>
+        </div>
+        <button id="btn-logout" class="btn-logout">خروج</button>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="nav-tabs">
+      <button class="nav-tab active" data-tab="tab-overview">📊 داشبورد و آمار زنده</button>
+      <button class="nav-tab" data-tab="tab-chart">📈 چارت زنده و SMC</button>
+      <button class="nav-tab" data-tab="tab-ai">🤖 تصمیم‌گیری هوش مصنوعی</button>
+      <button class="nav-tab" data-tab="tab-trade">⚡ معاملات و پوزیشن‌ها</button>
+      <button class="nav-tab" data-tab="tab-audit">🔐 لجر ممیزی SHA-256</button>
+      <button class="nav-tab" data-tab="tab-settings">⚙️ تنظیمات مدل و ریسک</button>
+    </nav>
+
+    <!-- TAB 1: OVERVIEW -->
+    <div id="tab-overview" class="tab-page active">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🚀 وضعیت هسته معاملاتی</div>
+          <span id="node-badge" style="background:var(--accent-green-bg); color:var(--accent-green); padding:4px 10px; border-radius:12px; font-weight:bold; font-size:0.75rem;">● موتور فعال (RUNNING)</span>
+        </div>
+        
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-val c-green" id="dash-equity">$10,000.00</div>
+            <div class="stat-lbl">ارزش کل حساب (Equity)</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val" id="dash-balance">$10,000.00</div>
+            <div class="stat-lbl">موجودی آزاد (Balance)</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val c-blue" id="dash-price">$67,450.00</div>
+            <div class="stat-lbl">قیمت زنده بیت‌کوین</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val c-amber" id="dash-pnl">+$0.00 (0.00%)</div>
+            <div class="stat-lbl">سود / زیان کل (PnL)</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val c-purple" id="dash-trades">0</div>
+            <div class="stat-lbl">معاملات انجام‌شده</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-val c-red" id="dash-drawdown">0.00%</div>
+            <div class="stat-lbl">دراداون روزانه (DD)</div>
+          </div>
+        </div>
+
+        <div class="controls-bar">
+          <button id="ctrl-start" class="btn-action btn-start">▶ شروع موتور خودکار</button>
+          <button id="ctrl-pause" class="btn-action btn-pause">⏸ توقف موقت (Pause)</button>
+          <button id="ctrl-stop" class="btn-action btn-stop">🛑 توقف اضطراری (Kill-Switch)</button>
+        </div>
+      </div>
+
+      <!-- Quick AI & Market Insight -->
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🧠 آخرین ارزیابی هوش مصنوعی (AI Consensus)</div>
+          <span style="font-size:0.72rem; color:var(--text-muted);" id="ai-last-eval-time">همین الان</span>
+        </div>
+        <div style="background:var(--bg-input); padding:0.85rem; border-radius:8px; border:1px solid var(--border-color);">
+          <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+            <strong id="ai-consensus-signal" style="color:var(--accent-green); font-size:0.95rem;">سیگنال: آماده ورود به معامله خرید (BUY - A+)</strong>
+            <span style="font-size:0.8rem; color:var(--text-muted);">ریسک به ریوارد: <strong>1:2.45</strong></span>
+          </div>
+          <p id="ai-consensus-desc" style="font-size:0.8rem; color:var(--text-muted); line-height:1.5;">
+            تایید تلاقی اوردر بلاک صعودی در تایم‌فریم ۵ دقیقه همراه با سوییپ نقدینگی کف قبلی و رشد تجمعی دلتا (CVD). هسته کنترل ریسک حجم مجاز ۰.۰۳۴ بیت‌کوین را تایید کرد.
+          </p>
+        </div>
       </div>
     </div>
 
-    <!-- ===== APP PAGE ===== -->
-    <div id="app-page">
-      <header>
-        <div>
-          <h1>داشبورد معاملاتی</h1>
-        </div>
-        <div class="user-bar">
-          <span id="user-email"></span>
-          <span class="sync-dot sync-active" id="sync-dot" title="سینک ابری فعال"></span>
-          <button id="signout-btn">خروج</button>
-        </div>
-      </header>
-
-      <!-- Engine Status -->
+    <!-- TAB 2: CHART & SMC -->
+    <div id="tab-chart" class="tab-page">
       <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <h3>وضعیت موتور</h3>
-          <span id="engine-status" class="status-badge status-idle">● IDLE</span>
-        </div>
-        <div class="stats-grid" style="margin-top: 1rem;">
-          <div class="stat-item">
-            <div class="stat-value stat-green" id="stat-equity">$10,000.00</div>
-            <div class="stat-label">سرمایه (Equity)</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value" id="stat-balance">$10,000.00</div>
-            <div class="stat-label">موجودی (Balance)</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value stat-red" id="stat-loss">$0.00</div>
-            <div class="stat-label">ضرر روزانه</div>
-          </div>
-          <div class="stat-item">
-            <div class="stat-value stat-amber" id="stat-trades">0</div>
-            <div class="stat-label">تعداد معاملات</div>
+        <div class="card-header">
+          <div class="card-title">📈 ساختار بازار هوشمند (Smart Money Concepts)</div>
+          <div class="tf-selector">
+            <button class="tf-btn active" data-tf="1M">1M</button>
+            <button class="tf-btn" data-tf="5M">5M</button>
+            <button class="tf-btn" data-tf="15M">15M</button>
+            <button class="tf-btn" data-tf="1H">1H</button>
           </div>
         </div>
-        <div class="engine-controls">
-          <button class="btn-start" id="btn-start">▶ شروع</button>
-          <button class="btn-pause" id="btn-pause">⏸ توقف موقت</button>
-          <button class="btn-stop" id="btn-stop">🛑 توقف اضطراری</button>
+        <div class="chart-container">
+          <canvas id="chart-canvas"></canvas>
+          <div class="chart-overlay-info">
+            <span id="chart-candle-info">O: 67420 | H: 67500 | L: 67400 | C: 67485</span>
+          </div>
+        </div>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:0.75rem; font-size:0.75rem; color:var(--text-muted);">
+          <span>🟩 Order Block صعودی</span>
+          <span>🟥 Order Block نزولی</span>
+          <span>🟨 Fair Value Gap (FVG)</span>
+          <span>⚡ نقدینگی و BOS</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 3: AI MULTI-AGENT -->
+    <div id="tab-ai" class="tab-page">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🤖 معماری ۳ لایه هوش مصنوعی (Tri-Agent System)</div>
+          <span style="font-size:0.75rem; color:var(--accent-purple);">مدل محلی مرورگر + فیلتر اعتبارسنجی</span>
+        </div>
+        <div class="ai-agents-grid">
+          <!-- Analyst -->
+          <div class="ai-agent-card">
+            <div class="ai-agent-header">
+              <div class="ai-agent-role"><span>🔍</span> تحلیل‌گر تکنیکال (Analyst)</div>
+              <span class="ai-agent-status" style="background:var(--accent-blue-bg); color:var(--accent-blue);">BULLISH</span>
+            </div>
+            <div class="ai-dialogue-text" id="ai-analyst-text">
+              شکل‌گیری FVG صعودی در محدوده ۶۷,۳۸۰ دلار با مومنتوم مثبت شناسایی شد. پیشنهاد لانگ با حد ضرر زیر سوئینگ قبلی.
+            </div>
+          </div>
+          <!-- Critic -->
+          <div class="ai-agent-card">
+            <div class="ai-agent-header">
+              <div class="ai-agent-role"><span>🛡️</span> منتقد و ارزیاب ریسک (Critic)</div>
+              <span class="ai-agent-status" style="background:var(--accent-amber-bg); color:var(--accent-amber);">CAUTION</span>
+            </div>
+            <div class="ai-dialogue-text" id="ai-critic-text">
+              اسپرد مارکت در محدوده نرمال است اما مقاومت ۶۷,۶۰۰ نزدیک است. ریسک به ریوارد ۱:۲.۲ مجاز بوده و وارد حباب نیست.
+            </div>
+          </div>
+          <!-- Judge -->
+          <div class="ai-agent-card">
+            <div class="ai-agent-header">
+              <div class="ai-agent-role"><span>⚖️</span> قاضی و مجری نهایی (Judge)</div>
+              <span class="ai-agent-status" style="background:var(--accent-green-bg); color:var(--accent-green);">APPROVED</span>
+            </div>
+            <div class="ai-dialogue-text" id="ai-judge-text">
+              انطباق کامل با قوانین مدیریت ریسک DEC-015 و سقف ریسک ۱٪ سرمایه. ارسال سفارش Limit Buy در ۶۷,۴۳۰ به هسته شبیه‌ساز.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 4: TRADE & POSITIONS -->
+    <div id="tab-trade" class="tab-page">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">⚡ ثبت سفارش سریع و دستی</div>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(140px, 1fr)); gap:0.6rem;">
+          <input type="number" id="trade-qty" class="auth-input" value="0.05" step="0.01" placeholder="حجم (BTC)" style="margin:0;">
+          <button id="btn-manual-buy" class="btn-action btn-start" style="height:44px;">خرید دستی (BUY)</button>
+          <button id="btn-manual-sell" class="btn-action btn-stop" style="height:44px;">فروش دستی (SELL)</button>
+          <button id="btn-close-all" class="btn-action btn-sec" style="height:44px;">بستن همه پوزیشن‌ها</button>
         </div>
       </div>
 
-      <!-- Audit Trail -->
       <div class="card">
-        <h3>لجر ممیزی رمزنگاری‌شده (SHA-256)</h3>
-        <div id="audit-feed">
-          <div class="audit-empty">هنوز رکوردی ثبت نشده است.</div>
+        <div class="card-header">
+          <div class="card-title">📋 پوزیشن‌های باز فعال (Active Positions)</div>
+        </div>
+        <div style="overflow-x:auto;">
+          <table class="positions-table">
+            <thead>
+              <tr>
+                <th>نماد</th>
+                <th>نوع</th>
+                <th>حجم</th>
+                <th>قیمت ورود</th>
+                <th>حد ضرر (SL)</th>
+                <th>حد سود (TP)</th>
+                <th>سود/زیان لحظه‌ای</th>
+                <th>عملیات</th>
+              </tr>
+            </thead>
+            <tbody id="positions-body">
+              <tr>
+                <td colspan="8" style="text-align:center; color:var(--text-muted); padding:1.5rem;">هیچ پوزیشن بازی در حال حاضر وجود ندارد.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 5: AUDIT TRAIL -->
+    <div id="tab-audit" class="tab-page">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">🔐 لجر ممیزی رمزنگاری‌شده (Tamper-Evident SHA-256)</div>
+          <span style="font-size:0.75rem; color:var(--text-muted);">غیرقابل دستکاری و زنجیره‌ای</span>
+        </div>
+        <div class="audit-box" id="audit-list-box">
+          <div style="text-align:center; color:var(--text-muted); padding:2rem;">در انتظار ثبت اولین رویداد...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 6: SETTINGS -->
+    <div id="tab-settings" class="tab-page">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">⚙️ تنظیمات هوش مصنوعی و پارامترهای ریسک</div>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:1rem;">
+          <div>
+            <label style="font-size:0.85rem; color:var(--text-muted); display:block; margin-bottom:4px;">حالت اجرای هوش مصنوعی:</label>
+            <select id="setting-ai-mode" class="auth-input" style="margin:0;">
+              <option value="offline">موتور اختصاصی آفلاین مرورگر (بدون هزینه / فوق‌سریع)</option>
+              <option value="gemini">اتصال به مدل ابری Google Gemini</option>
+              <option value="openai">اتصال به مدل ابری OpenAI GPT-4o</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size:0.85rem; color:var(--text-muted); display:block; margin-bottom:4px;">حداکثر ریسک مجاز در هر معامله (%):</label>
+            <input type="number" id="setting-risk-per-trade" class="auth-input" value="1.0" step="0.1" style="margin:0;">
+          </div>
+          <div>
+            <label style="font-size:0.85rem; color:var(--text-muted); display:block; margin-bottom:4px;">سقف دراداون روزانه مجاز (%):</label>
+            <input type="number" id="setting-daily-dd" class="auth-input" value="3.0" step="0.1" style="margin:0;">
+          </div>
+          <button id="btn-save-settings" class="btn-action btn-start" style="margin-top:0.5rem;">ذخیره تنظیمات</button>
         </div>
       </div>
     </div>
