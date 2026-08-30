@@ -25,12 +25,12 @@ Do not treat compilation, a green test, or a partial artifact as completion of a
 
 ## Current repository phase
 
-Consolidated Phase 2 (Deterministic Core) is authorized by DEC-075. Antigravity material remains untrusted and may be reused only after semantic review and correction. This phase may add reviewed source, dependencies, schemas, a lockfile, Mock/Replay fixtures, local deterministic storage foundations, and tests. During this phase, do not add:
+Consolidated Phase 3 (Offline AI) is authorized by DEC-077. It may add a pinned `llama.cpp` runtime source, verified GGUF acquisition tooling, Windows local-process and Android native adapters, analytical role orchestration, and Mock/Replay benchmarks. During this phase, do not add:
 
-- broker, exchange, market-data, notification, cloud, or AI integrations;
+- broker, exchange, market-data, notification, or cloud integrations;
 - network clients or outbound calls;
 - API keys, tokens, credentials, account data, or credential placeholders;
-- model files, model downloads, inference runtimes, or AI calls;
+- unverified model/runtime downloads, remote AI calls, or committed model artifacts;
 - live, demo, testnet, paper, OMS, or execution behavior.
 
 Do not request secrets. Keep `LIVE_TRADING_ENABLED`, `BROKER_CONNECTORS_ENABLED`, `AI_ROUTER_ENABLED`, and `MODEL_DOWNLOADS_ENABLED` false.
@@ -59,4 +59,4 @@ Do not request secrets. Keep `LIVE_TRADING_ENABLED`, `BROKER_CONNECTORS_ENABLED`
 
 Validate JSON/YAML syntax, workspace discovery, disabled flags, absence of dependencies/lockfiles/source code, and absence of credential or integration material. Report any verification that cannot run because dependencies are intentionally absent.
 
-For Phase 2, verify canonical contract generation, strict boundary validation, cryptographic hashing without downgrade, arbitrary-precision financial math, deterministic replay, fail-closed policy/risk boundaries, durable-storage behavior, and dependency direction. Keep every external capability disabled. Do not begin Consolidated Phase 3 without its separate scope declaration and explicit approval.
+For Phase 3, verify artifact SHA-256 before load, app-private Android model storage, local-process isolation on Windows, bounded prompts/output/tokens/time, schema validation, role capability isolation, deterministic no-trade behavior on any AI failure, and recorded device benchmarks. Keep broker, cloud, and live capabilities disabled. Do not begin Consolidated Phase 4 without its separate scope declaration and explicit approval.

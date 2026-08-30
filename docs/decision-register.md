@@ -87,6 +87,8 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 | DEC-073 | The owner explicitly authorizes Consolidated Phase 1, Recovery and Reuse Audit. This phase may inspect remote history and prepare a clean recovery branch, but cannot add connectors, secrets, AI calls, model artifacts/downloads, or real/paper execution behavior. | LOCKED |
 | DEC-074 | The owner accepts Consolidated Phase 1 and authorizes replacement of GitHub `main` with the clean recovery line. The Antigravity head is preserved only in `archive/antigravity-fc0df3a`. | LOCKED |
 | DEC-075 | The owner authorizes Consolidated Phase 2, Deterministic Core, including reviewed dependencies and a lockfile. Scope is canonical contracts, deterministic financial math and hashing, event validation, Mock/Replay fixtures, deterministic feature/strategy/policy/risk boundaries, local durable-storage foundations, and tests. Network feeds, cloud operation, secrets, AI calls/models, broker adapters, paper/demo external execution, and live trading remain prohibited. | LOCKED |
+| DEC-076 | The owner accepts Consolidated Phase 2 and authorizes merging it into GitHub `main`. Passing Phase 2 does not authorize external data, brokers, cloud operation, or live trading. | LOCKED |
+| DEC-077 | The owner authorizes Consolidated Phase 3 for offline AI on Windows and Android, including a pinned `llama.cpp` runtime, verified GGUF model acquisition, native Android binding, local runtime adapters, four analytical roles, resource benchmarks, and Mock/Replay-only evaluation. The initial test profile is `llama.cpp` v0.3.0 with Qwen3.5-0.8B Q4_0; this selection is for architecture testing, not trading-quality evidence. | LOCKED |
 
 ## Open ambiguities and conflicts
 

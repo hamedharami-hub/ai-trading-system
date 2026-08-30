@@ -14,6 +14,7 @@ import riskDecisionSchema from "./schemas/events/risk-decision.json" with { type
 import orderIntentSchema from "./schemas/events/order-intent.json" with { type: "json" };
 import executionReportSchema from "./schemas/events/execution-report.json" with { type: "json" };
 import auditEventSchema from "./schemas/events/audit-event.json" with { type: "json" };
+import postTradeAuditReportSchema from "./schemas/events/post-trade-audit-report.json" with { type: "json" };
 
 // Instantiate strict 2020-12 Ajv instance
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -95,6 +96,10 @@ ajv.addSchema(
   auditEventSchema,
   "https://trading.system/schemas/events/audit-event.json",
 );
+ajv.addSchema(
+  postTradeAuditReportSchema,
+  "https://trading.system/schemas/events/post-trade-audit-report.json",
+);
 
 const schemaMap: Record<string, string> = {
   MARKET_EVENT: "https://trading.system/schemas/events/market-event.json",
@@ -112,6 +117,8 @@ const schemaMap: Record<string, string> = {
   EXECUTION_REPORT:
     "https://trading.system/schemas/events/execution-report.json",
   AUDIT_EVENT: "https://trading.system/schemas/events/audit-event.json",
+  POST_TRADE_AUDIT_REPORT:
+    "https://trading.system/schemas/events/post-trade-audit-report.json",
 };
 
 export interface ValidationResult {

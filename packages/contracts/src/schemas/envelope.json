@@ -61,7 +61,8 @@
         "RISK_DECISION",
         "ORDER_INTENT",
         "EXECUTION_REPORT",
-        "AUDIT_EVENT"
+        "AUDIT_EVENT",
+        "POST_TRADE_AUDIT_REPORT"
       ],
       "description": "Discriminator enum for the enclosed payload."
     },

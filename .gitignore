@@ -40,6 +40,7 @@ logs/
 
 # Caches and temporary files
 .cache/
+.gradle/
 tmp/
 temp/
 *.tmp

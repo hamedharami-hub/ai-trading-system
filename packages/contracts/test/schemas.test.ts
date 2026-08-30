@@ -181,4 +181,23 @@ describe("Event Schemas & Contract Validation", () => {
     const res = validatePayload("RISK_DECISION", riskPayload);
     expect(res.valid).toBe(true);
   });
+
+  it("accepts only read-only Post-Trade Auditor reports", () => {
+    const report = {
+      candidate_id: "018f3a9e-64c2-7b00-8000-000000000010",
+      execution_report_id: "018f3a9e-64c2-7b00-8000-000000000030",
+      observations: [
+        "The recorded outcome differed from the candidate thesis.",
+      ],
+      comparisons: ["Observed slippage exceeded the replay fixture."],
+      reported_at: "2026-08-30T07:05:00.000Z",
+    };
+    expect(validatePayload("POST_TRADE_AUDIT_REPORT", report).valid).toBe(true);
+    expect(
+      validatePayload("POST_TRADE_AUDIT_REPORT", {
+        ...report,
+        change_risk_limit_to: "2.00",
+      }).valid,
+    ).toBe(false);
+  });
 });
