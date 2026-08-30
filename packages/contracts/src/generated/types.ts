@@ -2,7 +2,7 @@
 /**
  * AUTO-GENERATED FILE - DO NOT MODIFY MANUALLY.
  * Source: JSON Schema 2020-12 specifications in packages/contracts/src/schemas/
- * Generated at: 2026-08-30T08:19:11.430Z
+ * Generated at: 2026-08-30T09:15:17.818Z
  */
 
 // ==================== PRIMITIVES ====================
