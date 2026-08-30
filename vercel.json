@@ -1,7 +1,6 @@
 {
-  "buildCommand": "pnpm run build",
+  "buildCommand": "pnpm --filter @trade/contracts build && pnpm --filter @trade/pwa build",
   "outputDirectory": "apps/pwa/dist",
-  "framework": "vite",
   "rewrites": [
     {
       "source": "/(.*)",
