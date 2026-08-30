@@ -1,4 +1,5 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "buildCommand": "pnpm --filter @trade/contracts build && pnpm --filter @trade/pwa build",
   "outputDirectory": "dist",
   "rewrites": [
