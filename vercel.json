@@ -1,5 +1,5 @@
 {
-  "buildCommand": "pnpm --filter @trade/contracts build && pnpm --filter @trade/pwa build",
+  "buildCommand": "cd ../.. && pnpm --filter @trade/contracts build && pnpm --filter @trade/pwa build",
   "outputDirectory": "apps/pwa/dist",
   "rewrites": [
     {

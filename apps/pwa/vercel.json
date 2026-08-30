@@ -1,0 +1,10 @@
+{
+  "buildCommand": "pnpm --filter @trade/contracts build && pnpm --filter @trade/pwa build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}
