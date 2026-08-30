@@ -1,13 +1,12 @@
 /**
- * Firebase Configuration
- * Replace these values with your own Firebase project config.
- * Get them from: https://console.firebase.google.com → Project Settings → Your Apps → Web App
+ * Firebase Configuration for iraniandragons project
  */
 export const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT_ID.firebaseapp.com',
-  projectId: 'YOUR_PROJECT_ID',
-  storageBucket: 'YOUR_PROJECT_ID.firebasestorage.app',
-  messagingSenderId: 'YOUR_SENDER_ID',
-  appId: 'YOUR_APP_ID'
+  apiKey: "AIzaSyDjyDZsDrt8y4sWC9UQCP1YBM9aEJJltzk",
+  authDomain: "iraniandragons.firebaseapp.com",
+  projectId: "iraniandragons",
+  storageBucket: "iraniandragons.firebasestorage.app",
+  messagingSenderId: "4237898237",
+  appId: "1:4237898237:web:f985d49efe9b2ab6d3a994",
+  measurementId: "G-Z9YMSXER7X"
 };
