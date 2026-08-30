@@ -1,6 +1,6 @@
-# AI Trading System Foundation
+# AI Trading System
 
-This repository is the planning and configuration foundation for a personal, multi-market trading analysis and execution-control system. It does not contain a trading application and cannot connect to a market, broker, exchange, AI provider, model registry, or account.
+This repository is being recovered from an untrusted Antigravity implementation onto the approved architecture baseline. Consolidated Phase 1 is an audit and selective-reuse phase; it does not yet contain an approved trading application and cannot connect to a market, broker, exchange, AI provider, model registry, or account.
 
 ## Authority
 
@@ -8,7 +8,7 @@ The Persian architecture PDF and subsequent explicit owner instructions are the 
 
 ## Current status
 
-The repository contains only:
+The authoritative branch currently contains only:
 
 - the product decision and ambiguity register;
 - architecture boundaries and safety invariants;
@@ -16,7 +16,7 @@ The repository contains only:
 - a config-only pnpm/Turborepo workspace;
 - empty package manifests for the PWA, Local Trading Node, and shared contracts.
 
-There are no dependencies, source files, lockfiles, integrations, secrets, network clients, AI calls, models, databases, or executable trading behavior.
+There are no dependencies, source files, lockfiles, integrations, secrets, network clients, AI calls, models, databases, or executable trading behavior. Antigravity code exists in Git history and is reviewed only as an untrusted recovery source; see the recovery audit.
 
 ## Planned architecture
 
@@ -36,9 +36,12 @@ Only future deterministic Local Trading Node components may calculate risk or cr
 
 ## Documentation
 
+- [Consolidated six-phase roadmap](docs/consolidated-roadmap-fa.md)
+- [Antigravity recovery audit](docs/antigravity-recovery-audit.md)
+
 - [بسته تحویل به هوش مصنوعی بعدی](docs/ai-handoff-fa.md)
 - [نسخه داخل‌مخزن PDF مرجع](docs/source/architecture-authority-v2.1-fa.pdf)
-- [نقشه راه جامع اجرای پروژه](docs/execution-roadmap-fa.md)
+- [نقشه راه تاریخی سیزده‌مرحله‌ای](docs/execution-roadmap-fa.md)
 - [پرسش نامه تصمیم های P0 مالک](docs/owner-decision-questionnaire-fa.md)
 - [تصمیم های تفویض شده مرحله ۱](docs/phase-1-delegated-decisions-fa.md)
 - [Decision register](docs/decision-register.md)
@@ -77,4 +80,4 @@ pnpm build
 
 Work proceeds one roadmap phase at a time. Each phase must state scope, unresolved owner decisions, unsafe assumptions, acceptance evidence, and receive explicit owner approval before a later phase begins. Compilation alone is not a phase gate.
 
-The Phase 1 requirements and safety package was formally accepted in DEC-068. Phase 2 has not started and must receive separate approval. All application source, schemas, dependencies, integrations, secrets, AI calls, model downloads, and broker/exchange work remain prohibited.
+The original Phase 1 requirements and safety package was accepted in DEC-068. The owner subsequently approved the six-phase consolidated roadmap and Consolidated Phase 1 recovery audit in DEC-069 through DEC-073. Consolidated Phase 2 has not started and requires its own declaration and owner gate. External integrations, secrets, AI calls, model downloads, and execution remain prohibited.

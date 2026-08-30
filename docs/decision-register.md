@@ -80,6 +80,11 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 | DEC-066 | Live statistical gates and their conservative evaluation baseline are fixed in the delegated profile. A passing future gate still requires explicit owner approval per market and strategy. | LOCKED |
 | DEC-067 | Cross-device determinism uses canonical serialization, pinned time-zone data, versioned metadata, and exact replay fixtures as specified in the delegated profile. | LOCKED |
 | DEC-068 | The owner formally accepts Roadmap Phase 1 after review of the delegated P0/P1 planning resolutions. Phase 1 is complete. This acceptance does not authorize Roadmap Phase 2, dependencies, schemas, source code, connectors, secrets, AI calls, model downloads, paper/demo, live trading, or execution. | LOCKED |
+| DEC-069 | The owner replaces the thirteen management phases with six consolidated delivery phases. Internal safety gates and evidence requirements are preserved; consolidation does not waive any invariant or live gate. | LOCKED |
+| DEC-070 | The target product shall provide materially equivalent core workflows on Windows and Android, with Vercel and the owner's existing Firebase project approved as future cloud presentation/control infrastructure. Cloud components never own authoritative calculations, risk, OMS, credentials, or execution. | LOCKED |
+| DEC-071 | The first AI trial shall be offline on both Windows and Android. The planned common inference family is `llama.cpp` with GGUF models and platform-specific native adapters. AI remains analytical only. This decision does not authorize a model download in the recovery phase. | LOCKED |
+| DEC-072 | Antigravity output is an untrusted recovery source, not product authority. Code may be reused only after file-level review, correction, and applicable tests. Its DEC-069 through DEC-080 claims and its claim that all thirteen phases are complete are rejected and have no authority. | LOCKED |
+| DEC-073 | The owner explicitly authorizes Consolidated Phase 1, Recovery and Reuse Audit. This phase may inspect remote history and prepare a clean recovery branch, but cannot add connectors, secrets, AI calls, model artifacts/downloads, or real/paper execution behavior. | LOCKED |
 
 ## Open ambiguities and conflicts
 
