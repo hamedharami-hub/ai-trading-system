@@ -1,0 +1,130 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trading.system/schemas/events/feature-snapshot.json",
+  "title": "FeatureSnapshotPayload",
+  "description": "Deterministic market structure and order flow features.",
+  "type": "object",
+  "required": [
+    "symbol",
+    "timeframe",
+    "smc",
+    "order_flow",
+    "secondary_filters",
+    "evidence_candle_time"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "symbol": {
+      "$ref": "../primitives.json#/$defs/MarketId"
+    },
+    "timeframe": {
+      "$ref": "../primitives.json#/$defs/Timeframe"
+    },
+    "smc": {
+      "type": "object",
+      "required": ["bos", "choch", "displacement"],
+      "additionalProperties": false,
+      "properties": {
+        "bos": {
+          "type": "boolean"
+        },
+        "choch": {
+          "type": "boolean"
+        },
+        "displacement": {
+          "type": "boolean"
+        },
+        "order_block": {
+          "type": "object",
+          "required": ["top", "bottom", "type", "mitigated"],
+          "additionalProperties": false,
+          "properties": {
+            "top": {
+              "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+            },
+            "bottom": {
+              "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+            },
+            "type": {
+              "type": "string",
+              "enum": ["BULLISH", "BEARISH"]
+            },
+            "mitigated": {
+              "type": "boolean"
+            }
+          }
+        },
+        "fvg": {
+          "type": "object",
+          "required": ["top", "bottom", "type", "mitigated"],
+          "additionalProperties": false,
+          "properties": {
+            "top": {
+              "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+            },
+            "bottom": {
+              "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+            },
+            "type": {
+              "type": "string",
+              "enum": ["BULLISH", "BEARISH"]
+            },
+            "mitigated": {
+              "type": "boolean"
+            }
+          }
+        },
+        "liquidity_sweep": {
+          "type": "object",
+          "required": ["swept_level", "direction"],
+          "additionalProperties": false,
+          "properties": {
+            "swept_level": {
+              "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+            },
+            "direction": {
+              "type": "string",
+              "enum": ["HIGH", "LOW"]
+            }
+          }
+        }
+      }
+    },
+    "order_flow": {
+      "type": "object",
+      "required": ["ofi", "cvd", "spread_state"],
+      "additionalProperties": false,
+      "properties": {
+        "ofi": {
+          "$ref": "../primitives.json#/$defs/DecimalString"
+        },
+        "cvd": {
+          "$ref": "../primitives.json#/$defs/DecimalString"
+        },
+        "spread_state": {
+          "type": "string",
+          "enum": ["NORMAL", "ELEVATED", "WIDE"]
+        }
+      }
+    },
+    "secondary_filters": {
+      "type": "object",
+      "required": ["atr", "vwap"],
+      "additionalProperties": false,
+      "properties": {
+        "atr": {
+          "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+        },
+        "vwap": {
+          "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+        },
+        "volume_profile_poc": {
+          "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+        }
+      }
+    },
+    "evidence_candle_time": {
+      "$ref": "../primitives.json#/$defs/TimestampISO"
+    }
+  }
+}

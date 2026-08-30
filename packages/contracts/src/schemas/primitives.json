@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trading.system/schemas/primitives.json",
+  "title": "Primitives",
+  "description": "Authoritative base primitive definitions for the trading system.",
+  "$defs": {
+    "DecimalString": {
+      "type": "string",
+      "pattern": "^-?(0|[1-9]\\d*)(\\.\\d+)?$",
+      "description": "Arbitrary-precision decimal represented as a string. Binary floats are forbidden."
+    },
+    "PositiveDecimalString": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)(\\.\\d+)?$",
+      "description": "Non-negative arbitrary-precision decimal string."
+    },
+    "StrictPositiveDecimalString": {
+      "type": "string",
+      "pattern": "^(0\\.\\d*[1-9]\\d*|[1-9]\\d*(\\.\\d+)?)$",
+      "description": "Strictly positive arbitrary-precision decimal string (> 0)."
+    },
+    "TimestampISO": {
+      "type": "string",
+      "format": "utc-milliseconds",
+      "description": "RFC 3339 UTC timestamp with exactly millisecond precision."
+    },
+    "NonNegativeIntegerString": {
+      "type": "string",
+      "pattern": "^(0|[1-9]\\d*)$",
+      "description": "Unbounded non-negative integer represented as a canonical decimal string."
+    },
+    "UUIDv7": {
+      "type": "string",
+      "format": "uuid-v7",
+      "description": "Canonical lowercase UUIDv7 string for time-ordered identifiers."
+    },
+    "MarketId": {
+      "type": "string",
+      "enum": [
+        "EURUSD",
+        "GBPUSD",
+        "USDJPY",
+        "AUDUSD",
+        "USDCAD",
+        "USDCHF",
+        "NZDUSD",
+        "XAUUSD",
+        "BTCUSDT",
+        "ETHUSDT"
+      ],
+      "description": "Canonical market identifier according to DEC-053."
+    },
+    "Timeframe": {
+      "type": "string",
+      "enum": ["1M", "5M", "15M", "1H", "4H", "1D"],
+      "description": "Standardized candlestick timeframes."
+    },
+    "EngineType": {
+      "type": "string",
+      "enum": ["SCALP", "INTRADAY"],
+      "description": "Deterministic strategy engine type according to DEC-014."
+    },
+    "TradeSide": {
+      "type": "string",
+      "enum": ["BUY", "SELL"],
+      "description": "Order and position direction."
+    },
+    "OrderType": {
+      "type": "string",
+      "enum": ["LIMIT", "MARKET", "STOP_LIMIT"],
+      "description": "Order execution type."
+    },
+    "CandidateGrade": {
+      "type": "string",
+      "enum": ["A_PLUS", "A", "B", "C"],
+      "description": "Deterministic candidate quality grade according to DEC-017."
+    },
+    "JudgeDecisionType": {
+      "type": "string",
+      "enum": ["APPROVE", "REJECT", "REANALYZE"],
+      "description": "Conditional analytical judge verdict according to DEC-006."
+    },
+    "OrderStatus": {
+      "type": "string",
+      "enum": [
+        "PENDING_NEW",
+        "NEW",
+        "PARTIALLY_FILLED",
+        "FILLED",
+        "CANCELLED",
+        "REJECTED",
+        "EXPIRED"
+      ],
+      "description": "Lifecycle status of an order according to DEC-051."
+    }
+  }
+}

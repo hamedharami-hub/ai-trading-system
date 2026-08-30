@@ -85,6 +85,8 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 | DEC-071 | The first AI trial shall be offline on both Windows and Android. The planned common inference family is `llama.cpp` with GGUF models and platform-specific native adapters. AI remains analytical only. This decision does not authorize a model download in the recovery phase. | LOCKED |
 | DEC-072 | Antigravity output is an untrusted recovery source, not product authority. Code may be reused only after file-level review, correction, and applicable tests. Its DEC-069 through DEC-080 claims and its claim that all thirteen phases are complete are rejected and have no authority. | LOCKED |
 | DEC-073 | The owner explicitly authorizes Consolidated Phase 1, Recovery and Reuse Audit. This phase may inspect remote history and prepare a clean recovery branch, but cannot add connectors, secrets, AI calls, model artifacts/downloads, or real/paper execution behavior. | LOCKED |
+| DEC-074 | The owner accepts Consolidated Phase 1 and authorizes replacement of GitHub `main` with the clean recovery line. The Antigravity head is preserved only in `archive/antigravity-fc0df3a`. | LOCKED |
+| DEC-075 | The owner authorizes Consolidated Phase 2, Deterministic Core, including reviewed dependencies and a lockfile. Scope is canonical contracts, deterministic financial math and hashing, event validation, Mock/Replay fixtures, deterministic feature/strategy/policy/risk boundaries, local durable-storage foundations, and tests. Network feeds, cloud operation, secrets, AI calls/models, broker adapters, paper/demo external execution, and live trading remain prohibited. | LOCKED |
 
 ## Open ambiguities and conflicts
 

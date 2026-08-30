@@ -9,8 +9,15 @@
   },
   "scripts": {
     "build": "turbo run build",
+    "generate": "turbo run generate",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "prettier": "3.6.2",
+    "turbo": "2.10.12",
+    "typescript": "7.0.2"
   }
 }

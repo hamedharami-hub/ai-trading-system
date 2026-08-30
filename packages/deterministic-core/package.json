@@ -1,34 +1,26 @@
 {
-  "name": "@trade/contracts",
+  "name": "@trade/deterministic-core",
   "version": "0.1.0",
   "private": true,
   "type": "module",
   "main": "./src/index.ts",
   "types": "./src/index.ts",
   "exports": {
-    ".": {
-      "types": "./src/index.ts",
-      "import": "./src/index.ts",
-      "default": "./src/index.ts"
-    },
-    "./schemas/*": "./src/schemas/*"
+    ".": "./src/index.ts"
   },
   "scripts": {
-    "generate": "tsx scripts/generate-types.ts",
     "build": "tsc",
     "lint": "prettier --check . --ignore-path ../../.gitignore",
     "typecheck": "tsc --noEmit",
     "test": "vitest run"
   },
   "dependencies": {
-    "ajv": "8.20.0",
-    "ajv-formats": "3.0.1",
+    "@trade/contracts": "workspace:*",
     "decimal.js": "10.6.0"
   },
   "devDependencies": {
-    "json-schema-to-typescript": "16.0.0",
+    "@types/node": "24.13.3",
     "prettier": "3.6.2",
-    "tsx": "4.23.13",
     "typescript": "7.0.2",
     "vitest": "4.1.11"
   },

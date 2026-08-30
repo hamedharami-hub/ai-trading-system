@@ -1,0 +1,14 @@
+[
+  {
+    "eventId": "018f3a9e-64c2-7b00-8000-000000000201",
+    "streamId": "mock:XAUUSD:TICK",
+    "sequence": "10",
+    "receivedIndex": 1
+  },
+  {
+    "eventId": "018f3a9e-64c2-7b00-8000-000000000202",
+    "streamId": "mock:XAUUSD:TICK",
+    "sequence": "12",
+    "receivedIndex": 2
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trading.system/schemas/events/policy-decision.json",
+  "title": "PolicyDecisionPayload",
+  "description": "Deterministic hard policy evaluation outcome.",
+  "type": "object",
+  "required": [
+    "candidate_id",
+    "status",
+    "news_filter_passed",
+    "session_filter_passed",
+    "spread_filter_passed",
+    "counter_trend_allowed",
+    "block_reasons",
+    "evaluated_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "candidate_id": {
+      "$ref": "../primitives.json#/$defs/UUIDv7"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["PASSED", "BLOCKED"]
+    },
+    "news_filter_passed": {
+      "type": "boolean"
+    },
+    "session_filter_passed": {
+      "type": "boolean"
+    },
+    "spread_filter_passed": {
+      "type": "boolean"
+    },
+    "counter_trend_allowed": {
+      "type": "boolean"
+    },
+    "block_reasons": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "evaluated_at": {
+      "$ref": "../primitives.json#/$defs/TimestampISO"
+    }
+  }
+}

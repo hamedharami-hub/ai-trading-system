@@ -4,7 +4,7 @@
 
 The Persian architecture PDF and subsequent explicit owner instructions are the product authority. English repository documentation is the version-controlled implementation translation. If a conflict exists, the owner's latest explicit instruction prevails.
 
-This document defines boundaries for a future personal trading system. The current repository phase is foundation-only: it contains no application source code, dependencies, data feeds, broker or exchange integrations, secrets, network clients, AI calls, model downloads, or executable trading behavior.
+This document defines the system boundaries. Consolidated Phase 2 implements canonical contracts and a deterministic offline-core foundation only. It contains no data feeds, broker or exchange integrations, secrets, network clients, AI calls, model downloads, cloud operation, or executable trading adapter.
 
 ## 2. Safety invariants
 
@@ -35,7 +35,7 @@ This is a future separate Windows Node.js/TypeScript process and the determinist
 - risk-approved `OrderIntent` creation;
 - OMS state, idempotency, reconciliation, persistence, and audit emission.
 
-The foundation creates only its package boundary. It does not create these components.
+The repository now includes reviewed deterministic math, policy, risk, replay, guarded intent, and SQLite audit foundations in `packages/deterministic-core`. The Local Trading Node executable, real feeds, OMS adapters, and execution remain absent.
 
 ### Shared contracts (`packages/contracts`)
 
@@ -43,7 +43,7 @@ This future data-only package is the only contract dependency shared by the PWA 
 
 Financial wire values for `Price`, `Quantity`, `Money`, `Percent`, and `R:R` use decimal strings. Authoritative financial calculations cannot use JavaScript `number`; internally they use arbitrary-precision Decimal values, and symbol precision comes from versioned symbol metadata. The Decimal package/runtime, rounding policy, and metadata authority remain blocked by `OPEN-003` and `OPEN-006`.
 
-The package may contain schemas, types, versioning utilities, and deterministic validation only. It may not import either application or contain network, storage, AI, risk, or execution logic. No schemas are implemented in this foundation.
+The package contains schemas, generated types, Decimal parsing/formatting, canonical serialization, cryptographic hashing, and deterministic validation only. It may not import either application or contain network, storage, AI, risk, or execution logic.
 
 ### Future external boundaries
 
@@ -92,7 +92,7 @@ All future messages use an event envelope containing at least `schema_version`, 
 | `ExecutionReport` | Future OMS/adapter | State, reconciliation, audit | Execution observation requiring reconciliation |
 | `AuditEvent` | Every deterministic boundary | Append-only event log | Immutable audit record |
 
-Exact schemas are still not created in this foundation. Their future definitions must implement DEC-044 through DEC-067 and the delegated Phase 1 profile; no contract or executable interface is introduced by those decisions.
+Phase 2 provides the initial schema set implementing DEC-044 through DEC-067. Schema evolution remains versioned and fail-closed; the presence of `ExecutionReport` and `OrderIntent` contracts does not authorize an adapter or external execution.
 
 ## 6. Dependency and trust rules
 

@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trading.system/schemas/events/market-event.json",
+  "title": "MarketEventPayload",
+  "description": "Raw or normalized market data event from a feed.",
+  "type": "object",
+  "required": ["symbol", "feed_type"],
+  "additionalProperties": false,
+  "oneOf": [
+    {
+      "properties": {
+        "feed_type": { "const": "CANDLE" },
+        "candle": {},
+        "tick": false,
+        "orderbook": false
+      },
+      "required": ["candle"]
+    },
+    {
+      "properties": {
+        "feed_type": { "const": "TICK" },
+        "candle": false,
+        "tick": {},
+        "orderbook": false
+      },
+      "required": ["tick"]
+    },
+    {
+      "properties": {
+        "feed_type": { "const": "ORDERBOOK_L2" },
+        "candle": false,
+        "tick": false,
+        "orderbook": {},
+        "sequence_number": {}
+      },
+      "required": ["orderbook", "sequence_number"]
+    }
+  ],
+  "properties": {
+    "symbol": {
+      "$ref": "../primitives.json#/$defs/MarketId"
+    },
+    "feed_type": {
+      "type": "string",
+      "enum": ["CANDLE", "TICK", "ORDERBOOK_L2"]
+    },
+    "candle": {
+      "type": "object",
+      "required": [
+        "open",
+        "high",
+        "low",
+        "close",
+        "volume",
+        "timeframe",
+        "is_closed",
+        "open_time",
+        "close_time"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "open": {
+          "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+        },
+        "high": {
+          "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+        },
+        "low": {
+          "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+        },
+        "close": {
+          "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+        },
+        "volume": {
+          "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+        },
+        "timeframe": {
+          "$ref": "../primitives.json#/$defs/Timeframe"
+        },
+        "is_closed": {
+          "type": "boolean"
+        },
+        "open_time": {
+          "$ref": "../primitives.json#/$defs/TimestampISO"
+        },
+        "close_time": {
+          "$ref": "../primitives.json#/$defs/TimestampISO"
+        }
+      }
+    },
+    "tick": {
+      "type": "object",
+      "required": ["bid", "ask"],
+      "additionalProperties": false,
+      "properties": {
+        "bid": {
+          "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+        },
+        "ask": {
+          "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+        },
+        "last_price": {
+          "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+        },
+        "last_qty": {
+          "$ref": "../primitives.json#/$defs/PositiveDecimalString"
+        }
+      }
+    },
+    "orderbook": {
+      "type": "object",
+      "required": ["bids", "asks", "depth"],
+      "additionalProperties": false,
+      "properties": {
+        "bids": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+            }
+          }
+        },
+        "asks": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "items": {
+              "$ref": "../primitives.json#/$defs/StrictPositiveDecimalString"
+            }
+          }
+        },
+        "depth": {
+          "type": "integer",
+          "minimum": 1
+        }
+      }
+    },
+    "sequence_number": {
+      "$ref": "../primitives.json#/$defs/NonNegativeIntegerString"
+    }
+  }
+}

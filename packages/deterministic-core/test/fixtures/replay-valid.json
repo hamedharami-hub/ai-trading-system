@@ -1,0 +1,14 @@
+[
+  {
+    "eventId": "018f3a9e-64c2-7b00-8000-000000000101",
+    "streamId": "mock:EURUSD:TICK",
+    "sequence": "9007199254740992",
+    "receivedIndex": 1
+  },
+  {
+    "eventId": "018f3a9e-64c2-7b00-8000-000000000102",
+    "streamId": "mock:EURUSD:TICK",
+    "sequence": "9007199254740993",
+    "receivedIndex": 2
+  }
+]

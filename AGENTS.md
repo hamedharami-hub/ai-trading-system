@@ -25,9 +25,8 @@ Do not treat compilation, a green test, or a partial artifact as completion of a
 
 ## Current repository phase
 
-Consolidated Phase 1 (Antigravity recovery and reuse audit) is authorized by DEC-073. The clean baseline must remain recoverable and Antigravity code must not be merged wholesale. During this phase, do not add:
+Consolidated Phase 2 (Deterministic Core) is authorized by DEC-075. Antigravity material remains untrusted and may be reused only after semantic review and correction. This phase may add reviewed source, dependencies, schemas, a lockfile, Mock/Replay fixtures, local deterministic storage foundations, and tests. During this phase, do not add:
 
-- dependencies or lockfiles;
 - broker, exchange, market-data, notification, cloud, or AI integrations;
 - network clients or outbound calls;
 - API keys, tokens, credentials, account data, or credential placeholders;
@@ -60,4 +59,4 @@ Do not request secrets. Keep `LIVE_TRADING_ENABLED`, `BROKER_CONNECTORS_ENABLED`
 
 Validate JSON/YAML syntax, workspace discovery, disabled flags, absence of dependencies/lockfiles/source code, and absence of credential or integration material. Report any verification that cannot run because dependencies are intentionally absent.
 
-For the recovery phase, verify the Antigravity disposition matrix, preserve the clean baseline, reject false phase-completion claims, and keep every external capability disabled. Do not begin Consolidated Phase 2 without its separate scope declaration and explicit approval.
+For Phase 2, verify canonical contract generation, strict boundary validation, cryptographic hashing without downgrade, arbitrary-precision financial math, deterministic replay, fail-closed policy/risk boundaries, durable-storage behavior, and dependency direction. Keep every external capability disabled. Do not begin Consolidated Phase 3 without its separate scope declaration and explicit approval.

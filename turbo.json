@@ -1,19 +1,23 @@
 {
   "tasks": {
+    "generate": {
+      "dependsOn": ["^generate"],
+      "outputs": ["src/generated/**"]
+    },
     "build": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["^build", "generate"],
       "outputs": [".next/**", "dist/**"]
     },
     "lint": {
-      "dependsOn": ["^lint"],
+      "dependsOn": ["^lint", "generate"],
       "outputs": []
     },
     "test": {
-      "dependsOn": ["^test"],
-      "outputs": ["coverage/**"]
+      "dependsOn": ["^test", "generate"],
+      "outputs": []
     },
     "typecheck": {
-      "dependsOn": ["^typecheck"],
+      "dependsOn": ["^typecheck", "generate"],
       "outputs": []
     }
   }

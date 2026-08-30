@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://trading.system/schemas/events/audit-event.json",
+  "title": "AuditEventPayload",
+  "description": "Tamper-evident audit record linking causal actions and hash verified states.",
+  "type": "object",
+  "required": [
+    "audit_id",
+    "action",
+    "actor",
+    "entity_type",
+    "entity_id",
+    "canonical_hash",
+    "recorded_at"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "audit_id": {
+      "$ref": "../primitives.json#/$defs/UUIDv7"
+    },
+    "parent_event_id": {
+      "$ref": "../primitives.json#/$defs/UUIDv7"
+    },
+    "action": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actor": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entity_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "entity_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "state_before": {
+      "type": "object"
+    },
+    "state_after": {
+      "type": "object"
+    },
+    "canonical_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "recorded_at": {
+      "$ref": "../primitives.json#/$defs/TimestampISO"
+    }
+  }
+}
