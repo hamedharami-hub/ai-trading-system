@@ -7,7 +7,7 @@
 ## Enabled boundary
 
 - Vercel hosts the PWA presentation layer.
-- The PWA may initiate Firebase Google Authentication only after an explicit owner click.
+- The PWA may initiate Firebase Google Authentication only after an explicit owner click. It uses the Firebase redirect flow, which Firebase recommends for mobile browsers.
 - Firebase Authentication is used only to identify the signed-in owner in the UI.
 - Missing configuration, a popup failure, an unknown user state, or cloud unavailability remains visible and fail-closed. No pairing or synchronization is attempted.
 

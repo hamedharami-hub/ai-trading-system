@@ -1,11 +1,18 @@
 "use client";
 
-import { getApp, getApps, initializeApp, type FirebaseApp } from "firebase/app";
+import {
+  FirebaseError,
+  getApp,
+  getApps,
+  initializeApp,
+  type FirebaseApp,
+} from "firebase/app";
 import {
   getAuth,
+  getRedirectResult,
   GoogleAuthProvider,
   onAuthStateChanged,
-  signInWithPopup,
+  signInWithRedirect,
   signOut,
   type Auth,
   type User,
@@ -46,7 +53,32 @@ export type CloudSession =
   | Readonly<{ kind: "not-configured" }>
   | Readonly<{ kind: "signed-out" }>
   | Readonly<{ kind: "signed-in"; user: User }>
-  | Readonly<{ kind: "error"; reason: "authentication-failed" }>;
+  | Readonly<{
+      kind: "error";
+      reason:
+        | "authentication-failed"
+        | "domain-not-authorized"
+        | "network-unavailable"
+        | "sign-in-cancelled";
+    }>;
+
+function toCloudError(error: unknown): CloudSession {
+  if (!(error instanceof FirebaseError)) {
+    return { kind: "error", reason: "authentication-failed" };
+  }
+
+  switch (error.code) {
+    case "auth/unauthorized-domain":
+      return { kind: "error", reason: "domain-not-authorized" };
+    case "auth/network-request-failed":
+      return { kind: "error", reason: "network-unavailable" };
+    case "auth/user-cancelled":
+    case "auth/redirect-cancelled-by-user":
+      return { kind: "error", reason: "sign-in-cancelled" };
+    default:
+      return { kind: "error", reason: "authentication-failed" };
+  }
+}
 
 export function observeCloudSession(
   onChange: (session: CloudSession) => void,
@@ -57,6 +89,14 @@ export function observeCloudSession(
     return () => undefined;
   }
 
+  void getRedirectResult(auth)
+    .then((result) => {
+      if (result !== null) {
+        onChange({ kind: "signed-in", user: result.user });
+      }
+    })
+    .catch((error: unknown) => onChange(toCloudError(error)));
+
   return onAuthStateChanged(auth, (user) => {
     onChange(
       user === null ? { kind: "signed-out" } : { kind: "signed-in", user },
@@ -64,17 +104,17 @@ export function observeCloudSession(
   });
 }
 
-export async function signInToCloudControl(): Promise<CloudSession> {
+export async function signInToCloudControl(): Promise<CloudSession | null> {
   const auth = getFirebaseAuth();
   if (auth === null) {
     return { kind: "not-configured" };
   }
 
   try {
-    const credential = await signInWithPopup(auth, new GoogleAuthProvider());
-    return { kind: "signed-in", user: credential.user };
-  } catch {
-    return { kind: "error", reason: "authentication-failed" };
+    await signInWithRedirect(auth, new GoogleAuthProvider());
+    return null;
+  } catch (error: unknown) {
+    return toCloudError(error);
   }
 }
 

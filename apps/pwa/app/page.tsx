@@ -55,8 +55,10 @@ export default function HomePage() {
   async function handleCloudControl() {
     setCloudBusy(true);
     const session = await signInToCloudControl();
-    setCloudSession(session);
-    setCloudBusy(false);
+    if (session !== null) {
+      setCloudSession(session);
+      setCloudBusy(false);
+    }
   }
 
   async function handleSignOut() {
@@ -71,7 +73,13 @@ export default function HomePage() {
       : cloudSession.kind === "signed-out"
         ? "ورود لازم است"
         : cloudSession.kind === "error"
-          ? "ورود ناموفق بود"
+          ? cloudSession.reason === "domain-not-authorized"
+            ? "دامنهٔ سایت در Firebase مجاز نیست"
+            : cloudSession.reason === "network-unavailable"
+              ? "ارتباط Firebase در دسترس نیست"
+              : cloudSession.reason === "sign-in-cancelled"
+                ? "ورود لغو شد"
+                : "ورود ناموفق بود"
           : "پیکربندی Vercel لازم است";
 
   return (
@@ -258,7 +266,9 @@ export default function HomePage() {
                   disabled={cloudBusy}
                 >
                   <Cloud size={17} />
-                  {cloudBusy ? "در حال بررسی هویت…" : "ورود مالک با Google"}
+                  {cloudBusy
+                    ? "در حال انتقال به Google…"
+                    : "ورود مالک با Google"}
                 </button>
               )}
               <p className="control-note">
