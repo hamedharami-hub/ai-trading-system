@@ -14,7 +14,13 @@ import {
   Smartphone,
   X,
 } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import {
+  observeCloudSession,
+  signInToCloudControl,
+  signOutFromCloudControl,
+  type CloudSession,
+} from "./firebase-client";
 
 type PanelId = "overview" | "devices" | "audit";
 
@@ -34,12 +40,39 @@ export default function HomePage() {
   const [activePanel, setActivePanel] = useState<PanelId>("overview");
   const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false);
   const [notificationEnabled, setNotificationEnabled] = useState(false);
-  const [syncRequested, setSyncRequested] = useState(false);
+  const [cloudSession, setCloudSession] = useState<CloudSession>({
+    kind: "not-configured",
+  });
+  const [cloudBusy, setCloudBusy] = useState(false);
+
+  useEffect(() => observeCloudSession(setCloudSession), []);
 
   function selectPanel(panel: PanelId) {
     setActivePanel(panel);
     setMobileNavigationOpen(false);
   }
+
+  async function handleCloudControl() {
+    setCloudBusy(true);
+    const session = await signInToCloudControl();
+    setCloudSession(session);
+    setCloudBusy(false);
+  }
+
+  async function handleSignOut() {
+    setCloudBusy(true);
+    await signOutFromCloudControl();
+    setCloudBusy(false);
+  }
+
+  const cloudStateLabel =
+    cloudSession.kind === "signed-in"
+      ? "هویت مالک تأیید شد"
+      : cloudSession.kind === "signed-out"
+        ? "ورود لازم است"
+        : cloudSession.kind === "error"
+          ? "ورود ناموفق بود"
+          : "پیکربندی Vercel لازم است";
 
   return (
     <main className="app-shell">
@@ -205,17 +238,33 @@ export default function HomePage() {
                   <dt>execution</dt>
                   <dd>خاموش</dd>
                 </div>
+                <div>
+                  <dt>cloud state</dt>
+                  <dd>{cloudStateLabel}</dd>
+                </div>
               </dl>
-              <button
-                className="secondary-button"
-                onClick={() => setSyncRequested(true)}
-                disabled={syncRequested}
-              >
-                <RefreshCw size={17} />{" "}
-                {syncRequested
-                  ? "درخواست محلی ثبت شد"
-                  : "آماده‌سازی همگام‌سازی"}
-              </button>
+              {cloudSession.kind === "signed-in" ? (
+                <button
+                  className="secondary-button"
+                  onClick={handleSignOut}
+                  disabled={cloudBusy}
+                >
+                  <RefreshCw size={17} /> خروج امن از Cloud Control
+                </button>
+              ) : (
+                <button
+                  className="secondary-button"
+                  onClick={handleCloudControl}
+                  disabled={cloudBusy}
+                >
+                  <Cloud size={17} />
+                  {cloudBusy ? "در حال بررسی هویت…" : "ورود مالک با Google"}
+                </button>
+              )}
+              <p className="control-note">
+                ورود فقط برای نمایش وضعیت غیرحاکمیتی است؛ همگام‌سازی و pairing
+                تا تکمیل revoke/recovery فعال نمی‌شوند.
+              </p>
             </section>
 
             <section className="control-card">
@@ -234,7 +283,7 @@ export default function HomePage() {
                 <em>منتظر pair</em>
               </div>
               <button className="secondary-button" disabled>
-                شروع pairing پس از کنترل هویت
+                pairing مسدود است — کنترل revoke/recovery لازم است
               </button>
             </section>
           </aside>

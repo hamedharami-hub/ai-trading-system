@@ -48,6 +48,7 @@ temp/
 # Workspace-local agent/app metadata
 .codex/
 .agents/
+.codex-remote-attachments/
 
 # Editors and operating systems
 .idea/

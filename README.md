@@ -1,6 +1,6 @@
 # AI Trading System
 
-This repository has been recovered from an untrusted Antigravity implementation onto the approved architecture baseline. Consolidated Phase 2 now contains the first approved deterministic, offline core. It cannot connect to a market, broker, exchange, AI provider, model registry, cloud project, or account.
+This repository has been recovered from an untrusted Antigravity implementation onto the approved architecture baseline. Consolidated Phases 2 and 3 provide the deterministic offline core and guarded offline AI evidence. Consolidated Phase 4 is active for the responsive PWA and non-execution Firebase/Vercel control boundary only.
 
 ## Authority
 
@@ -8,7 +8,7 @@ The Persian architecture PDF and subsequent explicit owner instructions are the 
 
 ## Current status
 
-The current Phase 2 branch contains:
+The current `main` branch contains:
 
 - the product decision and ambiguity register;
 - architecture boundaries and safety invariants;
@@ -18,14 +18,17 @@ The current Phase 2 branch contains:
 - strict UUIDv7, UTC-millisecond, decimal-string, and payload validation;
 - deterministic Decimal financial utilities, PolicyGate, risk limits, and guarded OrderIntent creation;
 - sequence-aware Mock/Replay fixtures and a SQLite WAL append-only audit foundation.
+- an installable, responsive Persian PWA hosted through Vercel;
+- an owner-initiated Firebase Google Authentication boundary that fails closed when configuration is absent;
+- no Firestore synchronization, device pairing, cloud lease, or execution authority.
 
-There are no integrations, secrets, network clients, AI calls, models, broker adapters, external execution clients, or live-trading behavior. Antigravity code remains in archived Git history and is reused only after correction and tests.
+There are no market-data, broker, exchange, OMS, paper/demo, or live-trading integrations. Firebase is limited by [the Phase 4 cloud-control boundary](docs/phase-4-cloud-control.md); it has no risk, order, execution, or AI authority. Antigravity code remains in archived Git history and is reused only after correction and tests.
 
 ## Planned architecture
 
 | Workspace | Future responsibility | Current contents |
 | --- | --- | --- |
-| `apps/pwa` | Next.js/React installable PWA for presentation and trusted user interaction | Private package manifest only; no browser engine |
+| `apps/pwa` | Next.js/React installable PWA for presentation and trusted user interaction | Responsive presentation UI and guarded owner Google sign-in only |
 | `apps/local-trading-node` | Separate Node.js/TypeScript deterministic market-data, features, strategy, policy, risk, and OMS process | Private package manifest; executable process not started |
 | `packages/contracts` | Shared TypeScript contracts derived from canonical JSON Schema 2020-12 definitions | Implemented and tested |
 | `packages/deterministic-core` | Authoritative offline math, policy, risk, replay, intent, and persistence boundaries | Implemented Phase 2 foundation and tests |
@@ -43,6 +46,7 @@ Only future deterministic Local Trading Node components may calculate risk or cr
 - [Consolidated six-phase roadmap](docs/consolidated-roadmap-fa.md)
 - [Antigravity recovery audit](docs/antigravity-recovery-audit.md)
 - [Phase 2 implementation report](docs/phase-2-implementation.md)
+- [Phase 4 cloud-control boundary](docs/phase-4-cloud-control.md)
 
 - [بسته تحویل به هوش مصنوعی بعدی](docs/ai-handoff-fa.md)
 - [نسخه داخل‌مخزن PDF مرجع](docs/source/architecture-authority-v2.1-fa.pdf)
@@ -85,4 +89,4 @@ pnpm build
 
 Work proceeds one roadmap phase at a time. Each phase must state scope, unresolved owner decisions, unsafe assumptions, acceptance evidence, and receive explicit owner approval before a later phase begins. Compilation alone is not a phase gate.
 
-The original Phase 1 requirements package was accepted in DEC-068 and the consolidated recovery phase in DEC-074. Consolidated Phase 2 is active under DEC-075 and is ready for its acceptance review. External integrations, secrets, AI calls, model downloads, and execution remain prohibited.
+The original Phase 1 requirements package was accepted in DEC-068, the consolidated recovery phase in DEC-074, Phase 2 in DEC-076, and Phase 3 in DEC-079. Consolidated Phase 4 is active under DEC-080. `OPEN-021` blocks cloud synchronization, pairing, revocation, recovery, and cloud lease implementation. External market/broker integrations, trading credentials, paper/demo mode, and execution remain prohibited.
