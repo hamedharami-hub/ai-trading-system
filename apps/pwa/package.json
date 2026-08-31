@@ -6,5 +6,22 @@
   "engines": {
     "node": ">=24 <25",
     "pnpm": ">=11 <12"
+  },
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev",
+    "lint": "prettier --check . --ignore-path ../../.gitignore",
+    "start": "next start",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "lucide-react": "^1.37.0",
+    "next": "^16.3.3",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5"
   }
 }
