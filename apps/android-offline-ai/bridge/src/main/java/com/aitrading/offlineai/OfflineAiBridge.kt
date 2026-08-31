@@ -34,6 +34,7 @@ class OfflineAiBridge(private val context: Context) {
         systemPrompt: String,
         userPrompt: String,
         allowedKeys: Set<String>,
+        requiredKeys: Set<String> = allowedKeys,
         predictLength: Int = 512,
         timeoutMillis: Long = 90_000,
     ): String {
@@ -52,6 +53,7 @@ class OfflineAiBridge(private val context: Context) {
         val json = JSONObject(extractJson(output.toString()))
         val keys = json.keys().asSequence().toSet()
         require(keys.all(allowedKeys::contains)) { "Model returned an unauthorized field" }
+        require(requiredKeys.all(keys::contains)) { "Model omitted a required field" }
         return json.toString()
     }
 

@@ -1,6 +1,6 @@
 # گزارش پیاده‌سازی فاز تجمیعی ۳ — هوش مصنوعی آفلاین
 
-وضعیت: `READY_FOR_OWNER_REVIEW`؛ گذر کامل gate منوط به benchmark روی دستگاه اندرویدی هدف است.
+وضعیت: `READY_FOR_OWNER_REVIEW`؛ شواهد benchmark دستگاه اندرویدی هدف ثبت شده است، اما پذیرش صریح مالک برای عبور از gate فاز ۳ همچنان لازم است.
 
 ## محدوده انجام‌شده
 
@@ -35,6 +35,10 @@
 - `llamaAndroid-debug.aar`: اندازه `18,100,695` بایت، SHA-256 برابر `23d7a8ee98a220b52129c90c2f9941548e1457276c7212e94732b5d1e51bfef1` و شامل کتابخانه‌های native برای `arm64-v8a` و `x86_64` است.
 - `bridge-debug.aar`: اندازه `14,809` بایت و SHA-256 برابر `2dc2d3cda22060767f671ed4402b280ca049713aa2137c801ce5c70dbd1fecec` است؛ وابستگی native از پروژه `llamaAndroid` به‌صورت `api` منتقل می‌شود.
 - به‌دلیل محدودیت مسیر ۲۶۰ کاراکتری Ninja در ویندوز، اسکریپت build برای workspaceهای طولانی junction کوتاه موقت می‌سازد، مقصد را قبل از حذف کنترل می‌کند و آن را پس از build پاک می‌کند.
+- build نهایی Android شامل `:llamaAndroid:assembleDebug`، `:bridge:assembleDebug` و `:benchmark:assembleDebug` موفق شد (`105` task؛ بدون dependency یا artifact جدیدِ ثبت‌شده در Git).
+- benchmark فیزیکی Android روی `Pixel 9 Pro Fold` با Android `17` و ABI `arm64-v8a` انجام شد. مدل در مسیر app-private قرار گرفت، اندازه و SHA-256 آن روی خود دستگاه با پروفایل قفل‌شده برابر بود و فایل انتقال موقت پس از تأیید حذف شد.
+- اجرای کاملاً محلی Android: خروجی schema-valid برابر `{"decision":"REJECT","reason":"no deterministic evidence"}` و زمان `35,618 ms` بود. وضعیت حرارتی پیش و پس از اجرا `0` (عادی) بود. هیچ منبع داده، اتصال شبکه، حساب یا مسیر execution در benchmark وجود نداشت.
+- نخستین اجرای دستگاه نشان داد runtime برای یافتن backendهای native به libraryهای استخراج‌شده نیاز دارد؛ بسته‌بندی benchmark اکنون `jniLibs.useLegacyPackaging = true` دارد. نخستین پاسخ ۶۴-token نیز JSON تولید نکرد و به‌درستی fail-closed شد؛ آزمون نهایی با خروجی محدود `256` token و schema validation سخت موفق شد.
 
 ## قابلیت‌های همچنان ممنوع و خاموش
 
@@ -42,7 +46,7 @@
 
 ## ریسک باقیمانده و gate
 
-- benchmark و load/inference روی دستگاه فیزیکی اندروید هنوز شواهد ندارد؛ تفاوت RAM، thermal throttling و ABI می‌تواند قابلیت اجرا را تغییر دهد.
+- این benchmark فقط یک دستگاه با یک model profile را پوشش می‌دهد؛ تفاوت RAM، thermal throttling، ABI و نسخه Android در دستگاه‌های دیگر همچنان باید جداگانه benchmark شود.
 - مدل 0.8B برای آزمون معماری انتخاب شده و کیفیت تصمیم تحلیلی آن تضمین نیست.
-- تا تکمیل شواهد اندروید، رفتار امن «عدم تحلیل قابل‌قبول و عدم معامله جدید» است.
-- سبزشدن TypeScript و ویندوز به‌تنهایی مجوز شروع فاز ۴ نیست.
+- با وجود موفقیت benchmark، کیفیت تحلیلی/تجاری مدل اثبات نشده است و رفتار امن هر خطای AI همچنان «عدم تحلیل قابل‌قبول و عدم معامله جدید» است.
+- سبزشدن TypeScript، ویندوز یا Android به‌تنهایی مجوز شروع فاز ۴ نیست؛ پذیرش صریح فاز ۳ و declaration جداگانهٔ فاز ۴ لازم است.

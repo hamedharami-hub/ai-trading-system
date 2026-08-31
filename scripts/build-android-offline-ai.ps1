@@ -57,5 +57,5 @@ if (-not $env:ANDROID_HOME -or -not (Test-Path -LiteralPath $env:ANDROID_HOME)) 
     throw 'Android SDK is required to build the Android bridge.'
 }
 
-& $java -classpath $wrapperJar org.gradle.wrapper.GradleWrapperMain -p $androidProject ':llamaAndroid:assembleDebug' ':bridge:assembleDebug'
+& $java -classpath $wrapperJar org.gradle.wrapper.GradleWrapperMain -p $androidProject ':llamaAndroid:assembleDebug' ':bridge:assembleDebug' ':benchmark:assembleDebug'
 if ($LASTEXITCODE -ne 0) { throw "Android offline AI build failed with exit code $LASTEXITCODE" }

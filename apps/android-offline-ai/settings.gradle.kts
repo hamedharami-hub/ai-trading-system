@@ -16,5 +16,6 @@ dependencyResolutionManagement {
 
 rootProject.name = "TradeOfflineAi"
 include(":bridge")
+include(":benchmark")
 include(":llamaAndroid")
 project(":llamaAndroid").projectDir = file("../../vendor/llama.cpp/examples/llama.android/lib")
