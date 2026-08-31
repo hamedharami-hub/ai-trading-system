@@ -90,6 +90,7 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 | DEC-076 | The owner accepts Consolidated Phase 2 and authorizes merging it into GitHub `main`. Passing Phase 2 does not authorize external data, brokers, cloud operation, or live trading. | LOCKED |
 | DEC-077 | The owner authorizes Consolidated Phase 3 for offline AI on Windows and Android, including a pinned `llama.cpp` runtime, verified GGUF model acquisition, native Android binding, local runtime adapters, four analytical roles, resource benchmarks, and Mock/Replay-only evaluation. The initial test profile is `llama.cpp` v0.3.0 with Qwen3.5-0.8B Q4_0; this selection is for architecture testing, not trading-quality evidence. | LOCKED |
 | DEC-078 | The owner explicitly authorizes acceptance of the Android SDK/NDK licenses required for the Phase 3 build and gives general authorization to continue the remaining roadmap implementation sequentially. This is not acceptance of unverified phase evidence and does not authorize broker credentials, real accounts, or live execution; those remain behind their explicit safety gates. | LOCKED |
+| DEC-079 | The owner explicitly accepts Consolidated Phase 3 evidence and authorizes merging its guarded offline-AI implementation into GitHub `main`. This acceptance does not authorize Consolidated Phase 4, any cloud integration, market-data client, broker/exchange adapter, credential, paper/demo mode, or live execution. | LOCKED |
 
 ## Open ambiguities and conflicts
 
@@ -157,7 +158,7 @@ Historical baseline: this table records the unresolved state before DEC-043. It 
 
 ## Current phase gate
 
-Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Roadmap Phase 2 remains unstarted and requires separate explicit approval after its scope, remaining decisions, and unsafe assumptions are stated. External-capability flags remain disabled, and no source code, dependency, lockfile, credential placeholder, network client, connector, AI call, or model artifact is permitted.
+Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Consolidated Phase 2 passed through DEC-076 and Consolidated Phase 3 passed through DEC-079. Consolidated Phase 4 remains unstarted and requires a separate scope declaration and explicit owner approval after its affected decisions and unsafe assumptions are stated. External-capability flags remain disabled; no cloud integration, market-data client, broker/exchange connector, credential, paper/demo mode, or live execution is authorized.
 
 ## Phase 1 P0/P1 resolution ledger
 
