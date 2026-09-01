@@ -178,6 +178,10 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-128 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5J is accepted: the owner-facing PWA no longer displays or selects `MOCK` fixture data, while internal fixtures remain test-only. The PWA now reports that no accepted historical `REPLAY` dataset is installed. Six offline-AI tests, 33 deterministic-core tests, and the PWA build passed. No historical data was acquired or imported. | LOCKED |
 
+| DEC-129 | Under the owner-authorized autonomous progression of DEC-113, a documentation-only Historical Replay Admission Design Gate is authorized. Scope is a fail-closed design for future local historical dataset admission, provenance labelling, integrity, timestamps, symbol mapping, and rejection evidence. It excludes acquiring, downloading, importing, parsing, displaying, or connecting to any historical or live market data, and excludes Paper/Demo, OMS, broker action, and execution. | LOCKED |
+
+| DEC-130 | Under the owner-authorized autonomous progression of DEC-113, the documentation-only Historical Replay Admission Design Gate is accepted after formatting and integrity checks. The design retains the owner-facing `REPLAY unavailable` state and requires a separate accepted local-import implementation scope before any historical file is handled. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
