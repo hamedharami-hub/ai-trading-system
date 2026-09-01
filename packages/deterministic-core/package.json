@@ -12,7 +12,8 @@
     "build": "tsc",
     "lint": "prettier --check . --ignore-path ../../.gitignore",
     "typecheck": "tsc --noEmit",
-    "test": "vitest run"
+    "test": "vitest run --exclude test/local/**",
+    "test:historical-replay-local": "vitest run test/local/historical-replay-admission.local.test.ts"
   },
   "dependencies": {
     "@trade/contracts": "workspace:*",
