@@ -140,6 +140,10 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-109 | The owner accepts Consolidated Phase 5D-III evidence: the PWA shows only fixed local fixture metadata for the selected `MOCK` identifier and fails closed to no data for an unknown fixture. It displays no price and offers no network, risk, Paper/Demo, OMS, broker, or execution path. | LOCKED |
 
+| DEC-110 | The owner explicitly confirms that Consolidated Phase 4 remains accepted by DEC-083 and resolves the repository-instruction conflict that described Phase 4 as merely authorized. Continuation of separately scoped and owner-approved Phase 5 work is permitted, but this confirmation does not authorize market-data integrations, credentials, Paper/Demo, OMS, broker action, or execution. | LOCKED |
+
+| DEC-111 | The owner authorizes Consolidated Phase 5D-IV, Static Mock Chart. Scope is a PWA presentation-only fixed visual for the selected local `MOCK` fixture, prominently labelled as not a real price. It excludes local or remote data loading, real market feeds, signal generation, performance claims, Paper/Demo, risk calculation, OMS, broker action, and execution. Unknown fixture state must show no chart. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |

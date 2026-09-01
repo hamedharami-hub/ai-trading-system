@@ -31,6 +31,7 @@ type MockForexInstrument = {
   readonly eventId: string;
   readonly timestampExchange: string;
   readonly timestampLocal: string;
+  readonly staticChartPath: string;
 };
 
 const panels: ReadonlyArray<{ id: PanelId; label: string }> = [
@@ -53,6 +54,8 @@ const mockForexInstruments: ReadonlyArray<MockForexInstrument> = [
     eventId: "mock-fx-001",
     timestampExchange: "2026-09-01T00:00:00.000Z",
     timestampLocal: "2026-09-01T00:00:00.010Z",
+    staticChartPath:
+      "M 8 67 L 34 55 L 60 61 L 86 34 L 112 46 L 138 24 L 164 39 L 192 18",
   },
   {
     symbol: "GBPUSD",
@@ -61,6 +64,8 @@ const mockForexInstruments: ReadonlyArray<MockForexInstrument> = [
     eventId: "mock-fx-002",
     timestampExchange: "2026-09-01T00:00:01.000Z",
     timestampLocal: "2026-09-01T00:00:01.010Z",
+    staticChartPath:
+      "M 8 42 L 34 52 L 60 31 L 86 45 L 112 29 L 138 49 L 164 37 L 192 54",
   },
   {
     symbol: "USDJPY",
@@ -69,6 +74,8 @@ const mockForexInstruments: ReadonlyArray<MockForexInstrument> = [
     eventId: "mock-fx-003",
     timestampExchange: "2026-09-01T00:00:02.000Z",
     timestampLocal: "2026-09-01T00:00:02.010Z",
+    staticChartPath:
+      "M 8 58 L 34 46 L 60 64 L 86 48 L 112 56 L 138 30 L 164 42 L 192 25",
   },
   {
     symbol: "XAUUSD",
@@ -77,6 +84,8 @@ const mockForexInstruments: ReadonlyArray<MockForexInstrument> = [
     eventId: "mock-fx-004",
     timestampExchange: "2026-09-01T00:00:03.000Z",
     timestampLocal: "2026-09-01T00:00:03.010Z",
+    staticChartPath:
+      "M 8 29 L 34 40 L 60 26 L 86 50 L 112 41 L 138 59 L 164 45 L 192 62",
   },
 ];
 
@@ -278,44 +287,72 @@ export default function HomePage() {
                   می‌ماند.
                 </p>
               ) : (
-                <dl className="mock-fixture-details">
-                  <div>
-                    <dt>symbol</dt>
-                    <dd>{selectedMockInstrument.symbol}</dd>
-                  </div>
-                  <div>
-                    <dt>streamId</dt>
-                    <dd>
-                      <code>{selectedMockInstrument.streamId}</code>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>eventId</dt>
-                    <dd>
-                      <code>{selectedMockInstrument.eventId}</code>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>timestampExchange</dt>
-                    <dd>
-                      <time dateTime={selectedMockInstrument.timestampExchange}>
-                        {selectedMockInstrument.timestampExchange}
-                      </time>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>timestampLocal</dt>
-                    <dd>
-                      <time dateTime={selectedMockInstrument.timestampLocal}>
-                        {selectedMockInstrument.timestampLocal}
-                      </time>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt>status</dt>
-                    <dd>REPLAY_ONLY_VALID</dd>
-                  </div>
-                </dl>
+                <>
+                  <dl className="mock-fixture-details">
+                    <div>
+                      <dt>symbol</dt>
+                      <dd>{selectedMockInstrument.symbol}</dd>
+                    </div>
+                    <div>
+                      <dt>streamId</dt>
+                      <dd>
+                        <code>{selectedMockInstrument.streamId}</code>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>eventId</dt>
+                      <dd>
+                        <code>{selectedMockInstrument.eventId}</code>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>timestampExchange</dt>
+                      <dd>
+                        <time
+                          dateTime={selectedMockInstrument.timestampExchange}
+                        >
+                          {selectedMockInstrument.timestampExchange}
+                        </time>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>timestampLocal</dt>
+                      <dd>
+                        <time dateTime={selectedMockInstrument.timestampLocal}>
+                          {selectedMockInstrument.timestampLocal}
+                        </time>
+                      </dd>
+                    </div>
+                    <div>
+                      <dt>status</dt>
+                      <dd>REPLAY_ONLY_VALID</dd>
+                    </div>
+                  </dl>
+                  <figure
+                    className="mock-static-chart"
+                    aria-labelledby="mock-chart-caption"
+                  >
+                    <svg
+                      aria-label={`نمودار ساختگی ${selectedMockInstrument.symbol}`}
+                      role="img"
+                      viewBox="0 0 200 86"
+                    >
+                      <path
+                        className="mock-chart-grid"
+                        d="M 0 22 H 200 M 0 43 H 200 M 0 64 H 200"
+                      />
+                      <path
+                        className="mock-chart-line"
+                        d={selectedMockInstrument.staticChartPath}
+                      />
+                    </svg>
+                    <figcaption id="mock-chart-caption">
+                      نمودار ثابت و صرفاً نمایشی برای{" "}
+                      <code>{selectedMockInstrument.symbol}</code> — قیمت واقعی
+                      نیست.
+                    </figcaption>
+                  </figure>
+                </>
               )}
             </section>
 

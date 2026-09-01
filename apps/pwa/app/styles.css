@@ -262,6 +262,36 @@ h2 {
   color: #ffb7c3;
   font-size: 0.82rem;
 }
+.mock-static-chart {
+  margin: 1rem 0 0;
+  padding: 0.8rem;
+  border: 1px solid #304362;
+  border-radius: 0.65rem;
+  background: #101a2e;
+}
+.mock-static-chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+.mock-chart-grid {
+  fill: none;
+  stroke: #243653;
+  stroke-width: 1;
+}
+.mock-chart-line {
+  fill: none;
+  stroke: #70d6c0;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 2.5;
+}
+.mock-static-chart figcaption {
+  margin-top: 0.65rem;
+  color: #aabed7;
+  font-size: 0.75rem;
+  line-height: 1.6;
+}
 .section-heading,
 .card-title,
 .device-row,
