@@ -228,6 +228,40 @@ h2 {
 .mock-selection-state {
   color: #9fb8cf;
 }
+.mock-fixture-details {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.65rem;
+  margin: 1rem 0 0;
+}
+.mock-fixture-details div {
+  min-width: 0;
+  padding: 0.65rem;
+  border-radius: 0.55rem;
+  background: #16223a;
+}
+.mock-fixture-details dt {
+  color: #93a4c1;
+  font:
+    0.68rem ui-monospace,
+    monospace;
+}
+.mock-fixture-details dd {
+  margin: 0.3rem 0 0;
+  color: #d8e5fb;
+  font:
+    0.74rem ui-monospace,
+    monospace;
+  overflow-wrap: anywhere;
+}
+.mock-fixture-details time {
+  color: #b8cbe7;
+}
+.mock-fixture-unavailable {
+  margin-top: 1rem;
+  color: #ffb7c3;
+  font-size: 0.82rem;
+}
 .section-heading,
 .card-title,
 .device-row,
@@ -430,6 +464,9 @@ h2 {
     grid-template-columns: 1fr 1fr;
   }
   .mock-instrument-list {
+    grid-template-columns: 1fr;
+  }
+  .mock-fixture-details {
     grid-template-columns: 1fr;
   }
   .event-row {

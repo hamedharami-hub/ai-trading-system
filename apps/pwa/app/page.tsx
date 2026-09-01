@@ -28,6 +28,9 @@ type MockForexInstrument = {
   readonly symbol: "EURUSD" | "GBPUSD" | "USDJPY" | "XAUUSD";
   readonly label: string;
   readonly streamId: string;
+  readonly eventId: string;
+  readonly timestampExchange: string;
+  readonly timestampLocal: string;
 };
 
 const panels: ReadonlyArray<{ id: PanelId; label: string }> = [
@@ -47,21 +50,33 @@ const mockForexInstruments: ReadonlyArray<MockForexInstrument> = [
     symbol: "EURUSD",
     label: "یورو / دلار آمریکا",
     streamId: "mock:EURUSD:TICK",
+    eventId: "mock-fx-001",
+    timestampExchange: "2026-09-01T00:00:00.000Z",
+    timestampLocal: "2026-09-01T00:00:00.010Z",
   },
   {
     symbol: "GBPUSD",
     label: "پوند / دلار آمریکا",
     streamId: "mock:GBPUSD:TICK",
+    eventId: "mock-fx-002",
+    timestampExchange: "2026-09-01T00:00:01.000Z",
+    timestampLocal: "2026-09-01T00:00:01.010Z",
   },
   {
     symbol: "USDJPY",
     label: "دلار آمریکا / ین ژاپن",
     streamId: "mock:USDJPY:TICK",
+    eventId: "mock-fx-003",
+    timestampExchange: "2026-09-01T00:00:02.000Z",
+    timestampLocal: "2026-09-01T00:00:02.010Z",
   },
   {
     symbol: "XAUUSD",
     label: "طلا / دلار آمریکا",
     streamId: "mock:XAUUSD:TICK",
+    eventId: "mock-fx-004",
+    timestampExchange: "2026-09-01T00:00:03.000Z",
+    timestampLocal: "2026-09-01T00:00:03.010Z",
   },
 ];
 
@@ -75,6 +90,10 @@ export default function HomePage() {
     kind: "not-configured",
   });
   const [cloudBusy, setCloudBusy] = useState(false);
+
+  const selectedMockInstrument = mockForexInstruments.find(
+    (instrument) => instrument.symbol === selectedMockSymbol,
+  );
 
   useEffect(() => observeCloudSession(setCloudSession), []);
 
@@ -253,6 +272,51 @@ export default function HomePage() {
                 fixture انتخاب‌شده: <code>mock:{selectedMockSymbol}:TICK</code>{" "}
                 · `REPLAY_ONLY_VALID` · execution-ineligible
               </p>
+              {selectedMockInstrument === undefined ? (
+                <p className="mock-fixture-unavailable">
+                  دادهٔ قابل‌نمایش نیست؛ وضعیت نامعتبر است و سامانه متوقف
+                  می‌ماند.
+                </p>
+              ) : (
+                <dl className="mock-fixture-details">
+                  <div>
+                    <dt>symbol</dt>
+                    <dd>{selectedMockInstrument.symbol}</dd>
+                  </div>
+                  <div>
+                    <dt>streamId</dt>
+                    <dd>
+                      <code>{selectedMockInstrument.streamId}</code>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>eventId</dt>
+                    <dd>
+                      <code>{selectedMockInstrument.eventId}</code>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>timestampExchange</dt>
+                    <dd>
+                      <time dateTime={selectedMockInstrument.timestampExchange}>
+                        {selectedMockInstrument.timestampExchange}
+                      </time>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>timestampLocal</dt>
+                    <dd>
+                      <time dateTime={selectedMockInstrument.timestampLocal}>
+                        {selectedMockInstrument.timestampLocal}
+                      </time>
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>status</dt>
+                    <dd>REPLAY_ONLY_VALID</dd>
+                  </div>
+                </dl>
+              )}
             </section>
 
             <section className="section-block">

@@ -136,6 +136,8 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-107 | The owner accepts Consolidated Phase 5D-II evidence: the PWA selector switches only among accepted local `MOCK` fixture identifiers, displays no prices, and offers no network, risk, Paper/Demo, OMS, broker, or execution path. | LOCKED |
 
+| DEC-108 | The owner authorizes Consolidated Phase 5D-III, Offline Fixture Detail View. Scope is a PWA presentation-only display of fixed local fixture metadata: symbol, stream ID, event ID, timestamps, and `REPLAY_ONLY_VALID` status. It excludes price display, local or remote data loading, real market feeds, backtest/performance claims, Paper/Demo, risk calculation, OMS, broker action, and execution. Unknown fixture state must show no data. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
