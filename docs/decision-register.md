@@ -150,6 +150,8 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-114 | The owner authorizes Consolidated Phase 5E, Offline AI Benchmark Evidence View. Scope is a PWA presentation-only rendering of the already recorded Phase 3 local Windows and Android benchmark evidence, explicitly labelled as historical benchmark evidence rather than current inference or trading analysis. It excludes model download/load/inference, remote AI, price or market data, signal generation, Paper/Demo, risk calculation, OMS, broker action, and execution. Missing or invalid evidence must display no result. | LOCKED |
 
+| DEC-115 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5E is accepted after PWA build verification and six offline-AI package tests passed. The PWA view remains historical and non-authoritative: it does not load a model, perform inference, or create any analytical, risk, Paper/Demo, OMS, broker, or execution action. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
