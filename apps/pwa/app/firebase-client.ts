@@ -89,19 +89,48 @@ export function observeCloudSession(
     return () => undefined;
   }
 
-  void getRedirectResult(auth)
-    .then((result) => {
-      if (result !== null) {
-        onChange({ kind: "signed-in", user: result.user });
-      }
-    })
-    .catch((error: unknown) => onChange(toCloudError(error)));
+  let redirectResolutionComplete = false;
+  let observedUser: User | null = null;
+  let disposed = false;
 
-  return onAuthStateChanged(auth, (user) => {
+  const unsubscribe = onAuthStateChanged(auth, (user) => {
+    observedUser = user;
+
+    // Redirect completion owns the initial result. Publishing an early
+    // signed-out observation can otherwise replace a successful redirect
+    // result while Firebase restores its persisted session.
+    if (!redirectResolutionComplete || disposed) {
+      return;
+    }
+
     onChange(
       user === null ? { kind: "signed-out" } : { kind: "signed-in", user },
     );
   });
+
+  void getRedirectResult(auth)
+    .then((result) => {
+      if (disposed) {
+        return;
+      }
+
+      redirectResolutionComplete = true;
+      const user = result?.user ?? auth.currentUser ?? observedUser;
+      onChange(
+        user === null ? { kind: "signed-out" } : { kind: "signed-in", user },
+      );
+    })
+    .catch((error: unknown) => {
+      if (!disposed) {
+        redirectResolutionComplete = true;
+        onChange(toCloudError(error));
+      }
+    });
+
+  return () => {
+    disposed = true;
+    unsubscribe();
+  };
 }
 
 export async function signInToCloudControl(): Promise<CloudSession | null> {
