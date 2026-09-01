@@ -1,0 +1,38 @@
+[
+  {
+    "eventId": "mock-fx-001",
+    "streamId": "mock:EURUSD:TICK",
+    "sequence": "1",
+    "receivedIndex": 1,
+    "timestampExchange": "2026-09-01T00:00:00.000Z",
+    "timestampLocal": "2026-09-01T00:00:00.010Z",
+    "symbol": "EURUSD"
+  },
+  {
+    "eventId": "mock-fx-002",
+    "streamId": "mock:GBPUSD:TICK",
+    "sequence": "1",
+    "receivedIndex": 2,
+    "timestampExchange": "2026-09-01T00:00:01.000Z",
+    "timestampLocal": "2026-09-01T00:00:01.010Z",
+    "symbol": "GBPUSD"
+  },
+  {
+    "eventId": "mock-fx-003",
+    "streamId": "mock:USDJPY:TICK",
+    "sequence": "1",
+    "receivedIndex": 3,
+    "timestampExchange": "2026-09-01T00:00:02.000Z",
+    "timestampLocal": "2026-09-01T00:00:02.010Z",
+    "symbol": "USDJPY"
+  },
+  {
+    "eventId": "mock-fx-004",
+    "streamId": "mock:XAUUSD:TICK",
+    "sequence": "1",
+    "receivedIndex": 4,
+    "timestampExchange": "2026-09-01T00:00:03.000Z",
+    "timestampLocal": "2026-09-01T00:00:03.010Z",
+    "symbol": "XAUUSD"
+  }
+]

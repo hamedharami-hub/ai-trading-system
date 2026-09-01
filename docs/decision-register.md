@@ -128,6 +128,8 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-103 | The owner accepts Consolidated Phase 5C-III evidence: the provider evidence-package template records every required legal, mapping, recovery, custody, and adapter-review artifact, and fails closed when any item is absent. This acceptance authorizes no account access, app registration, credential, provider request, connectivity, Paper/Demo, OMS, broker action, or execution. | LOCKED |
 
+| DEC-104 | The owner authorizes Consolidated Phase 5D, Offline Forex Fixtures. Scope is local `MOCK` replay identifiers for EURUSD, GBPUSD, USDJPY, and XAUUSD with deterministic validation tests. It excludes real prices, market feeds, backtest/performance claims, Paper/Demo, OMS, broker action, and execution. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
