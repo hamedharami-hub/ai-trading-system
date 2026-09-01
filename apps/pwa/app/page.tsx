@@ -61,6 +61,14 @@ const offlineAiBenchmarks: ReadonlyArray<OfflineAiBenchmark> = [
   },
 ];
 
+const historicalReplayEvidence = {
+  dataset: "EURUSD · M1 · Bid",
+  source: "Dukascopy Historical Data Export",
+  coverage: "2025-08-01 · 00:00 تا 20:59 UTC",
+  rows: "۱٬۲۶۰ ردیف",
+  status: "ADMITTED_LOCAL_REPLAY",
+} as const;
+
 export default function HomePage() {
   const [activePanel, setActivePanel] = useState<PanelId>("overview");
   const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false);
@@ -203,7 +211,7 @@ export default function HomePage() {
             </section>
 
             <section
-              className="section-block replay-unavailable"
+              className="section-block replay-evidence"
               aria-labelledby="replay-title"
             >
               <div className="section-heading">
@@ -211,17 +219,40 @@ export default function HomePage() {
                   <p className="eyeline">دادهٔ کاری</p>
                   <h2 id="replay-title">Replay تاریخی</h2>
                 </div>
-                <span className="subtle-status">بدون دادهٔ واردشده</span>
+                <span className="subtle-status replay-evidence-status">
+                  historical · execution-ineligible
+                </span>
               </div>
               <p>
-                برای استفادهٔ شما فقط دادهٔ تاریخیِ واضحاً برچسب‌خوردهٔ `REPLAY`
-                نمایش داده خواهد شد. دادهٔ MOCK و نمودارهای ساختگی صرفاً در
-                تست‌های داخلی نگه داشته می‌شوند و در این رابط کاری نمایش داده
-                نمی‌شوند.
+                یک dataset تاریخیِ محلی از آزمون ساختاری عبور کرده است. این کارت
+                فقط evidence پذیرش را نشان می‌دهد؛ فایل CSV به مرورگر وارد یا در
+                این رابط پردازش نمی‌شود.
               </p>
-              <p className="replay-unavailable-state">
-                هنوز dataset تاریخیِ پذیرفته‌شده وارد نشده است؛ بنابراین تحلیل،
-                سیگنال و معامله‌ای در دسترس نیست.
+              <dl className="replay-evidence-list">
+                <div>
+                  <dt>dataset</dt>
+                  <dd>{historicalReplayEvidence.dataset}</dd>
+                </div>
+                <div>
+                  <dt>source</dt>
+                  <dd>{historicalReplayEvidence.source}</dd>
+                </div>
+                <div>
+                  <dt>coverage</dt>
+                  <dd>{historicalReplayEvidence.coverage}</dd>
+                </div>
+                <div>
+                  <dt>evidence</dt>
+                  <dd>
+                    {historicalReplayEvidence.status} ·{" "}
+                    {historicalReplayEvidence.rows}
+                  </dd>
+                </div>
+              </dl>
+              <p className="replay-evidence-safe-stop">
+                این داده فقط تاریخی، منبع‌برچسب‌خورده و coverage-bounded است. نه
+                تحلیل، نه AI، نه Paper Trading، نه سود/زیان، نه سفارش و نه
+                معامله در دسترس نیست.
               </p>
             </section>
 
