@@ -122,6 +122,8 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-100 | The owner authorizes Consolidated Phase 5C-II, Offline Connectivity Readiness Validator. Scope is a deterministic local validator that reports missing evidence and is structurally unable to authorize activation or execution. It excludes all provider connections, network/API/WebSocket calls, credentials, accounts, external tests, Paper/Demo, OMS, broker action, and execution. | LOCKED |
 
+| DEC-101 | The owner accepts Consolidated Phase 5C-II evidence: the local readiness validator reports missing evidence and is structurally limited to `NOT_READY`, with activation and execution permanently false. This acceptance authorizes no provider connection, credential, external request, Paper/Demo, OMS, broker action, or execution. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
