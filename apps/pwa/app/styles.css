@@ -177,120 +177,14 @@ h2 {
   border-radius: 0.85rem;
   padding: clamp(1rem, 2vw, 1.35rem);
 }
-.mock-selector-description,
-.mock-selection-state {
+.replay-unavailable > p {
   color: #afc3d3;
   font-size: 0.84rem;
   line-height: 1.7;
   margin-top: 0.8rem;
 }
-.mock-instrument-list {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
-  margin-top: 1rem;
-}
-.mock-instrument {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.65rem;
-  min-width: 0;
-  padding: 0.75rem;
-  border: 1px solid #33415f;
-  border-radius: 0.6rem;
-  background: #121e34;
-  color: #dce7ff;
-  cursor: pointer;
-  text-align: right;
-}
-.mock-instrument:hover,
-.mock-instrument-selected {
-  border-color: #4b86aa;
-  background: #16354a;
-}
-.mock-instrument span {
-  display: grid;
-  gap: 0.2rem;
-}
-.mock-instrument small {
-  color: #aab8d2;
-  font-size: 0.72rem;
-}
-.mock-instrument code,
-.mock-selection-state code {
-  color: #9cd9ef;
-  font:
-    0.68rem ui-monospace,
-    monospace;
-  overflow-wrap: anywhere;
-}
-.mock-selection-state {
-  color: #9fb8cf;
-}
-.mock-fixture-details {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0.65rem;
-  margin: 1rem 0 0;
-}
-.mock-fixture-details div {
-  min-width: 0;
-  padding: 0.65rem;
-  border-radius: 0.55rem;
-  background: #16223a;
-}
-.mock-fixture-details dt {
-  color: #93a4c1;
-  font:
-    0.68rem ui-monospace,
-    monospace;
-}
-.mock-fixture-details dd {
-  margin: 0.3rem 0 0;
-  color: #d8e5fb;
-  font:
-    0.74rem ui-monospace,
-    monospace;
-  overflow-wrap: anywhere;
-}
-.mock-fixture-details time {
-  color: #b8cbe7;
-}
-.mock-fixture-unavailable {
-  margin-top: 1rem;
-  color: #ffb7c3;
-  font-size: 0.82rem;
-}
-.mock-static-chart {
-  margin: 1rem 0 0;
-  padding: 0.8rem;
-  border: 1px solid #304362;
-  border-radius: 0.65rem;
-  background: #101a2e;
-}
-.mock-static-chart svg {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-.mock-chart-grid {
-  fill: none;
-  stroke: #243653;
-  stroke-width: 1;
-}
-.mock-chart-line {
-  fill: none;
-  stroke: #70d6c0;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2.5;
-}
-.mock-static-chart figcaption {
-  margin-top: 0.65rem;
-  color: #aabed7;
-  font-size: 0.75rem;
-  line-height: 1.6;
+.replay-unavailable-state {
+  color: #ffc56f !important;
 }
 .offline-ai-note,
 .offline-ai-safe-stop,
@@ -550,12 +444,6 @@ h2 {
   .process-line {
     display: grid;
     grid-template-columns: 1fr 1fr;
-  }
-  .mock-instrument-list {
-    grid-template-columns: 1fr;
-  }
-  .mock-fixture-details {
-    grid-template-columns: 1fr;
   }
   .offline-ai-benchmark {
     grid-template-columns: 1fr;

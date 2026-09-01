@@ -172,6 +172,12 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-125 | Under the owner-authorized autonomous progression of DEC-113, the documentation-only Local Paper Trading Design Gate is accepted after formatting and integrity checks. The resulting design explicitly keeps Paper/OMS implementation disabled and requires a separate implementation gate with deterministic fixtures and owner acceptance. | LOCKED |
 
+| DEC-126 | The owner requires that `MOCK`/synthetic data remain internal test material only and never appear in the owner-facing operational PWA as usable market data. Owner-facing analysis must use clearly labelled historical `REPLAY` data when available, and later only separately authorized real read-only data. Synthetic tests may never create a performance, Paper/Demo, or trading claim. | LOCKED |
+
+| DEC-127 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5J is authorized to enforce the historical-only owner-facing PWA boundary. Scope is removing `MOCK` fixture selection, static mock metadata, and mock chart display from the PWA, then showing an explicit historical-replay-unavailable state. It excludes acquiring/importing historical data, any market-data connection, Paper/Demo, risk, OMS, broker action, and execution. | LOCKED |
+
+| DEC-128 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5J is accepted: the owner-facing PWA no longer displays or selects `MOCK` fixture data, while internal fixtures remain test-only. The PWA now reports that no accepted historical `REPLAY` dataset is installed. Six offline-AI tests, 33 deterministic-core tests, and the PWA build passed. No historical data was acquired or imported. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |

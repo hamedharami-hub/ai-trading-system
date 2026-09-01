@@ -24,16 +24,6 @@ import {
 
 type PanelId = "overview" | "devices" | "audit";
 
-type MockForexInstrument = {
-  readonly symbol: "EURUSD" | "GBPUSD" | "USDJPY" | "XAUUSD";
-  readonly label: string;
-  readonly streamId: string;
-  readonly eventId: string;
-  readonly timestampExchange: string;
-  readonly timestampLocal: string;
-  readonly staticChartPath: string;
-};
-
 type OfflineAiBenchmark = {
   readonly platform: string;
   readonly runtime: string;
@@ -71,63 +61,14 @@ const offlineAiBenchmarks: ReadonlyArray<OfflineAiBenchmark> = [
   },
 ];
 
-const mockForexInstruments: ReadonlyArray<MockForexInstrument> = [
-  {
-    symbol: "EURUSD",
-    label: "یورو / دلار آمریکا",
-    streamId: "mock:EURUSD:TICK",
-    eventId: "mock-fx-001",
-    timestampExchange: "2026-09-01T00:00:00.000Z",
-    timestampLocal: "2026-09-01T00:00:00.010Z",
-    staticChartPath:
-      "M 8 67 L 34 55 L 60 61 L 86 34 L 112 46 L 138 24 L 164 39 L 192 18",
-  },
-  {
-    symbol: "GBPUSD",
-    label: "پوند / دلار آمریکا",
-    streamId: "mock:GBPUSD:TICK",
-    eventId: "mock-fx-002",
-    timestampExchange: "2026-09-01T00:00:01.000Z",
-    timestampLocal: "2026-09-01T00:00:01.010Z",
-    staticChartPath:
-      "M 8 42 L 34 52 L 60 31 L 86 45 L 112 29 L 138 49 L 164 37 L 192 54",
-  },
-  {
-    symbol: "USDJPY",
-    label: "دلار آمریکا / ین ژاپن",
-    streamId: "mock:USDJPY:TICK",
-    eventId: "mock-fx-003",
-    timestampExchange: "2026-09-01T00:00:02.000Z",
-    timestampLocal: "2026-09-01T00:00:02.010Z",
-    staticChartPath:
-      "M 8 58 L 34 46 L 60 64 L 86 48 L 112 56 L 138 30 L 164 42 L 192 25",
-  },
-  {
-    symbol: "XAUUSD",
-    label: "طلا / دلار آمریکا",
-    streamId: "mock:XAUUSD:TICK",
-    eventId: "mock-fx-004",
-    timestampExchange: "2026-09-01T00:00:03.000Z",
-    timestampLocal: "2026-09-01T00:00:03.010Z",
-    staticChartPath:
-      "M 8 29 L 34 40 L 60 26 L 86 50 L 112 41 L 138 59 L 164 45 L 192 62",
-  },
-];
-
 export default function HomePage() {
   const [activePanel, setActivePanel] = useState<PanelId>("overview");
   const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false);
   const [notificationEnabled, setNotificationEnabled] = useState(false);
-  const [selectedMockSymbol, setSelectedMockSymbol] =
-    useState<MockForexInstrument["symbol"]>("EURUSD");
   const [cloudSession, setCloudSession] = useState<CloudSession>({
     kind: "not-configured",
   });
   const [cloudBusy, setCloudBusy] = useState(false);
-
-  const selectedMockInstrument = mockForexInstruments.find(
-    (instrument) => instrument.symbol === selectedMockSymbol,
-  );
 
   useEffect(() => observeCloudSession(setCloudSession), []);
 
@@ -262,123 +203,26 @@ export default function HomePage() {
             </section>
 
             <section
-              className="section-block mock-selector"
-              aria-labelledby="mock-forex-title"
+              className="section-block replay-unavailable"
+              aria-labelledby="replay-title"
             >
               <div className="section-heading">
                 <div>
-                  <p className="eyeline">دادهٔ آزمایشی آفلاین</p>
-                  <h2 id="mock-forex-title">انتخاب fixture فارکس</h2>
+                  <p className="eyeline">دادهٔ کاری</p>
+                  <h2 id="replay-title">Replay تاریخی</h2>
                 </div>
-                <span className="subtle-status">MOCK · فقط‌نمایشی</span>
+                <span className="subtle-status">بدون دادهٔ واردشده</span>
               </div>
-              <p className="mock-selector-description">
-                این انتخاب فقط نمای رابط را تغییر می‌دهد؛ قیمت، feed، معاملهٔ
-                آزمایشی و سفارش در دسترس نیستند.
+              <p>
+                برای استفادهٔ شما فقط دادهٔ تاریخیِ واضحاً برچسب‌خوردهٔ `REPLAY`
+                نمایش داده خواهد شد. دادهٔ MOCK و نمودارهای ساختگی صرفاً در
+                تست‌های داخلی نگه داشته می‌شوند و در این رابط کاری نمایش داده
+                نمی‌شوند.
               </p>
-              <div className="mock-instrument-list" role="list">
-                {mockForexInstruments.map((instrument) => {
-                  const isSelected = selectedMockSymbol === instrument.symbol;
-
-                  return (
-                    <button
-                      aria-pressed={isSelected}
-                      className={
-                        isSelected
-                          ? "mock-instrument mock-instrument-selected"
-                          : "mock-instrument"
-                      }
-                      key={instrument.symbol}
-                      onClick={() => setSelectedMockSymbol(instrument.symbol)}
-                      role="listitem"
-                      type="button"
-                    >
-                      <span>
-                        <strong>{instrument.symbol}</strong>
-                        <small>{instrument.label}</small>
-                      </span>
-                      <code>{instrument.streamId}</code>
-                    </button>
-                  );
-                })}
-              </div>
-              <p className="mock-selection-state">
-                fixture انتخاب‌شده: <code>mock:{selectedMockSymbol}:TICK</code>{" "}
-                · `REPLAY_ONLY_VALID` · execution-ineligible
+              <p className="replay-unavailable-state">
+                هنوز dataset تاریخیِ پذیرفته‌شده وارد نشده است؛ بنابراین تحلیل،
+                سیگنال و معامله‌ای در دسترس نیست.
               </p>
-              {selectedMockInstrument === undefined ? (
-                <p className="mock-fixture-unavailable">
-                  دادهٔ قابل‌نمایش نیست؛ وضعیت نامعتبر است و سامانه متوقف
-                  می‌ماند.
-                </p>
-              ) : (
-                <>
-                  <dl className="mock-fixture-details">
-                    <div>
-                      <dt>symbol</dt>
-                      <dd>{selectedMockInstrument.symbol}</dd>
-                    </div>
-                    <div>
-                      <dt>streamId</dt>
-                      <dd>
-                        <code>{selectedMockInstrument.streamId}</code>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>eventId</dt>
-                      <dd>
-                        <code>{selectedMockInstrument.eventId}</code>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>timestampExchange</dt>
-                      <dd>
-                        <time
-                          dateTime={selectedMockInstrument.timestampExchange}
-                        >
-                          {selectedMockInstrument.timestampExchange}
-                        </time>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>timestampLocal</dt>
-                      <dd>
-                        <time dateTime={selectedMockInstrument.timestampLocal}>
-                          {selectedMockInstrument.timestampLocal}
-                        </time>
-                      </dd>
-                    </div>
-                    <div>
-                      <dt>status</dt>
-                      <dd>REPLAY_ONLY_VALID</dd>
-                    </div>
-                  </dl>
-                  <figure
-                    className="mock-static-chart"
-                    aria-labelledby="mock-chart-caption"
-                  >
-                    <svg
-                      aria-label={`نمودار ساختگی ${selectedMockInstrument.symbol}`}
-                      role="img"
-                      viewBox="0 0 200 86"
-                    >
-                      <path
-                        className="mock-chart-grid"
-                        d="M 0 22 H 200 M 0 43 H 200 M 0 64 H 200"
-                      />
-                      <path
-                        className="mock-chart-line"
-                        d={selectedMockInstrument.staticChartPath}
-                      />
-                    </svg>
-                    <figcaption id="mock-chart-caption">
-                      نمودار ثابت و صرفاً نمایشی برای{" "}
-                      <code>{selectedMockInstrument.symbol}</code> — قیمت واقعی
-                      نیست.
-                    </figcaption>
-                  </figure>
-                </>
-              )}
             </section>
 
             <section
