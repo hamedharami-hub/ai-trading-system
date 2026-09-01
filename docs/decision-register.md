@@ -164,6 +164,10 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-121 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5H is accepted: `pnpm verify:offline` passed six offline-AI tests, 33 deterministic-core tests, and the PWA production build. The result is local verification evidence only; it grants no market-data, model, Paper/Demo, OMS, broker, or execution capability. | LOCKED |
 
+| DEC-122 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5I is authorized for a read-only tracked-file capability and credential-pattern audit. Scope is checking disabled capability flags, tracked environment-file names, and credential-pattern false positives. It excludes changing configuration, accessing accounts, using credentials, network activity, Paper/Demo, OMS, broker action, and execution. | LOCKED |
+
+| DEC-123 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5I is accepted: the tracked `.env.example` retains `LIVE_TRADING_ENABLED=false`, `BROKER_CONNECTORS_ENABLED=false`, `AI_ROUTER_ENABLED=false`, and `MODEL_DOWNLOADS_ENABLED=false`; no tracked `.env` file exists; and the only pattern hit was verified as a `mask_test` identifier in vendored audio code, not a credential. This audit is point-in-time local evidence only. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
