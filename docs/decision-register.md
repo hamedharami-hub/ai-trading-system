@@ -130,6 +130,8 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-104 | The owner authorizes Consolidated Phase 5D, Offline Forex Fixtures. Scope is local `MOCK` replay identifiers for EURUSD, GBPUSD, USDJPY, and XAUUSD with deterministic validation tests. It excludes real prices, market feeds, backtest/performance claims, Paper/Demo, OMS, broker action, and execution. | LOCKED |
 
+| DEC-105 | The owner accepts Consolidated Phase 5D evidence: local `MOCK` replay fixtures for EURUSD, GBPUSD, USDJPY, and XAUUSD validate deterministically and remain `REPLAY_ONLY_VALID` and execution-ineligible. This acceptance authorizes no real prices, market feeds, backtest/performance claim, Paper/Demo, OMS, broker action, or execution. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
@@ -196,7 +198,7 @@ Historical baseline: this table records the unresolved state before DEC-043. It 
 
 ## Current phase gate
 
-Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Consolidated Phase 2 passed through DEC-076, Consolidated Phase 3 through DEC-079, Consolidated Phase 4 through DEC-083, Consolidated Phase 5A through DEC-085, Consolidated Phase 5B-I through DEC-087, Consolidated Phase 5B-II through DEC-089, Consolidated Phase 5B-III through DEC-091, Consolidated Phase 5B-IV through DEC-093, Consolidated Phase 5B-V through DEC-095, and Consolidated Phase 5B-VI through DEC-097. No later Phase 5B scope is active. `OPEN-021` keeps pairing, synchronization, cloud lease, key custody, recovery, and revocation implementation disabled. Market-data clients, active provider selection, broker/exchange connectors, trading credentials, paper/demo mode, and live execution remain prohibited until a separately scoped and accepted later gate.
+Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Consolidated Phase 2 passed through DEC-076, Consolidated Phase 3 through DEC-079, Consolidated Phase 4 through DEC-083, Consolidated Phase 5A through DEC-085, Consolidated Phase 5B-I through DEC-087, Consolidated Phase 5B-II through DEC-089, Consolidated Phase 5B-III through DEC-091, Consolidated Phase 5B-IV through DEC-093, Consolidated Phase 5B-V through DEC-095, Consolidated Phase 5B-VI through DEC-097, Consolidated Phase 5C-II through DEC-101, Consolidated Phase 5C-III through DEC-103, and Consolidated Phase 5D through DEC-105. No later Phase 5 scope is active. `OPEN-021` keeps pairing, synchronization, cloud lease, key custody, recovery, and revocation implementation disabled. Market-data clients, active provider selection, broker/exchange connectors, trading credentials, paper/demo mode, and live execution remain prohibited until a separately scoped and accepted later gate.
 
 ## Phase 1 P0/P1 resolution ledger
 
