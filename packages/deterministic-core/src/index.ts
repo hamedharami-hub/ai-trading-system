@@ -4,5 +4,6 @@ export * from "./pipeline/boundaries.js";
 export * from "./policy/policy-gate.js";
 export * from "./replay/sequence-validator.js";
 export * from "./replay/offline-replay-runner.js";
+export * from "./replay/read-only-market-data-fixture-validator.js";
 export * from "./risk/risk-engine.js";
 export * from "./storage/sqlite-audit-store.js";
