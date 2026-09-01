@@ -168,6 +168,10 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-123 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5I is accepted: the tracked `.env.example` retains `LIVE_TRADING_ENABLED=false`, `BROKER_CONNECTORS_ENABLED=false`, `AI_ROUTER_ENABLED=false`, and `MODEL_DOWNLOADS_ENABLED=false`; no tracked `.env` file exists; and the only pattern hit was verified as a `mask_test` identifier in vendored audio code, not a credential. This audit is point-in-time local evidence only. | LOCKED |
 
+| DEC-124 | The owner authorizes a documentation-only Local Paper Trading Design Gate. Scope is a fail-closed design artifact for a future completely offline simulator. It may map already locked DEC-051/DEC-056/DEC-057/DEC-058 constraints and list future acceptance evidence. It does not authorize or add Paper/Demo behavior, simulator code, OMS code, prices, market data, accounts, credentials, broker access, or execution. | LOCKED |
+
+| DEC-125 | Under the owner-authorized autonomous progression of DEC-113, the documentation-only Local Paper Trading Design Gate is accepted after formatting and integrity checks. The resulting design explicitly keeps Paper/OMS implementation disabled and requires a separate implementation gate with deterministic fixtures and owner acceptance. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
