@@ -124,6 +124,8 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-101 | The owner accepts Consolidated Phase 5C-II evidence: the local readiness validator reports missing evidence and is structurally limited to `NOT_READY`, with activation and execution permanently false. This acceptance authorizes no provider connection, credential, external request, Paper/Demo, OMS, broker action, or execution. | LOCKED |
 
+| DEC-102 | The owner authorizes Consolidated Phase 5C-III, Provider Evidence Package Template. Scope is a documentation-only, fail-closed template for future provider terms, metadata, recovery, custody, and adapter-review evidence. It excludes account access, app registration, credentials, provider requests, connectivity, Paper/Demo, OMS, broker action, and execution. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
