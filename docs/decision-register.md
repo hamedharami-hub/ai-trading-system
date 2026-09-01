@@ -115,6 +115,8 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-096 | The owner authorizes Consolidated Phase 5B-VI, Offline Boundary Integration Evidence. Scope is one local integration test of invalid fixture evidence, recovery failure, and the disabled adapter boundary. It excludes all provider connections, network/API/WebSocket calls, credentials, accounts, Paper/Demo, OMS, broker action, and execution. | LOCKED |
 
+| DEC-097 | The owner accepts Consolidated Phase 5B-VI evidence: the offline integration test proves invalid fixture evidence and gapped recovery remain execution-ineligible through the disabled adapter boundary, with no network capability and zero execution artifacts. This acceptance authorizes no provider connection, credential, external request, Paper/Demo, OMS, broker action, or execution. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
@@ -181,7 +183,7 @@ Historical baseline: this table records the unresolved state before DEC-043. It 
 
 ## Current phase gate
 
-Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Consolidated Phase 2 passed through DEC-076, Consolidated Phase 3 through DEC-079, Consolidated Phase 4 through DEC-083, Consolidated Phase 5A through DEC-085, Consolidated Phase 5B-I through DEC-087, Consolidated Phase 5B-II through DEC-089, Consolidated Phase 5B-III through DEC-091, Consolidated Phase 5B-IV through DEC-093, and Consolidated Phase 5B-V through DEC-095. Consolidated Phase 5B-VI is active under DEC-096 for offline boundary integration evidence only. `OPEN-021` keeps pairing, synchronization, cloud lease, key custody, recovery, and revocation implementation disabled. Market-data clients, active provider selection, broker/exchange connectors, trading credentials, paper/demo mode, and live execution remain prohibited until a separately scoped and accepted later gate.
+Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Consolidated Phase 2 passed through DEC-076, Consolidated Phase 3 through DEC-079, Consolidated Phase 4 through DEC-083, Consolidated Phase 5A through DEC-085, Consolidated Phase 5B-I through DEC-087, Consolidated Phase 5B-II through DEC-089, Consolidated Phase 5B-III through DEC-091, Consolidated Phase 5B-IV through DEC-093, Consolidated Phase 5B-V through DEC-095, and Consolidated Phase 5B-VI through DEC-097. No later Phase 5B scope is active. `OPEN-021` keeps pairing, synchronization, cloud lease, key custody, recovery, and revocation implementation disabled. Market-data clients, active provider selection, broker/exchange connectors, trading credentials, paper/demo mode, and live execution remain prohibited until a separately scoped and accepted later gate.
 
 ## Phase 1 P0/P1 resolution ledger
 
