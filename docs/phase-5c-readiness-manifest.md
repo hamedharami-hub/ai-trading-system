@@ -21,6 +21,8 @@ The manifest is `NOT_READY` until every required item has immutable evidence and
 
 The machine-readable baseline is [`read-only-connectivity-readiness-manifest.json`](./read-only-connectivity-readiness-manifest.json). Every evidence field begins false or null; no field may be inferred from this template.
 
+`evaluateConnectivityReadiness` is the local Phase 5C-II companion. It lists missing evidence but is structurally limited to `NOT_READY`, `activationAllowed: false`, and `executionAllowed: false`.
+
 ## Owner attestation
 
 The owner attested on 2026-09-01 that they are responsible for checking the legality of cTrader/OpoFinance and Binance market-data use for their residence and accounts, accept the data-use/retention terms, and authorize readiness review only. This is not technical/provider evidence and does not change `NOT_READY`.
