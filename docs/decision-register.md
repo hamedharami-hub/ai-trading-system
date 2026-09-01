@@ -117,6 +117,9 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-097 | The owner accepts Consolidated Phase 5B-VI evidence: the offline integration test proves invalid fixture evidence and gapped recovery remain execution-ineligible through the disabled adapter boundary, with no network capability and zero execution artifacts. This acceptance authorizes no provider connection, credential, external request, Paper/Demo, OMS, broker action, or execution. | LOCKED |
 
+| DEC-098 | The owner authorizes Consolidated Phase 5C-I, Read-only Connectivity Readiness Manifest. Scope is documentation-only collection of required provider evidence and fail-closed readiness criteria. It excludes provider activation, connections, network/API/WebSocket calls, credentials, accounts, external tests, Paper/Demo, OMS, broker action, and execution. | LOCKED |
+| DEC-099 | The owner attests responsibility for checking the legality of cTrader/OpoFinance and Binance data use for their residence and accounts, accepts applicable data-use/retention terms, and authorizes read-only connectivity readiness review only. This attestation is not provider or technical evidence and does not authorize provider activation, account connection, credentials, external requests, Paper/Demo, OMS, broker action, or execution. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
