@@ -109,6 +109,8 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-093 | The owner accepts Consolidated Phase 5B-IV evidence: offline Binance recovery fixtures validate snapshot bridging, buffered and subsequent sequence gaps, and reconnect states fail-closed; cTrader depth remains `UNPROVEN` without evidenced snapshot/rebuild semantics. Every report has a fixed execution denial and zero intent, execution, fill, and external-request counts. This acceptance authorizes no adapter, provider activation, credential, external request, Paper/Demo, OMS, broker action, or execution. | LOCKED |
 
+| DEC-094 | The owner authorizes Consolidated Phase 5B-V, Disabled Read-only Adapter Boundary. Scope is a local type-only capability-deny boundary and tests showing no transport, credential, account, OMS, or execution operation exists. It excludes all provider adapters, dependencies, SDKs, network/API/WebSocket calls, endpoints, app registration, credentials, external tests, Paper/Demo, broker action, and execution. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
@@ -175,7 +177,7 @@ Historical baseline: this table records the unresolved state before DEC-043. It 
 
 ## Current phase gate
 
-Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Consolidated Phase 2 passed through DEC-076, Consolidated Phase 3 through DEC-079, Consolidated Phase 4 through DEC-083, Consolidated Phase 5A through DEC-085, Consolidated Phase 5B-I through DEC-087, Consolidated Phase 5B-II through DEC-089, Consolidated Phase 5B-III through DEC-091, and Consolidated Phase 5B-IV through DEC-093. No later Phase 5B scope is active. `OPEN-021` keeps pairing, synchronization, cloud lease, key custody, recovery, and revocation implementation disabled. Market-data clients, active provider selection, broker/exchange connectors, trading credentials, paper/demo mode, and live execution remain prohibited until a separately scoped and accepted later gate.
+Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Consolidated Phase 2 passed through DEC-076, Consolidated Phase 3 through DEC-079, Consolidated Phase 4 through DEC-083, Consolidated Phase 5A through DEC-085, Consolidated Phase 5B-I through DEC-087, Consolidated Phase 5B-II through DEC-089, Consolidated Phase 5B-III through DEC-091, and Consolidated Phase 5B-IV through DEC-093. Consolidated Phase 5B-V is active under DEC-094 for a disabled adapter boundary only. `OPEN-021` keeps pairing, synchronization, cloud lease, key custody, recovery, and revocation implementation disabled. Market-data clients, active provider selection, broker/exchange connectors, trading credentials, paper/demo mode, and live execution remain prohibited until a separately scoped and accepted later gate.
 
 ## Phase 1 P0/P1 resolution ledger
 

@@ -6,5 +6,6 @@ export * from "./replay/sequence-validator.js";
 export * from "./replay/offline-replay-runner.js";
 export * from "./replay/read-only-market-data-fixture-validator.js";
 export * from "./replay/read-only-provider-recovery-fixture.js";
+export * from "./replay/disabled-read-only-provider-adapter.js";
 export * from "./risk/risk-engine.js";
 export * from "./storage/sqlite-audit-store.js";
