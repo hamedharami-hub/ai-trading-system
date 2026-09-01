@@ -160,6 +160,10 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-119 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5G is accepted: `pnpm verify:offline-replay` passed 33 deterministic-core tests across 12 test files and the PWA production build. The accepted fixtures remain offline and execution-ineligible, with no real price, performance claim, Paper/Demo, broker, or execution capability. | LOCKED |
 
+| DEC-120 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5H is authorized for one aggregate offline verification command. Scope is running the existing offline-AI tests, deterministic-core replay tests, and one PWA production build in a fixed local sequence. It excludes model load or inference, external connectivity, prices, Paper/Demo, risk, OMS, broker action, and execution. A failure stops the command and grants no capability. | LOCKED |
+
+| DEC-121 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5H is accepted: `pnpm verify:offline` passed six offline-AI tests, 33 deterministic-core tests, and the PWA production build. The result is local verification evidence only; it grants no market-data, model, Paper/Demo, OMS, broker, or execution capability. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
