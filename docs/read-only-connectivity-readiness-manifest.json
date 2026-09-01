@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0.0",
+  "status": "NOT_READY",
+  "activation_allowed": false,
+  "execution_allowed": false,
+  "profiles": {
+    "CTRADER_SPOT_DEPTH_V1": {
+      "terms_and_entitlement_evidence": false,
+      "instrument_mapping_revision": null,
+      "timestamp_semantics_evidence": false,
+      "snapshot_rebuild_evidence": false,
+      "recovery_failure_corpus": false,
+      "credential_custody_revision": null,
+      "adapter_review_evidence": false
+    },
+    "BINANCE_SPOT_DEPTH_V1": {
+      "terms_and_entitlement_evidence": false,
+      "instrument_mapping_revision": null,
+      "timestamp_semantics_evidence": false,
+      "snapshot_rebuild_evidence": false,
+      "recovery_failure_corpus": false,
+      "credential_custody_revision": null,
+      "adapter_review_evidence": false
+    },
+    "BINANCE_USDM_DEPTH_V1": {
+      "terms_and_entitlement_evidence": false,
+      "instrument_mapping_revision": null,
+      "timestamp_semantics_evidence": false,
+      "snapshot_rebuild_evidence": false,
+      "recovery_failure_corpus": false,
+      "credential_custody_revision": null,
+      "adapter_review_evidence": false
+    }
+  }
+}

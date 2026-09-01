@@ -19,6 +19,8 @@
 
 The manifest is `NOT_READY` until every required item has immutable evidence and an owner-approved provider-specific revision. `NOT_READY` means no provider activation, connection, API/WebSocket call, credential, account access, Paper/Demo, OMS, or execution.
 
+The machine-readable baseline is [`read-only-connectivity-readiness-manifest.json`](./read-only-connectivity-readiness-manifest.json). Every evidence field begins false or null; no field may be inferred from this template.
+
 ## Owner attestation
 
 The owner attested on 2026-09-01 that they are responsible for checking the legality of cTrader/OpoFinance and Binance market-data use for their residence and accounts, accept the data-use/retention terms, and authorize readiness review only. This is not technical/provider evidence and does not change `NOT_READY`.
