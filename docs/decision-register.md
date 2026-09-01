@@ -156,6 +156,10 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-117 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5F is accepted: `pnpm verify:offline-ai` passed six offline-AI tests and the PWA production build. This command verifies only local code and build state; it does not demonstrate model quality, market-data health, a trading signal, profitability, Paper/Demo, broker, or execution readiness. | LOCKED |
 
+| DEC-118 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5G is authorized for an offline replay verification command and documentation. Scope is running existing deterministic-core tests, including `MOCK` Forex fixture and fail-closed replay coverage, together with the PWA production build. It excludes price loading, real feeds, backtest performance claims, Paper/Demo, risk calculation, OMS, broker action, and execution. A command failure is fail-closed and grants no capability. | LOCKED |
+
+| DEC-119 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5G is accepted: `pnpm verify:offline-replay` passed 33 deterministic-core tests across 12 test files and the PWA production build. The accepted fixtures remain offline and execution-ineligible, with no real price, performance claim, Paper/Demo, broker, or execution capability. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |
