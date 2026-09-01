@@ -132,6 +132,8 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-105 | The owner accepts Consolidated Phase 5D evidence: local `MOCK` replay fixtures for EURUSD, GBPUSD, USDJPY, and XAUUSD validate deterministically and remain `REPLAY_ONLY_VALID` and execution-ineligible. This acceptance authorizes no real prices, market feeds, backtest/performance claim, Paper/Demo, OMS, broker action, or execution. | LOCKED |
 
+| DEC-106 | The owner authorizes Consolidated Phase 5D-II, Offline Forex Fixture Selector. Scope is a PWA presentation-only local selection control for the accepted `MOCK` identifiers EURUSD, GBPUSD, USDJPY, and XAUUSD. It excludes price display, local or remote data loading, real market feeds, backtest/performance claims, Paper/Demo, risk calculation, OMS, broker action, and execution. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |

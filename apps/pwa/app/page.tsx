@@ -24,6 +24,12 @@ import {
 
 type PanelId = "overview" | "devices" | "audit";
 
+type MockForexInstrument = {
+  readonly symbol: "EURUSD" | "GBPUSD" | "USDJPY" | "XAUUSD";
+  readonly label: string;
+  readonly streamId: string;
+};
+
 const panels: ReadonlyArray<{ id: PanelId; label: string }> = [
   { id: "overview", label: "نمای کلی" },
   { id: "devices", label: "دستگاه‌ها" },
@@ -36,10 +42,35 @@ const advisoryRows = [
   { role: "Judge", title: "اجرا نشده — شرط برقرار نیست", tone: "muted" },
 ] as const;
 
+const mockForexInstruments: ReadonlyArray<MockForexInstrument> = [
+  {
+    symbol: "EURUSD",
+    label: "یورو / دلار آمریکا",
+    streamId: "mock:EURUSD:TICK",
+  },
+  {
+    symbol: "GBPUSD",
+    label: "پوند / دلار آمریکا",
+    streamId: "mock:GBPUSD:TICK",
+  },
+  {
+    symbol: "USDJPY",
+    label: "دلار آمریکا / ین ژاپن",
+    streamId: "mock:USDJPY:TICK",
+  },
+  {
+    symbol: "XAUUSD",
+    label: "طلا / دلار آمریکا",
+    streamId: "mock:XAUUSD:TICK",
+  },
+];
+
 export default function HomePage() {
   const [activePanel, setActivePanel] = useState<PanelId>("overview");
   const [mobileNavigationOpen, setMobileNavigationOpen] = useState(false);
   const [notificationEnabled, setNotificationEnabled] = useState(false);
+  const [selectedMockSymbol, setSelectedMockSymbol] =
+    useState<MockForexInstrument["symbol"]>("EURUSD");
   const [cloudSession, setCloudSession] = useState<CloudSession>({
     kind: "not-configured",
   });
@@ -175,6 +206,53 @@ export default function HomePage() {
                   انجام نمی‌دهد.
                 </p>
               </div>
+            </section>
+
+            <section
+              className="section-block mock-selector"
+              aria-labelledby="mock-forex-title"
+            >
+              <div className="section-heading">
+                <div>
+                  <p className="eyeline">دادهٔ آزمایشی آفلاین</p>
+                  <h2 id="mock-forex-title">انتخاب fixture فارکس</h2>
+                </div>
+                <span className="subtle-status">MOCK · فقط‌نمایشی</span>
+              </div>
+              <p className="mock-selector-description">
+                این انتخاب فقط نمای رابط را تغییر می‌دهد؛ قیمت، feed، معاملهٔ
+                آزمایشی و سفارش در دسترس نیستند.
+              </p>
+              <div className="mock-instrument-list" role="list">
+                {mockForexInstruments.map((instrument) => {
+                  const isSelected = selectedMockSymbol === instrument.symbol;
+
+                  return (
+                    <button
+                      aria-pressed={isSelected}
+                      className={
+                        isSelected
+                          ? "mock-instrument mock-instrument-selected"
+                          : "mock-instrument"
+                      }
+                      key={instrument.symbol}
+                      onClick={() => setSelectedMockSymbol(instrument.symbol)}
+                      role="listitem"
+                      type="button"
+                    >
+                      <span>
+                        <strong>{instrument.symbol}</strong>
+                        <small>{instrument.label}</small>
+                      </span>
+                      <code>{instrument.streamId}</code>
+                    </button>
+                  );
+                })}
+              </div>
+              <p className="mock-selection-state">
+                fixture انتخاب‌شده: <code>mock:{selectedMockSymbol}:TICK</code>{" "}
+                · `REPLAY_ONLY_VALID` · execution-ineligible
+              </p>
             </section>
 
             <section className="section-block">
