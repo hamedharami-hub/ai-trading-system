@@ -152,6 +152,10 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-115 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5E is accepted after PWA build verification and six offline-AI package tests passed. The PWA view remains historical and non-authoritative: it does not load a model, perform inference, or create any analytical, risk, Paper/Demo, OMS, broker, or execution action. | LOCKED |
 
+| DEC-116 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5F is authorized for an offline-AI verification command and owner-facing documentation. Scope is running the existing local offline-AI tests and PWA production build together. It excludes model load or inference, remote AI, market data, Paper/Demo, risk, OMS, broker action, and execution. A command failure is reported as a failed verification and grants no capability. | LOCKED |
+
+| DEC-117 | Under the owner-authorized autonomous progression of DEC-113, Consolidated Phase 5F is accepted: `pnpm verify:offline-ai` passed six offline-AI tests and the PWA production build. This command verifies only local code and build state; it does not demonstrate model quality, market-data health, a trading signal, profitability, Paper/Demo, broker, or execution readiness. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |

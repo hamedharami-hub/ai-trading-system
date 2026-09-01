@@ -12,7 +12,8 @@
     "generate": "turbo run generate",
     "lint": "turbo run lint",
     "test": "turbo run test",
-    "typecheck": "turbo run typecheck"
+    "typecheck": "turbo run typecheck",
+    "verify:offline-ai": "pnpm --filter @trade/offline-ai test && pnpm --filter @trade/pwa build"
   },
   "devDependencies": {
     "@types/node": "24.13.3",
