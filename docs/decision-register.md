@@ -146,6 +146,10 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 
 | DEC-112 | The owner accepts Consolidated Phase 5D-IV evidence: the PWA displays a fixed, clearly labelled mock-only chart for each accepted local fixture and shows no chart for unknown fixture state. It displays no real price and offers no network, signal, performance, Paper/Demo, risk, OMS, broker, or execution path. | LOCKED |
 
+| DEC-113 | The owner authorizes autonomous progression through separately documented, offline and presentation-only Phase 5 subphases without repeated micro-approval, provided each change is verified, recorded, and reported. This delegation never authorizes real market-data access, credentials, account access, Paper/Demo, OMS, broker action, execution, remote AI, or a waiver of any P0/P1 gate. Those boundaries still require an explicit owner decision. | LOCKED |
+
+| DEC-114 | The owner authorizes Consolidated Phase 5E, Offline AI Benchmark Evidence View. Scope is a PWA presentation-only rendering of the already recorded Phase 3 local Windows and Android benchmark evidence, explicitly labelled as historical benchmark evidence rather than current inference or trading analysis. It excludes model download/load/inference, remote AI, price or market data, signal generation, Paper/Demo, risk calculation, OMS, broker action, and execution. Missing or invalid evidence must display no result. | LOCKED |
+
 ## Open ambiguities and conflicts
 
 | ID       | Priority | Area                  | Ambiguity or conflict                                                                                                                                                                                                                                                                                                                                                    | Unsafe assumption to avoid / required resolution                                                       |

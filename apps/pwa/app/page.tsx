@@ -34,6 +34,14 @@ type MockForexInstrument = {
   readonly staticChartPath: string;
 };
 
+type OfflineAiBenchmark = {
+  readonly platform: string;
+  readonly runtime: string;
+  readonly result: "REJECT";
+  readonly duration: string;
+  readonly detail: string;
+};
+
 const panels: ReadonlyArray<{ id: PanelId; label: string }> = [
   { id: "overview", label: "نمای کلی" },
   { id: "devices", label: "دستگاه‌ها" },
@@ -45,6 +53,23 @@ const advisoryRows = [
   { role: "Critic", title: "دادهٔ قطعی وارد نشده", tone: "blocked" },
   { role: "Judge", title: "اجرا نشده — شرط برقرار نیست", tone: "muted" },
 ] as const;
+
+const offlineAiBenchmarks: ReadonlyArray<OfflineAiBenchmark> = [
+  {
+    platform: "Windows",
+    runtime: "llama.cpp local CPU",
+    result: "REJECT",
+    duration: "4,147 ms",
+    detail: "خروجی JSON محلی پس از اعتبارسنجی schema",
+  },
+  {
+    platform: "Android · Pixel 9 Pro Fold",
+    runtime: "llama.android local",
+    result: "REJECT",
+    duration: "35,618 ms",
+    detail: "benchmark محلی؛ evidence قطعی برای تحلیل وجود نداشت",
+  },
+];
 
 const mockForexInstruments: ReadonlyArray<MockForexInstrument> = [
   {
@@ -354,6 +379,53 @@ export default function HomePage() {
                   </figure>
                 </>
               )}
+            </section>
+
+            <section
+              className="section-block"
+              aria-labelledby="offline-ai-title"
+            >
+              <div className="section-heading">
+                <div>
+                  <p className="eyeline">شواهد آزمون پیشین</p>
+                  <h2 id="offline-ai-title">AI آفلاین</h2>
+                </div>
+                <span className="subtle-status">
+                  historical · non-authoritative
+                </span>
+              </div>
+              <p className="offline-ai-note">
+                این‌ها نتایج benchmark ثبت‌شدهٔ قبلی‌اند، نه اجرای فعلی مدل و نه
+                تحلیل یا توصیهٔ معاملاتی.
+              </p>
+              <div className="offline-ai-benchmark-list">
+                {offlineAiBenchmarks.map((benchmark) => (
+                  <article
+                    className="offline-ai-benchmark"
+                    key={benchmark.platform}
+                  >
+                    <div>
+                      <strong>{benchmark.platform}</strong>
+                      <p>{benchmark.runtime}</p>
+                    </div>
+                    <dl>
+                      <div>
+                        <dt>result</dt>
+                        <dd>{benchmark.result}</dd>
+                      </div>
+                      <div>
+                        <dt>duration</dt>
+                        <dd>{benchmark.duration}</dd>
+                      </div>
+                    </dl>
+                    <p className="offline-ai-detail">{benchmark.detail}</p>
+                  </article>
+                ))}
+              </div>
+              <p className="offline-ai-safe-stop">
+                `REJECT` یعنی AI در نبود evidence قطعی، fail-closed شده است؛ هیچ
+                سفارش یا اقدام معاملاتی ایجاد نمی‌شود.
+              </p>
             </section>
 
             <section className="section-block">
