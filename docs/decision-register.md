@@ -103,6 +103,7 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 | DEC-089 | The owner accepts Consolidated Phase 5B-II evidence: official cTrader and Binance documentation was recorded with explicit legal, availability, entitlement, contract, recovery, and custody blockers. Every candidate remains `PREQUALIFIED_NOT_ACTIVE`; no provider, account, credential, external request, Paper/Demo behavior, OMS, or execution is authorized by this acceptance.                                                                                                            | LOCKED |
 
 | DEC-090 | The owner authorizes Consolidated Phase 5B-III, Provider-specific Read-only Contract Design. Scope is documentation-only design of cTrader and Binance mapping, timestamps, sequence/quote-ID semantics, snapshot/reconnect states, and deny-lists. It excludes all adapters, app registration, credentials, accounts, network/API/WebSocket calls, external tests, Paper/Demo, OMS, broker action, and execution. Unknown semantics remain fail-closed. | LOCKED |
+| DEC-091 | The owner accepts Consolidated Phase 5B-III evidence: provider-specific cTrader and Binance read-only contract designs distinguish symbol mapping, timestamps, sequence/quote-ID semantics, snapshot/reconnect state, and capability denial. Unknown or unrecovered source state remains `UNPROVEN` and blocks candidates. This acceptance authorizes no adapter, provider activation, credential, external request, Paper/Demo, OMS, broker action, or execution. | LOCKED |
 
 ## Open ambiguities and conflicts
 
@@ -170,7 +171,7 @@ Historical baseline: this table records the unresolved state before DEC-043. It 
 
 ## Current phase gate
 
-Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Consolidated Phase 2 passed through DEC-076, Consolidated Phase 3 through DEC-079, Consolidated Phase 4 through DEC-083, Consolidated Phase 5A through DEC-085, Consolidated Phase 5B-I through DEC-087, and Consolidated Phase 5B-II through DEC-089. Consolidated Phase 5B-III is active under DEC-090 for provider contract design only. `OPEN-021` keeps pairing, synchronization, cloud lease, key custody, recovery, and revocation implementation disabled. Market-data clients, active provider selection, broker/exchange connectors, trading credentials, paper/demo mode, and live execution remain prohibited until a separately scoped and accepted later gate.
+Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Consolidated Phase 2 passed through DEC-076, Consolidated Phase 3 through DEC-079, Consolidated Phase 4 through DEC-083, Consolidated Phase 5A through DEC-085, Consolidated Phase 5B-I through DEC-087, Consolidated Phase 5B-II through DEC-089, and Consolidated Phase 5B-III through DEC-091. No later Phase 5B scope is active. `OPEN-021` keeps pairing, synchronization, cloud lease, key custody, recovery, and revocation implementation disabled. Market-data clients, active provider selection, broker/exchange connectors, trading credentials, paper/demo mode, and live execution remain prohibited until a separately scoped and accepted later gate.
 
 ## Phase 1 P0/P1 resolution ledger
 
