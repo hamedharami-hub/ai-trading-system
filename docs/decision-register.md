@@ -95,6 +95,7 @@ Status values are `LOCKED`, `OPEN`, `DEFERRED`, and `SUPERSEDED`.
 | DEC-081 | Phase 4 Firebase use is restricted to owner-initiated Google Authentication in the PWA. Until `OPEN-021` has explicit revoke, recovery, device-trust, key-custody, and pairing evidence, the PWA shall not write Firestore device state, create a cloud lease, synchronize data, or enable pairing.                                                                                                                                                                               | LOCKED |
 | DEC-082 | The owner approves a same-origin Firebase Authentication redirect boundary for the Vercel PWA. Vercel proxies only `/__/auth/*` to the approved Firebase project, the production PWA hostname is the Firebase `authDomain`, and its exact `/__/auth/handler` URI is authorized in the Google OAuth client. This does not authorize Firestore, Storage, Functions, pairing, synchronization, cloud lease, risk, OMS, or execution.                                                 | LOCKED |
 | DEC-083 | The owner accepts Consolidated Phase 4 evidence: the responsive PWA is deployed on Vercel, owner-initiated Firebase Google Authentication is verified through the same-origin redirect boundary, and Cloud Control remains non-authoritative. `OPEN-021` keeps Firestore, synchronization, pairing, revocation, recovery, and cloud lease disabled. This acceptance does not authorize Phase 5, market-data clients, paper/demo execution, brokers, credentials, or live trading. | LOCKED |
+| DEC-084 | The owner authorizes Consolidated Phase 5A, Offline Mock/Replay and Backtest Evidence. Scope is deterministic fixture replay, validation, local reports, and tests only. It excludes network clients, external feeds, broker/exchange adapters, credentials, model calls, Paper/Demo fills, OMS execution, account state, and live trading. Any undefined metric or invalid replay remains fail-closed and is reported without a profitability claim.                             | LOCKED |
 
 ## Open ambiguities and conflicts
 
@@ -162,7 +163,7 @@ Historical baseline: this table records the unresolved state before DEC-043. It 
 
 ## Current phase gate
 
-Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Consolidated Phase 2 passed through DEC-076, Consolidated Phase 3 through DEC-079, and Consolidated Phase 4 through DEC-083. `OPEN-021` keeps pairing, synchronization, cloud lease, key custody, recovery, and revocation implementation disabled. Consolidated Phase 5 has not started. Market-data clients, broker/exchange connectors, trading credentials, paper/demo mode, and live execution remain prohibited until Phase 5 receives its separate scope approval.
+Phase 1 passed its roadmap gate through the owner's explicit acceptance in DEC-068. Consolidated Phase 2 passed through DEC-076, Consolidated Phase 3 through DEC-079, and Consolidated Phase 4 through DEC-083. Consolidated Phase 5A is active under DEC-084 for offline Mock/Replay evidence only. `OPEN-021` keeps pairing, synchronization, cloud lease, key custody, recovery, and revocation implementation disabled. Market-data clients, broker/exchange connectors, trading credentials, paper/demo mode, and live execution remain prohibited.
 
 ## Phase 1 P0/P1 resolution ledger
 
