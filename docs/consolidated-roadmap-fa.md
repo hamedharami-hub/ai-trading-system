@@ -65,6 +65,11 @@
 - مرحلهٔ ۵AC: با `DEC-169` پذیرفته و بسته شده است. audit مخصوص رکورد شبیه‌سازی‌شده فقط درون‌حافظه‌ای، immutable، append-only و reconstructable است.
 - مرحلهٔ ۵AD: با `DEC-170` پذیرفته و بسته شده است. integration آفلاین fixture/replay/assumption/idempotency/expiry همچنان فقط `NO_TRADE`/`REJECTED` و صفر OrderIntent/fill/position/P&L می‌دهد.
 - مرحلهٔ فعال: ندارد؛ simulated entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
+- مرحلهٔ ۵AE: با `DEC-175` پذیرفته و بسته شده است. evidence محلی Replay/assumption/protective/reconciliation/lifecycle برای کامل‌بودن سنجیده می‌شود و کمبود آن fail-closed است.
+- مرحلهٔ ۵AF: با `DEC-176` پذیرفته و بسته شده است. lifecycle validator حالت ناشناخته، transition جهشی/برعکس و خروج از terminal را رد می‌کند.
+- مرحلهٔ ۵AG: با `DEC-177` پذیرفته و بسته شده است. protective/reconciliation فقط evidence identifier می‌پذیرند و هیچ action یا order نمی‌سازند.
+- مرحلهٔ ۵AH: با `DEC-178` پذیرفته و بسته شده است. integration readiness محلی در حالت evidence کامل نیز `NO_TRADE` می‌ماند و در دادهٔ ناقص/نامعتبر `NO_TRADE` یا `REJECTED` می‌دهد.
+- مرحلهٔ فعال: ندارد؛ simulated entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحله ۶: شروع نشده و به پذیرش صریح مرحلهٔ ۵ نیاز دارد.
 - Firebase و Vercel برای مرحله ۴ تأیید شده‌اند، نه برای اختیار ریسک یا اجرا.
 - AI آفلاین Windows و Android برای مرحله ۳ تأیید شده است؛ دانلود مدل در مرحله ۱ انجام نمی‌شود.
