@@ -3,6 +3,7 @@ export * from "./orders/order-intent-factory.js";
 export * from "./paper/local-paper-admission.js";
 export * from "./paper/local-paper-lifecycle.js";
 export * from "./paper/local-paper-no-trade-audit.js";
+export * from "./paper/local-paper-terminal-fixtures.js";
 export * from "./pipeline/boundaries.js";
 export * from "./policy/policy-gate.js";
 export * from "./replay/sequence-validator.js";
