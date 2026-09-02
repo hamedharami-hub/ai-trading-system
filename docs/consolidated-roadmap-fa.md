@@ -65,6 +65,10 @@
 - مرحلهٔ ۵AC: با `DEC-169` پذیرفته و بسته شده است. audit مخصوص رکورد شبیه‌سازی‌شده فقط درون‌حافظه‌ای، immutable، append-only و reconstructable است.
 - مرحلهٔ ۵AD: با `DEC-170` پذیرفته و بسته شده است. integration آفلاین fixture/replay/assumption/idempotency/expiry همچنان فقط `NO_TRADE`/`REJECTED` و صفر OrderIntent/fill/position/P&L می‌دهد.
 - مرحلهٔ فعال: ندارد؛ simulated entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
+- مرحلهٔ ۵AM: با `DEC-190` پذیرفته و بسته شده است. registry محلی تصمیم‌های expiry/idempotency/protective/reconciliation/evidence را صریحاً `OPEN` نگه می‌دارد.
+- مرحلهٔ ۵AN: با `DEC-191` پذیرفته و بسته شده است. validator، decision IDهای unknown/duplicate را رد، موارد missing را ثبت و پذیرش ضمنی را ناممکن می‌کند.
+- مرحلهٔ ۵AO: با `DEC-192` پذیرفته و بسته شده است. fixtureهای complete-but-open/missing/duplicate/unknown همگی fail-closed هستند و حتی complete set نیز `NO_TRADE` می‌ماند.
+- مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AI: با `DEC-183` پذیرفته و بسته شده است. قرارداد versioned و identifier-only برای lifecycle/expiry/idempotency/protective/reconciliation/evidence ثبت شد و هیچ مفهوم مالی/اجرایی ندارد.
 - مرحلهٔ ۵AJ: با `DEC-184` پذیرفته و بسته شده است. validator قطعی، completeness قراردادها و lifecycle شناخته‌شده را فقط برای `NO_TRADE`/`REJECTED` ارزیابی می‌کند.
 - مرحلهٔ ۵AK: با `DEC-185` پذیرفته و بسته شده است. fixture/testهای complete/missing/unknown/skipped/terminal-reversal مسیرهای fail-closed را پوشش می‌دهند.
