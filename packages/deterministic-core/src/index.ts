@@ -9,5 +9,6 @@ export * from "./replay/read-only-provider-recovery-fixture.js";
 export * from "./replay/disabled-read-only-provider-adapter.js";
 export * from "./replay/connectivity-readiness-validator.js";
 export * from "./replay/historical-replay-admission-validator.js";
+export * from "./replay/historical-replay-runner.js";
 export * from "./risk/risk-engine.js";
 export * from "./storage/sqlite-audit-store.js";

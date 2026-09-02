@@ -3,6 +3,10 @@ import { existsSync, readFileSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { describe, expect, it } from "vitest";
 import { validateHistoricalReplayCsv } from "../../src/replay/historical-replay-admission-validator.js";
+import {
+  advanceHistoricalReplay,
+  prepareHistoricalReplay,
+} from "../../src/replay/historical-replay-runner.js";
 
 const DATASET_ID = "dukascopy-eurusd-m1-bid-2025-08-01-utc";
 const EXPECTED_SHA256 =
@@ -40,5 +44,43 @@ describe("quarantined Dukascopy EURUSD M1 historical replay dataset", () => {
       externalRequestsMade: 0,
     });
     expect(report.rejectionReasons).toEqual([]);
+  });
+
+  it("replays the admitted local artifact sequentially without any execution capability", () => {
+    const csvText = readFileSync(QUARANTINED_DATASET, "utf8");
+    const actualSha256 = createHash("sha256").update(csvText).digest("hex");
+    const playback = prepareHistoricalReplay({
+      datasetId: DATASET_ID,
+      expectedSha256: EXPECTED_SHA256,
+      actualSha256,
+      csvText,
+    });
+
+    expect(playback).toMatchObject({
+      status: "REPLAY_READY",
+      coverageStartUtc: "2025-08-01T00:00:00+00:00",
+      coverageEndUtc: "2025-08-01T20:59:00+00:00",
+      sourceKind: "REPLAY",
+      executionEligible: false,
+      orderIntentsCreated: 0,
+      executionReportsCreated: 0,
+      simulatedFillsCreated: 0,
+      externalRequestsMade: 0,
+    });
+    expect(playback.candles).toHaveLength(1260);
+    expect(advanceHistoricalReplay(playback, 0)).toMatchObject({
+      kind: "CANDLE",
+      nextCursor: 1,
+      candle: { timestampUtc: "2025-08-01T00:00:00+00:00" },
+    });
+    expect(advanceHistoricalReplay(playback, 1259)).toMatchObject({
+      kind: "CANDLE",
+      nextCursor: 1260,
+      candle: { timestampUtc: "2025-08-01T20:59:00+00:00" },
+    });
+    expect(advanceHistoricalReplay(playback, 1260)).toEqual({
+      kind: "END",
+      currentCursor: 1260,
+    });
   });
 });
