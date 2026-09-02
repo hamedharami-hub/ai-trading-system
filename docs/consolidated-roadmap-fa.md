@@ -51,7 +51,8 @@
 - مرحلهٔ ۵P: با `DEC-142` پذیرفته و بسته شده است. helper قطعی و محلی فقط preview window immutable از یک تا پنج candleِ ثبت‌شده را می‌سازد، در انتهای داده `END` و برای Replay ردشده `UNAVAILABLE` می‌دهد؛ ورودی نامعتبر یا oversized هرگز candle حدسی یا wrap-around تولید نمی‌کند. PWA، فایل‌خوانی production، اتصال، AI، Paper/Demo، سود/زیان، ریسک، OMS، broker و اجرا خارج از دامنه‌اند.
 - مرحلهٔ ۵Q: با `DEC-144` پذیرفته و بسته شده است. admission محلی اکنون ناسازگاری decimal-string میان `OHLC` را با evidence ردیف‌محور رد می‌کند؛ artifact تاریخی پذیرفته‌شده همچنان معتبر است. acquisition، PWA، اتصال، AI، Paper/Demo، سود/زیان، ریسک، OMS، broker و اجرا خارج از دامنه‌اند.
 - مرحلهٔ ۵R: با `DEC-146` پذیرفته و بسته شده است. هستهٔ محلی summary فقط‌خواندنیِ dataset، وضعیت ready/unavailable، تعداد candle، coverage UTC و evidence ردشدن را بدون candle خام یا تغییر cursor/state برمی‌گرداند. فایل‌خوانی production، PWA، اتصال، AI، Paper/Demo، سود/زیان، ریسک، OMS، broker و اجرا خارج از دامنه‌اند.
-- مرحلهٔ فعال: ندارد؛ هر افزایش دامنهٔ نمایش/مصرف دادهٔ تاریخی، Paper/OMS، منطق نقش‌های AI و هر اتصال هنوز گیت مستقل دارند.
+- مرحلهٔ ۵S: با `DEC-148` پذیرفته و بسته شده است. evaluator قطعیِ admission برای Paper محلی تمام prerequisiteهای Replay، Policy/Risk، cost/partial-fill، محافظ و reconciliation را ثبت می‌کند، اما همیشه `NO_TRADE` با صفر record/fill/P&L می‌دهد تا lifecycle جداگانه گیت شود. PWA، اتصال، AI، broker، Demo/Testnet و اجرای واقعی خارج از دامنه‌اند.
+- مرحلهٔ فعال: ندارد؛ simulated lifecycle/Paper record، P&L، OMS، منطق نقش‌های AI و هر اتصال هنوز گیت مستقل دارند.
 - مرحله ۶: شروع نشده و به پذیرش صریح مرحلهٔ ۵ نیاز دارد.
 - Firebase و Vercel برای مرحله ۴ تأیید شده‌اند، نه برای اختیار ریسک یا اجرا.
 - AI آفلاین Windows و Android برای مرحله ۳ تأیید شده است؛ دانلود مدل در مرحله ۱ انجام نمی‌شود.

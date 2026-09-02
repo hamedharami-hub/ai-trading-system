@@ -1,5 +1,6 @@
 export * from "./math/financial.js";
 export * from "./orders/order-intent-factory.js";
+export * from "./paper/local-paper-admission.js";
 export * from "./pipeline/boundaries.js";
 export * from "./policy/policy-gate.js";
 export * from "./replay/sequence-validator.js";
