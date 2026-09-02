@@ -32,6 +32,15 @@ type OfflineAiBenchmark = {
   readonly detail: string;
 };
 
+type HistoricalReplayPreviewCandle = {
+  readonly cursor: string;
+  readonly timestampUtc: string;
+  readonly open: string;
+  readonly high: string;
+  readonly low: string;
+  readonly close: string;
+};
+
 const panels: ReadonlyArray<{ id: PanelId; label: string }> = [
   { id: "overview", label: "نمای کلی" },
   { id: "devices", label: "دستگاه‌ها" },
@@ -68,6 +77,49 @@ const historicalReplayEvidence = {
   rows: "۱٬۲۶۰ ردیف",
   status: "ADMITTED_LOCAL_REPLAY",
 } as const;
+
+const historicalReplayPreview: ReadonlyArray<HistoricalReplayPreviewCandle> = [
+  {
+    cursor: "0",
+    timestampUtc: "2025-08-01T00:00:00+00:00",
+    open: "1.14217",
+    high: "1.14217",
+    low: "1.14192",
+    close: "1.14194",
+  },
+  {
+    cursor: "1",
+    timestampUtc: "2025-08-01T00:01:00+00:00",
+    open: "1.14193",
+    high: "1.14193",
+    low: "1.14153",
+    close: "1.14161",
+  },
+  {
+    cursor: "2",
+    timestampUtc: "2025-08-01T00:02:00+00:00",
+    open: "1.14161",
+    high: "1.14180",
+    low: "1.14157",
+    close: "1.14173",
+  },
+  {
+    cursor: "3",
+    timestampUtc: "2025-08-01T00:03:00+00:00",
+    open: "1.14176",
+    high: "1.14209",
+    low: "1.14175",
+    close: "1.14208",
+  },
+  {
+    cursor: "4",
+    timestampUtc: "2025-08-01T00:04:00+00:00",
+    open: "1.14207",
+    high: "1.14207",
+    low: "1.14176",
+    close: "1.14178",
+  },
+] as const;
 
 export default function HomePage() {
   const [activePanel, setActivePanel] = useState<PanelId>("overview");
@@ -249,6 +301,49 @@ export default function HomePage() {
                   </dd>
                 </div>
               </dl>
+              <div
+                className="replay-preview"
+                aria-labelledby="replay-preview-title"
+              >
+                <div className="replay-preview-heading">
+                  <div>
+                    <p className="eyeline">پیش‌نمایش ثابت</p>
+                    <h3 id="replay-preview-title">پنج candle نخست Replay</h3>
+                  </div>
+                  <span className="subtle-status">cursor 0 تا 4</span>
+                </div>
+                <p>
+                  snapshot محدود از همان evidence محلیِ پذیرفته‌شده؛ نه feed
+                  جاری است، نه کنترل بازپخش و نه CSV قابل دریافت در مرورگر.
+                </p>
+                <div className="replay-preview-table-wrap">
+                  <table className="replay-preview-table" dir="ltr">
+                    <caption>EURUSD · M1 · Bid · Dukascopy · UTC</caption>
+                    <thead>
+                      <tr>
+                        <th scope="col">cursor</th>
+                        <th scope="col">UTC</th>
+                        <th scope="col">Open</th>
+                        <th scope="col">High</th>
+                        <th scope="col">Low</th>
+                        <th scope="col">Close</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {historicalReplayPreview.map((candle) => (
+                        <tr key={candle.cursor}>
+                          <td>{candle.cursor}</td>
+                          <td>{candle.timestampUtc}</td>
+                          <td>{candle.open}</td>
+                          <td>{candle.high}</td>
+                          <td>{candle.low}</td>
+                          <td>{candle.close}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
               <p className="replay-evidence-safe-stop">
                 این داده فقط تاریخی، منبع‌برچسب‌خورده و coverage-bounded است. نه
                 تحلیل، نه AI، نه Paper Trading، نه سود/زیان، نه سفارش و نه
