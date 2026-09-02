@@ -57,7 +57,8 @@
 - مرحلهٔ ۵V: با `DEC-154` پذیرفته و بسته شده است. سه fixture قطعی و immutable فقط برای terminalهای `NO_TRADE`/`CANCELLED`/`REJECTED` با evidence identifier و خروجی صفرِ غیرمعاملاتی موجود است.
 - مرحلهٔ ۵W: با `DEC-156` پذیرفته و بسته شده است. فقط presenceِ evidence فرض‌های cost/partial-fill/protective/reconciliation ارزیابی می‌شود و حتی در کامل‌بودن آن‌ها وضعیت `NO_TRADE` می‌ماند.
 - مرحلهٔ ۵X: با `DEC-158` پذیرفته و بسته شده است. verifier محلی فقط log درون‌حافظه‌ای `NO_TRADE` را بدون mutation بازسازی می‌کند و link/timestamp/duplicate/zero-artifact را fail-closed می‌سنجد.
-- مرحلهٔ ۵Y: با تأیید یک‌جای مالک برای بستهٔ ۵U تا ۵Y و `DEC-159` آغاز شد. محدوده فقط evaluator transition برای terminalهای `NO_TRADE`/`CANCELLED`/`REJECTED` است؛ هر target غیرterminal یا state/reason ناشناخته رد می‌شود و record، OrderIntent، fill، position، P&L، اتصال و UI خارج از دامنه‌اند.
+- مرحلهٔ ۵Y: با `DEC-160` پذیرفته و بسته شده است. evaluator فقط terminal evidence immutable برای `NO_TRADE`/`CANCELLED`/`REJECTED` را از source شناخته‌شده می‌پذیرد و هر source/target/reason نامعتبر را fail-closed رد می‌کند؛ خروجی در همهٔ حالات صفر record/fill/position/P&L دارد.
+- مرحلهٔ فعال: ندارد؛ ایجاد simulated Paper record، OrderIntent، entry/fill/position/P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحله ۶: شروع نشده و به پذیرش صریح مرحلهٔ ۵ نیاز دارد.
 - Firebase و Vercel برای مرحله ۴ تأیید شده‌اند، نه برای اختیار ریسک یا اجرا.
 - AI آفلاین Windows و Android برای مرحله ۳ تأیید شده است؛ دانلود مدل در مرحله ۱ انجام نمی‌شود.
