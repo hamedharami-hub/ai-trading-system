@@ -13,6 +13,7 @@ export * from "./paper/local-paper-simulation-fixtures.js";
 export * from "./paper/local-paper-simulated-audit.js";
 export * from "./paper/local-paper-offline-integration.js";
 export * from "./paper/local-paper-fail-closed-readiness.js";
+export * from "./paper/local-paper-contract-readiness.js";
 export * from "./pipeline/boundaries.js";
 export * from "./policy/policy-gate.js";
 export * from "./replay/sequence-validator.js";
