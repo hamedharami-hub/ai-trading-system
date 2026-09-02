@@ -18,3 +18,7 @@
 ## تصمیم PolicyGate محلی
 
 با `DEC-210`، PolicyGate محلی تا پذیرش جداگانهٔ strategy definition، policy rule و risk model، deny-only است. هیچ candidateی eligible نمی‌شود و خروجی ثابت `NO_TRADE / POLICY_RULES_NOT_APPROVED` است.
+
+## تصمیم Risk محلی
+
+با `DEC-212`، Risk محلی تا پذیرش جداگانهٔ risk model، ورودی‌ها و قرارداد محاسبات مالی، deny-only است. هیچ risk amount محاسبه نمی‌شود و خروجی ثابت `NO_TRADE / RISK_MODEL_NOT_APPROVED` است.

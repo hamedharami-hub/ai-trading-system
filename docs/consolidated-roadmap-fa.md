@@ -77,6 +77,7 @@
 - مرحلهٔ ۵AT: با `DEC-203` پذیرفته و بسته شده است. pre-entry boundary evidence محلی کامل را می‌سنجد، duplicate را رد می‌کند و حتی در وضعیت کامل فقط `NO_TRADE` با صفر artifact می‌دهد.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AX: با `DEC-211` پذیرفته و بسته شده است. PolicyGate محلی deny-only و immutable است؛ تا پذیرش strategy/policy/risk، هر candidate فقط `NO_TRADE / POLICY_RULES_NOT_APPROVED` می‌گیرد.
+- مرحلهٔ ۵AY: با `DEC-213` پذیرفته و بسته شده است. Risk محلی deny-only و immutable است؛ تا پذیرش risk model و قرارداد مالی، هر candidate فقط `NO_TRADE / RISK_MODEL_NOT_APPROVED` می‌گیرد.
 - مرحلهٔ ۵AU: با `DEC-207` پذیرفته و بسته شده است. قرارداد versioned و identifier-only Policy/Risk readiness ثبت شد و هیچ policy rule یا risk calculation ندارد.
 - مرحلهٔ ۵AV: با `DEC-208` پذیرفته و بسته شده است. validator محلی evidence ناقص را fail-closed ثبت می‌کند و structurally نمی‌تواند policy/risk را approved کند.
 - مرحلهٔ ۵AW: با `DEC-209` پذیرفته و بسته شده است. complete-but-unapproved = `NO_TRADE` و missing evidence = `REJECTED`؛ صفر artifact باقی می‌ماند.
