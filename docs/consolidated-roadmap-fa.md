@@ -70,6 +70,7 @@
 - مرحلهٔ ۵AO: با `DEC-192` پذیرفته و بسته شده است. fixtureهای complete-but-open/missing/duplicate/unknown همگی fail-closed هستند و حتی complete set نیز `NO_TRADE` می‌ماند.
 - تصمیم expiry: با `DEC-193` مالک صریحاً `paper-expiry-v1` را باز و بدون عدد نگه داشت؛ هیچ قانون فرضی اضافه نشد و readiness همچنان `NO_TRADE` است.
 - تصمیم idempotency: با `DEC-194` تا پذیرش lifecycle پایدار و storage، `paper-idempotency-v1` باز و بدون lifetime/scope فرضی می‌ماند؛ readiness همچنان `NO_TRADE` است.
+- تصمیم‌های protective/reconciliation/evidence: با `DEC-195` تا پذیرش مستقل، هر سه باز و بدون semantics فرضی می‌مانند؛ readiness همچنان `NO_TRADE` است.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AI: با `DEC-183` پذیرفته و بسته شده است. قرارداد versioned و identifier-only برای lifecycle/expiry/idempotency/protective/reconciliation/evidence ثبت شد و هیچ مفهوم مالی/اجرایی ندارد.
 - مرحلهٔ ۵AJ: با `DEC-184` پذیرفته و بسته شده است. validator قطعی، completeness قراردادها و lifecycle شناخته‌شده را فقط برای `NO_TRADE`/`REJECTED` ارزیابی می‌کند.

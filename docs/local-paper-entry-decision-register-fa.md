@@ -8,8 +8,8 @@
 | ------------------------- | -------------------------------------------------------------------------------------------------- | ----------------- |
 | `paper-expiry-v1`         | expiry و invalidation؛ تعیین عدد/زمان عمداً تا تعیین timeframe و no-chase قطعی به تعویق افتاده است | `OPEN / NO_TRADE` |
 | `paper-idempotency-v1`    | تا پذیرش lifecycle پایدار و storage، هیچ lifetime یا scope فرضی برای idempotency تعریف نمی‌شود     | `OPEN / NO_TRADE` |
-| `paper-protective-v1`     | evidence protective handling                                                                       | `OPEN`            |
-| `paper-reconciliation-v1` | evidence reconciliation                                                                            | `OPEN`            |
-| `paper-evidence-v1`       | ownership و completeness evidence                                                                  | `OPEN`            |
+| `paper-protective-v1`     | semantics protective handling تا پذیرش مستقل، فرض نمی‌شود                                          | `OPEN / NO_TRADE` |
+| `paper-reconciliation-v1` | precedence و evidence reconciliation تا پذیرش مستقل، فرض نمی‌شود                                   | `OPEN / NO_TRADE` |
+| `paper-evidence-v1`       | ownership و completeness evidence تا پذیرش مستقل، فرض نمی‌شود                                      | `OPEN / NO_TRADE` |
 
 این سند قیمت، quantity، risk، entry، `OrderIntent`، fill، position، P&L، حساب، broker، API، credential، شبکه، Demo/Testnet، AI signal، UI کنترل یا اجرای واقعی تعریف نمی‌کند.
