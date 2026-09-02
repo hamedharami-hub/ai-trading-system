@@ -55,7 +55,8 @@
 - مرحلهٔ ۵T: با `DEC-150` پذیرفته و بسته شده است. audit record immutable و append-only برای `NO_TRADE / PAPER_LOCAL_ONLY` با پیوند Replay evidence ثبت می‌شود و duplicate ID رد می‌شود؛ هیچ record معاملاتی، lifecycle، OrderIntent، fill، position یا P&L ساخته نشده است. PWA، storage production، اتصال، AI، broker، Demo/Testnet و اجرای واقعی خارج از دامنه‌اند.
 - مرحلهٔ ۵U: با `DEC-152` پذیرفته و بسته شده است. vocabulary و factory محلی فقط terminal evidence immutable برای `NO_TRADE`/`CANCELLED`/`REJECTED` می‌سازند و در همهٔ حالت‌ها صفر record/fill/position/P&L می‌مانند.
 - مرحلهٔ ۵V: با `DEC-154` پذیرفته و بسته شده است. سه fixture قطعی و immutable فقط برای terminalهای `NO_TRADE`/`CANCELLED`/`REJECTED` با evidence identifier و خروجی صفرِ غیرمعاملاتی موجود است.
-- مرحلهٔ ۵W: با تأیید یک‌جای مالک برای بستهٔ ۵U تا ۵Y و `DEC-155` آغاز شد. محدوده فقط قرارداد immutable برای evidence فرض‌های cost/partial-fill/protective/reconciliation است؛ قیمت، quantity، record، OrderIntent، fill، position، P&L، اتصال و UI خارج از دامنه‌اند.
+- مرحلهٔ ۵W: با `DEC-156` پذیرفته و بسته شده است. فقط presenceِ evidence فرض‌های cost/partial-fill/protective/reconciliation ارزیابی می‌شود و حتی در کامل‌بودن آن‌ها وضعیت `NO_TRADE` می‌ماند.
+- مرحلهٔ ۵X: با تأیید یک‌جای مالک برای بستهٔ ۵U تا ۵Y و `DEC-157` آغاز شد. محدوده فقط verifier بازسازی audit append-only درون‌حافظه‌ای برای evidence محلی `NO_TRADE` است؛ lifecycle، record معاملاتی، OrderIntent، fill، position، P&L، اتصال و UI خارج از دامنه‌اند.
 - مرحله ۶: شروع نشده و به پذیرش صریح مرحلهٔ ۵ نیاز دارد.
 - Firebase و Vercel برای مرحله ۴ تأیید شده‌اند، نه برای اختیار ریسک یا اجرا.
 - AI آفلاین Windows و Android برای مرحله ۳ تأیید شده است؛ دانلود مدل در مرحله ۱ انجام نمی‌شود.
