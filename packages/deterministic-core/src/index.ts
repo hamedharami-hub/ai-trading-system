@@ -1,6 +1,7 @@
 export * from "./math/financial.js";
 export * from "./orders/order-intent-factory.js";
 export * from "./paper/local-paper-admission.js";
+export * from "./paper/local-paper-lifecycle.js";
 export * from "./paper/local-paper-no-trade-audit.js";
 export * from "./pipeline/boundaries.js";
 export * from "./policy/policy-gate.js";
