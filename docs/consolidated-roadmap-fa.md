@@ -72,6 +72,10 @@
 - تصمیم idempotency: با `DEC-194` تا پذیرش lifecycle پایدار و storage، `paper-idempotency-v1` باز و بدون lifetime/scope فرضی می‌ماند؛ readiness همچنان `NO_TRADE` است.
 - تصمیم‌های protective/reconciliation/evidence: با `DEC-195` تا پذیرش مستقل، هر سه باز و بدون semantics فرضی می‌مانند؛ readiness همچنان `NO_TRADE` است.
 - مرحلهٔ ۵AP: با `DEC-197` پذیرفته و بسته شده است. rule محدود expiry فقط برای Historical Replay پذیرفته‌شدهٔ EUR/USD M1 سه candle کامل بعدی را می‌پذیرد؛ قبل/بعد از expiry و هر gap/ورودی نامشخص فقط `NO_TRADE` است.
+- مرحلهٔ ۵AQ: با `DEC-201` پذیرفته و بسته شده است. idempotency فقط در یک local Replay run و exact recordId است؛ duplicate فوراً `REJECTED` می‌شود.
+- مرحلهٔ ۵AR و ۵AS: با `DEC-202` پذیرفته و بسته شده‌اند. protective فقط evidence presence و reconciliation فقط terminal evidence محلی است؛ هیچ action/fill/position ساخته نمی‌شود.
+- مرحلهٔ ۵AT: با `DEC-203` پذیرفته و بسته شده است. pre-entry boundary evidence محلی کامل را می‌سنجد، duplicate را رد می‌کند و حتی در وضعیت کامل فقط `NO_TRADE` با صفر artifact می‌دهد.
+- مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AI: با `DEC-183` پذیرفته و بسته شده است. قرارداد versioned و identifier-only برای lifecycle/expiry/idempotency/protective/reconciliation/evidence ثبت شد و هیچ مفهوم مالی/اجرایی ندارد.
 - مرحلهٔ ۵AJ: با `DEC-184` پذیرفته و بسته شده است. validator قطعی، completeness قراردادها و lifecycle شناخته‌شده را فقط برای `NO_TRADE`/`REJECTED` ارزیابی می‌کند.

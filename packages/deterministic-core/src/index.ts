@@ -16,6 +16,7 @@ export * from "./paper/local-paper-fail-closed-readiness.js";
 export * from "./paper/local-paper-contract-readiness.js";
 export * from "./paper/local-paper-entry-decision-registry.js";
 export * from "./paper/local-paper-replay-expiry.js";
+export * from "./paper/local-paper-pre-entry-boundary.js";
 export * from "./pipeline/boundaries.js";
 export * from "./policy/policy-gate.js";
 export * from "./replay/sequence-validator.js";
