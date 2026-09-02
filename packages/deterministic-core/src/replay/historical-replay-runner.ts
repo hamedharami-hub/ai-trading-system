@@ -42,6 +42,24 @@ export type HistoricalReplayStep =
       readonly currentCursor: number;
     };
 
+export type HistoricalReplayPreviewWindow =
+  | {
+      readonly kind: "WINDOW";
+      readonly startCursor: number;
+      readonly endCursorExclusive: number;
+      readonly candles: readonly HistoricalReplayCandle[];
+    }
+  | {
+      readonly kind: "END";
+      readonly currentCursor: number;
+    }
+  | {
+      readonly kind: "UNAVAILABLE";
+      readonly reason: "REPLAY_REJECTED";
+    };
+
+const MAX_HISTORICAL_REPLAY_PREVIEW_CANDLES = 5;
+
 function toRejectedPlayback(
   admission: HistoricalReplayAdmissionReport,
 ): HistoricalReplayPlayback {
@@ -151,5 +169,53 @@ export function advanceHistoricalReplay(
     currentCursor: cursor,
     nextCursor: cursor + 1,
     candle,
+  });
+}
+
+/**
+ * Reads a small, immutable, recorded-order window for a future local view.
+ * It does not wrap, infer candles, perform I/O, or create any trading state.
+ */
+export function readHistoricalReplayPreviewWindow(
+  playback: Readonly<HistoricalReplayPlayback>,
+  startCursor: number,
+  windowSize: number,
+): HistoricalReplayPreviewWindow {
+  if (!Number.isSafeInteger(startCursor) || startCursor < 0) {
+    throw new Error(
+      "Historical Replay preview cursor must be a non-negative integer",
+    );
+  }
+
+  if (
+    !Number.isSafeInteger(windowSize) ||
+    windowSize < 1 ||
+    windowSize > MAX_HISTORICAL_REPLAY_PREVIEW_CANDLES
+  ) {
+    throw new Error(
+      `Historical Replay preview size must be an integer from 1 to ${MAX_HISTORICAL_REPLAY_PREVIEW_CANDLES}`,
+    );
+  }
+
+  if (playback.status !== "REPLAY_READY") {
+    return Object.freeze({ kind: "UNAVAILABLE", reason: "REPLAY_REJECTED" });
+  }
+
+  if (startCursor >= playback.candles.length) {
+    return Object.freeze({ kind: "END", currentCursor: startCursor });
+  }
+
+  const endCursorExclusive = Math.min(
+    startCursor + windowSize,
+    playback.candles.length,
+  );
+
+  return Object.freeze({
+    kind: "WINDOW",
+    startCursor,
+    endCursorExclusive,
+    candles: Object.freeze(
+      playback.candles.slice(startCursor, endCursorExclusive),
+    ),
   });
 }

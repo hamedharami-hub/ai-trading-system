@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 import {
   advanceHistoricalReplay,
   prepareHistoricalReplay,
+  readHistoricalReplayPreviewWindow,
 } from "../src/replay/historical-replay-runner.js";
 
 const SHA256 = "a".repeat(64);
@@ -89,5 +90,56 @@ describe("historical Replay runner", () => {
     expect(() => advanceHistoricalReplay(playback, -1)).toThrow(
       "Historical Replay cursor must be a non-negative integer",
     );
+  });
+
+  it("returns only a bounded immutable window in recorded order", () => {
+    const playback = prepareHistoricalReplay({
+      datasetId: "eurusd-m1-sample",
+      expectedSha256: SHA256,
+      actualSha256: SHA256,
+      csvText: VALID_CSV,
+    });
+
+    const preview = readHistoricalReplayPreviewWindow(playback, 0, 2);
+
+    expect(preview).toMatchObject({
+      kind: "WINDOW",
+      startCursor: 0,
+      endCursorExclusive: 2,
+      candles: [
+        { timestampUtc: "2025-08-01T00:00:00+00:00" },
+        { timestampUtc: "2025-08-01T00:01:00+00:00" },
+      ],
+    });
+    expect(Object.isFrozen(preview)).toBe(true);
+    expect(
+      preview.kind === "WINDOW" ? Object.isFrozen(preview.candles) : false,
+    ).toBe(true);
+    expect(readHistoricalReplayPreviewWindow(playback, 2, 1)).toEqual({
+      kind: "END",
+      currentCursor: 2,
+    });
+  });
+
+  it("fails closed for rejected Replay and rejects invalid preview bounds", () => {
+    const rejectedPlayback = prepareHistoricalReplay({
+      datasetId: "changed-file",
+      expectedSha256: SHA256,
+      actualSha256: "b".repeat(64),
+      csvText: VALID_CSV,
+    });
+
+    expect(readHistoricalReplayPreviewWindow(rejectedPlayback, 0, 1)).toEqual({
+      kind: "UNAVAILABLE",
+      reason: "REPLAY_REJECTED",
+    });
+    expect(() =>
+      readHistoricalReplayPreviewWindow(rejectedPlayback, -1, 1),
+    ).toThrow(
+      "Historical Replay preview cursor must be a non-negative integer",
+    );
+    expect(() =>
+      readHistoricalReplayPreviewWindow(rejectedPlayback, 0, 6),
+    ).toThrow("Historical Replay preview size must be an integer from 1 to 5");
   });
 });
