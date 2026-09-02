@@ -14,3 +14,7 @@
 ## Safe stop
 
 تا زمان پذیرش جداگانهٔ policy rules و risk model، هر مجموعه—even با همهٔ identifierها—فقط `NO_TRADE` با `POLICY_RISK_NOT_APPROVED` برمی‌گرداند. شناسهٔ ناقص یا ناشناخته نیز fail-closed است.
+
+## تصمیم PolicyGate محلی
+
+با `DEC-210`، PolicyGate محلی تا پذیرش جداگانهٔ strategy definition، policy rule و risk model، deny-only است. هیچ candidateی eligible نمی‌شود و خروجی ثابت `NO_TRADE / POLICY_RULES_NOT_APPROVED` است.
