@@ -48,6 +48,40 @@ function isPositiveDecimal(value: string): boolean {
   );
 }
 
+function comparePositiveDecimals(left: string, right: string): number {
+  const [leftInteger, leftFraction = ""] = left.split(".");
+  const [rightInteger, rightFraction = ""] = right.split(".");
+  if (
+    leftInteger === undefined ||
+    rightInteger === undefined ||
+    !isPositiveDecimal(left) ||
+    !isPositiveDecimal(right)
+  ) {
+    throw new Error(
+      "Historical Replay decimal comparison requires valid values",
+    );
+  }
+
+  const normalizedLeftInteger = leftInteger.replace(/^0+(?=\d)/, "");
+  const normalizedRightInteger = rightInteger.replace(/^0+(?=\d)/, "");
+  if (normalizedLeftInteger.length !== normalizedRightInteger.length) {
+    return normalizedLeftInteger.length < normalizedRightInteger.length
+      ? -1
+      : 1;
+  }
+  if (normalizedLeftInteger !== normalizedRightInteger) {
+    return normalizedLeftInteger < normalizedRightInteger ? -1 : 1;
+  }
+
+  const fractionLength = Math.max(leftFraction.length, rightFraction.length);
+  const normalizedLeftFraction = leftFraction.padEnd(fractionLength, "0");
+  const normalizedRightFraction = rightFraction.padEnd(fractionLength, "0");
+  if (normalizedLeftFraction === normalizedRightFraction) {
+    return 0;
+  }
+  return normalizedLeftFraction < normalizedRightFraction ? -1 : 1;
+}
+
 function freezeReport(
   report: HistoricalReplayAdmissionReport,
 ): HistoricalReplayAdmissionReport {
@@ -121,15 +155,33 @@ export function validateHistoricalReplayCsv(
       continue;
     }
 
-    for (const [fieldName, value] of [
+    const priceFields = [
       ["OPEN", open],
       ["HIGH", high],
       ["LOW", low],
       ["CLOSE", close],
-      ["VOLUME", volume],
-    ] as const) {
+    ] as const;
+    for (const [fieldName, value] of priceFields) {
       if (!isPositiveDecimal(value)) {
         reasons.push(`INVALID_${fieldName}_AT_ROW_${rowNumber}`);
+      }
+    }
+    if (!isPositiveDecimal(volume)) {
+      reasons.push(`INVALID_VOLUME_AT_ROW_${rowNumber}`);
+    }
+
+    if (priceFields.every(([, value]) => isPositiveDecimal(value))) {
+      if (comparePositiveDecimals(high, open) < 0) {
+        reasons.push(`HIGH_BELOW_OPEN_AT_ROW_${rowNumber}`);
+      }
+      if (comparePositiveDecimals(high, close) < 0) {
+        reasons.push(`HIGH_BELOW_CLOSE_AT_ROW_${rowNumber}`);
+      }
+      if (comparePositiveDecimals(low, open) > 0) {
+        reasons.push(`LOW_ABOVE_OPEN_AT_ROW_${rowNumber}`);
+      }
+      if (comparePositiveDecimals(low, close) > 0) {
+        reasons.push(`LOW_ABOVE_CLOSE_AT_ROW_${rowNumber}`);
       }
     }
 

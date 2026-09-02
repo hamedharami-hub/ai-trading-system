@@ -61,6 +61,24 @@ describe("historical replay admission", () => {
     expect(report.rejectionReasons).toContain("ONE_MINUTE_GAP_AT_ROW_3");
   });
 
+  it("fails closed when a valid decimal OHLC relation is inconsistent", () => {
+    const report = validateHistoricalReplayCsv({
+      datasetId: "inconsistent-ohlc",
+      expectedSha256: SHA256,
+      actualSha256: SHA256,
+      csvText: VALID_CSV.replace(
+        "1.14217,1.14217,1.14192,1.14194",
+        "1.14217,1.14180,1.14220,1.14210",
+      ),
+    });
+
+    expect(report.status).toBe("REJECTED");
+    expect(report.rejectionReasons).toContain("HIGH_BELOW_OPEN_AT_ROW_2");
+    expect(report.rejectionReasons).toContain("HIGH_BELOW_CLOSE_AT_ROW_2");
+    expect(report.rejectionReasons).toContain("LOW_ABOVE_OPEN_AT_ROW_2");
+    expect(report.rejectionReasons).toContain("LOW_ABOVE_CLOSE_AT_ROW_2");
+  });
+
   it("fails closed on duplicate timestamps and malformed price values", () => {
     const report = validateHistoricalReplayCsv({
       datasetId: "duplicate-and-price",
