@@ -7,7 +7,7 @@
 | شناسهٔ تصمیم              | موضوع                                                                                              | وضعیت             |
 | ------------------------- | -------------------------------------------------------------------------------------------------- | ----------------- |
 | `paper-expiry-v1`         | expiry و invalidation؛ تعیین عدد/زمان عمداً تا تعیین timeframe و no-chase قطعی به تعویق افتاده است | `OPEN / NO_TRADE` |
-| `paper-idempotency-v1`    | محدوده و زمان اعتبار idempotency                                                                   | `OPEN`            |
+| `paper-idempotency-v1`    | تا پذیرش lifecycle پایدار و storage، هیچ lifetime یا scope فرضی برای idempotency تعریف نمی‌شود     | `OPEN / NO_TRADE` |
 | `paper-protective-v1`     | evidence protective handling                                                                       | `OPEN`            |
 | `paper-reconciliation-v1` | evidence reconciliation                                                                            | `OPEN`            |
 | `paper-evidence-v1`       | ownership و completeness evidence                                                                  | `OPEN`            |
