@@ -3,6 +3,7 @@ import {
   advanceHistoricalReplay,
   prepareHistoricalReplay,
   readHistoricalReplayPreviewWindow,
+  summarizeHistoricalReplay,
 } from "../src/replay/historical-replay-runner.js";
 
 const SHA256 = "a".repeat(64);
@@ -141,5 +142,45 @@ describe("historical Replay runner", () => {
     expect(() =>
       readHistoricalReplayPreviewWindow(rejectedPlayback, 0, 6),
     ).toThrow("Historical Replay preview size must be an integer from 1 to 5");
+  });
+
+  it("summarizes ready Replay evidence without exposing candles", () => {
+    const playback = prepareHistoricalReplay({
+      datasetId: "eurusd-m1-sample",
+      expectedSha256: SHA256,
+      actualSha256: SHA256,
+      csvText: VALID_CSV,
+    });
+
+    expect(summarizeHistoricalReplay(playback)).toEqual({
+      kind: "READY",
+      datasetId: "eurusd-m1-sample",
+      candleCount: 2,
+      coverageStartUtc: "2025-08-01T00:00:00+00:00",
+      coverageEndUtc: "2025-08-01T00:01:00+00:00",
+      sourceKind: "REPLAY",
+      executionEligible: false,
+      orderIntentsCreated: 0,
+      executionReportsCreated: 0,
+      simulatedFillsCreated: 0,
+      externalRequestsMade: 0,
+    });
+  });
+
+  it("summarizes rejected Replay as unavailable with rejection evidence", () => {
+    const playback = prepareHistoricalReplay({
+      datasetId: "changed-file",
+      expectedSha256: SHA256,
+      actualSha256: "b".repeat(64),
+      csvText: VALID_CSV,
+    });
+
+    expect(summarizeHistoricalReplay(playback)).toMatchObject({
+      kind: "UNAVAILABLE",
+      datasetId: "changed-file",
+      rejectionReasons: ["SHA256_MISMATCH"],
+      executionEligible: false,
+      externalRequestsMade: 0,
+    });
   });
 });

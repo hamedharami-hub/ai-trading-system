@@ -58,6 +58,32 @@ export type HistoricalReplayPreviewWindow =
       readonly reason: "REPLAY_REJECTED";
     };
 
+export type HistoricalReplayStatusSummary =
+  | {
+      readonly kind: "READY";
+      readonly datasetId: string;
+      readonly candleCount: number;
+      readonly coverageStartUtc?: string;
+      readonly coverageEndUtc?: string;
+      readonly sourceKind: "REPLAY";
+      readonly executionEligible: false;
+      readonly orderIntentsCreated: 0;
+      readonly executionReportsCreated: 0;
+      readonly simulatedFillsCreated: 0;
+      readonly externalRequestsMade: 0;
+    }
+  | {
+      readonly kind: "UNAVAILABLE";
+      readonly datasetId: string;
+      readonly rejectionReasons: readonly string[];
+      readonly sourceKind: "REPLAY";
+      readonly executionEligible: false;
+      readonly orderIntentsCreated: 0;
+      readonly executionReportsCreated: 0;
+      readonly simulatedFillsCreated: 0;
+      readonly externalRequestsMade: 0;
+    };
+
 const MAX_HISTORICAL_REPLAY_PREVIEW_CANDLES = 5;
 
 function toRejectedPlayback(
@@ -217,5 +243,45 @@ export function readHistoricalReplayPreviewWindow(
     candles: Object.freeze(
       playback.candles.slice(startCursor, endCursorExclusive),
     ),
+  });
+}
+
+/**
+ * Returns evidence about a prepared Replay without exposing candles or
+ * advancing it. This summary is non-authoritative and execution-ineligible.
+ */
+export function summarizeHistoricalReplay(
+  playback: Readonly<HistoricalReplayPlayback>,
+): HistoricalReplayStatusSummary {
+  if (playback.status !== "REPLAY_READY") {
+    return Object.freeze({
+      kind: "UNAVAILABLE",
+      datasetId: playback.datasetId,
+      rejectionReasons: Object.freeze([...playback.rejectionReasons]),
+      sourceKind: "REPLAY",
+      executionEligible: false,
+      orderIntentsCreated: 0,
+      executionReportsCreated: 0,
+      simulatedFillsCreated: 0,
+      externalRequestsMade: 0,
+    });
+  }
+
+  return Object.freeze({
+    kind: "READY",
+    datasetId: playback.datasetId,
+    candleCount: playback.candles.length,
+    ...(playback.coverageStartUtc === undefined
+      ? {}
+      : { coverageStartUtc: playback.coverageStartUtc }),
+    ...(playback.coverageEndUtc === undefined
+      ? {}
+      : { coverageEndUtc: playback.coverageEndUtc }),
+    sourceKind: "REPLAY",
+    executionEligible: false,
+    orderIntentsCreated: 0,
+    executionReportsCreated: 0,
+    simulatedFillsCreated: 0,
+    externalRequestsMade: 0,
   });
 }
