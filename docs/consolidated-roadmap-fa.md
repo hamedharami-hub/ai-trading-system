@@ -59,6 +59,12 @@
 - مرحلهٔ ۵X: با `DEC-158` پذیرفته و بسته شده است. verifier محلی فقط log درون‌حافظه‌ای `NO_TRADE` را بدون mutation بازسازی می‌کند و link/timestamp/duplicate/zero-artifact را fail-closed می‌سنجد.
 - مرحلهٔ ۵Y: با `DEC-160` پذیرفته و بسته شده است. evaluator فقط terminal evidence immutable برای `NO_TRADE`/`CANCELLED`/`REJECTED` را از source شناخته‌شده می‌پذیرد و هر source/target/reason نامعتبر را fail-closed رد می‌کند؛ خروجی در همهٔ حالات صفر record/fill/position/P&L دارد.
 - مرحلهٔ فعال: ندارد؛ ایجاد simulated Paper record، OrderIntent، entry/fill/position/P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
+- مرحلهٔ ۵Z: با `DEC-166` پذیرفته و بسته شده است. رکورد immutable محلی فقط با evidence کامل ساخته می‌شود و terminal/non-executable با صفر artifact می‌ماند.
+- مرحلهٔ ۵AA: با `DEC-167` پذیرفته و بسته شده است. fixtureهای identifier-only برای accepted/rejected/expired/duplicate/cancelled/unknown موجود است؛ accepted نیز همچنان معامله نمی‌سازد.
+- مرحلهٔ ۵AB: با `DEC-168` پذیرفته و بسته شده است. gate قطعی idempotency/expiry و assumption/replay در همهٔ حالت‌ها fail-closed و بدون artifact است.
+- مرحلهٔ ۵AC: با `DEC-169` پذیرفته و بسته شده است. audit مخصوص رکورد شبیه‌سازی‌شده فقط درون‌حافظه‌ای، immutable، append-only و reconstructable است.
+- مرحلهٔ ۵AD: با `DEC-170` پذیرفته و بسته شده است. integration آفلاین fixture/replay/assumption/idempotency/expiry همچنان فقط `NO_TRADE`/`REJECTED` و صفر OrderIntent/fill/position/P&L می‌دهد.
+- مرحلهٔ فعال: ندارد؛ simulated entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحله ۶: شروع نشده و به پذیرش صریح مرحلهٔ ۵ نیاز دارد.
 - Firebase و Vercel برای مرحله ۴ تأیید شده‌اند، نه برای اختیار ریسک یا اجرا.
 - AI آفلاین Windows و Android برای مرحله ۳ تأیید شده است؛ دانلود مدل در مرحله ۱ انجام نمی‌شود.
