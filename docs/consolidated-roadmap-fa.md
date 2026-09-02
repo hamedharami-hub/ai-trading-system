@@ -76,6 +76,10 @@
 - مرحلهٔ ۵AR و ۵AS: با `DEC-202` پذیرفته و بسته شده‌اند. protective فقط evidence presence و reconciliation فقط terminal evidence محلی است؛ هیچ action/fill/position ساخته نمی‌شود.
 - مرحلهٔ ۵AT: با `DEC-203` پذیرفته و بسته شده است. pre-entry boundary evidence محلی کامل را می‌سنجد، duplicate را رد می‌کند و حتی در وضعیت کامل فقط `NO_TRADE` با صفر artifact می‌دهد.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
+- مرحلهٔ ۵AU: با `DEC-207` پذیرفته و بسته شده است. قرارداد versioned و identifier-only Policy/Risk readiness ثبت شد و هیچ policy rule یا risk calculation ندارد.
+- مرحلهٔ ۵AV: با `DEC-208` پذیرفته و بسته شده است. validator محلی evidence ناقص را fail-closed ثبت می‌کند و structurally نمی‌تواند policy/risk را approved کند.
+- مرحلهٔ ۵AW: با `DEC-209` پذیرفته و بسته شده است. complete-but-unapproved = `NO_TRADE` و missing evidence = `REJECTED`؛ صفر artifact باقی می‌ماند.
+- مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AI: با `DEC-183` پذیرفته و بسته شده است. قرارداد versioned و identifier-only برای lifecycle/expiry/idempotency/protective/reconciliation/evidence ثبت شد و هیچ مفهوم مالی/اجرایی ندارد.
 - مرحلهٔ ۵AJ: با `DEC-184` پذیرفته و بسته شده است. validator قطعی، completeness قراردادها و lifecycle شناخته‌شده را فقط برای `NO_TRADE`/`REJECTED` ارزیابی می‌کند.
