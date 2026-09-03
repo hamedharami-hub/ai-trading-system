@@ -93,6 +93,7 @@
 - مرحلهٔ ۵BG: با `DEC-230` پذیرفته و بسته شده است. فقط منشأ Order Block پیش از BOS معتبر و مرزهای بدنه‌اش برای `EURUSD / M1 / REPLAY` محلی محاسبه می‌شود؛ validity، mitigation، invalidation، candidate، risk، هزینه، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ ۵BH: با `DEC-232` پذیرفته و بسته شده است. فقط state مشاهده‌ایِ بدون تماس/mitigated/invalidated برای Order Block پس از BOS در `EURUSD / M1 / REPLAY` محلی محاسبه می‌شود؛ candidate، entry، risk، هزینه، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ ۵BI: با `DEC-234` پذیرفته و بسته شده است. فقط state مشاهده‌ایِ بدون تماس/mitigated/invalidated برای FVG پس از تشکیل در `EURUSD / M1 / REPLAY` محلی محاسبه می‌شود؛ candidate، entry، risk، هزینه، Paper و اجرا خارج از دامنه‌اند.
+- مرحلهٔ ۵BJ: با `DEC-236` پذیرفته و بسته شده است. فقط fact مربوط به liquidity sweep/raid نسبت به آخرین Swing تأییدشده در `EURUSD / M1 / REPLAY` محلی محاسبه می‌شود؛ candidate، entry، risk، هزینه، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AI: با `DEC-183` پذیرفته و بسته شده است. قرارداد versioned و identifier-only برای lifecycle/expiry/idempotency/protective/reconciliation/evidence ثبت شد و هیچ مفهوم مالی/اجرایی ندارد.
