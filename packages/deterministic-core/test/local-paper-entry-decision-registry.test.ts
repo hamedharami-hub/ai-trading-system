@@ -5,7 +5,7 @@ import {
 } from "../src/paper/local-paper-entry-decision-registry.js";
 
 describe("local Paper entry decision registry", () => {
-  it("keeps a complete decision set at no-trade because every decision is open", () => {
+  it("keeps a complete accepted decision set at no-trade", () => {
     expect(
       evaluateLocalPaperEntryDecisionReadiness(
         REQUIRED_LOCAL_PAPER_ENTRY_DECISIONS,
@@ -13,7 +13,7 @@ describe("local Paper entry decision registry", () => {
     ).toMatchObject({
       status: "NO_TRADE",
       label: "PAPER_LOCAL_ONLY",
-      reasons: ["ENTRY_DECISIONS_NOT_ACCEPTED"],
+      reasons: ["ENTRY_DECISIONS_ACCEPTED"],
       orderIntentsCreated: 0,
       simulatedFillsCreated: 0,
       positionsCreated: 0,
@@ -36,7 +36,6 @@ describe("local Paper entry decision registry", () => {
       "DECISION_ID_MISSING",
       "DECISION_ID_MISSING",
       "DECISION_ID_MISSING",
-      "ENTRY_DECISIONS_NOT_ACCEPTED",
     ]);
   });
 });

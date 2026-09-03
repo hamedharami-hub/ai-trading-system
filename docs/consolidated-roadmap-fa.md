@@ -81,6 +81,11 @@
 - مرحلهٔ ۵AU: با `DEC-207` پذیرفته و بسته شده است. قرارداد versioned و identifier-only Policy/Risk readiness ثبت شد و هیچ policy rule یا risk calculation ندارد.
 - مرحلهٔ ۵AV: با `DEC-208` پذیرفته و بسته شده است. validator محلی evidence ناقص را fail-closed ثبت می‌کند و structurally نمی‌تواند policy/risk را approved کند.
 - مرحلهٔ ۵AW: با `DEC-209` پذیرفته و بسته شده است. complete-but-unapproved = `NO_TRADE` و missing evidence = `REJECTED`؛ صفر artifact باقی می‌ماند.
+- مرحلهٔ ۵AZ: با `DEC-215` پذیرفته و بسته شده است. شناسه‌های تصمیم localِ پذیرفته‌شده را با Policy/Risk deny-only و evidence پیش‌ورود تجمیع می‌کند؛ در همهٔ حالت‌ها فقط `NO_TRADE` یا `REJECTED` با صفر artifact می‌ماند.
+- مرحلهٔ ۵BA: با `DEC-217` پذیرفته و بسته شده است. Local Trading Node یک CLI تشخیصی آفلاین و بدون port/داده/شبکه دارد که فقط گزارش `NO_TRADE` را از کنترل‌های محلی موجود می‌خواند.
+- مرحلهٔ ۵BB: با `DEC-218` فعال است. PolicyGate و Risk Engine موجود را فقط روی input قطعی و محلی غربال می‌کند؛ نتیجه همیشه غیرقابل‌اجرا و `NO_TRADE` می‌ماند.
+- مرحلهٔ ۵BB: با `DEC-219` پذیرفته و بسته شده است. PolicyGate و Risk Engine موجود را فقط روی input قطعی و محلی غربال می‌کند؛ نتیجه همیشه غیرقابل‌اجرا و `NO_TRADE` می‌ماند.
+- مرحلهٔ ۵BC: با `DEC-221` پذیرفته و بسته شده است. workflow کم‌اختیار CI، lint/typecheck/test/build/audit را پس از push یا pull request اجرا می‌کند؛ هیچ secret، deploy یا اختیار معاملاتی ندارد.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AI: با `DEC-183` پذیرفته و بسته شده است. قرارداد versioned و identifier-only برای lifecycle/expiry/idempotency/protective/reconciliation/evidence ثبت شد و هیچ مفهوم مالی/اجرایی ندارد.

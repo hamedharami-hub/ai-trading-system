@@ -22,8 +22,8 @@ export interface LocalPaperEntryDecisionReadiness {
 }
 
 /**
- * The registry is deliberately all OPEN. Supplied IDs are evidence only and
- * cannot authorize a local Paper entry until a later explicit owner decision.
+ * These decision identifiers are accepted only as local, non-executable
+ * prerequisites. They cannot approve policy/risk or authorize a Paper entry.
  */
 export function evaluateLocalPaperEntryDecisionReadiness(
   suppliedDecisionIds: readonly string[],
@@ -44,7 +44,7 @@ export function evaluateLocalPaperEntryDecisionReadiness(
   for (const requiredId of REQUIRED_LOCAL_PAPER_ENTRY_DECISIONS) {
     if (!supplied.has(requiredId)) reasons.push("DECISION_ID_MISSING");
   }
-  reasons.push("ENTRY_DECISIONS_NOT_ACCEPTED");
+  if (reasons.length === 0) reasons.push("ENTRY_DECISIONS_ACCEPTED");
   return Object.freeze({
     status: reasons.some(
       (reason) =>

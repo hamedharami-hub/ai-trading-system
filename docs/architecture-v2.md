@@ -4,7 +4,7 @@
 
 The Persian architecture PDF and subsequent explicit owner instructions are the product authority. English repository documentation is the version-controlled implementation translation. If a conflict exists, the owner's latest explicit instruction prevails.
 
-This document defines the system boundaries. Consolidated Phase 2 implements canonical contracts and a deterministic offline-core foundation only. It contains no data feeds, broker or exchange integrations, secrets, network clients, AI calls, model downloads, cloud operation, or executable trading adapter.
+This document defines the system boundaries. Phases 2 and 3 added canonical contracts, deterministic offline-core foundations, and guarded offline-AI evidence. Phase 4 added the responsive PWA and an owner-initiated Firebase Authentication boundary. The accepted Phase 5 work is local and fail-closed: replay evidence and Paper-readiness helpers are not a Paper entry, fill, position, P&L, OMS, provider connection, or executable trading adapter.
 
 ## 2. Safety invariants
 
@@ -19,7 +19,7 @@ This document defines the system boundaries. Consolidated Phase 2 implements can
 
 ### Next.js PWA (`apps/pwa`)
 
-Future responsibilities are responsive Persian-first UI, charts, evidence display, AI-role comparison, manual approval/rejection, position/order visibility, reports, and settings presentation.
+Current responsibilities are responsive Persian-first presentation, fixed offline evidence display, and owner-initiated Firebase Google Authentication. Future responsibilities include charts, AI-role comparison, manual approval/rejection, position/order visibility, reports, and settings presentation.
 
 The PWA may submit authenticated user commands to the Local Trading Node in a future phase. It may not directly contact a broker/exchange, hold trading credentials, calculate authoritative features or risk, manufacture an `OrderIntent`, or treat browser state as execution truth.
 
@@ -35,22 +35,22 @@ This is a future separate Windows Node.js/TypeScript process and the determinist
 - risk-approved `OrderIntent` creation;
 - OMS state, idempotency, reconciliation, persistence, and audit emission.
 
-The repository now includes reviewed deterministic math, policy, risk, replay, guarded intent, and SQLite audit foundations in `packages/deterministic-core`. The Local Trading Node executable, real feeds, OMS adapters, and execution remain absent.
+The repository now includes reviewed deterministic math, policy/risk deny-only boundaries, replay, guarded intent, SQLite audit foundations, and local Paper-readiness evidence in `packages/deterministic-core`. The Local Trading Node executable, real feeds, OMS adapters, Paper entry lifecycle, and execution remain absent.
 
 ### Shared contracts (`packages/contracts`)
 
 This future data-only package is the only contract dependency shared by the PWA and Local Trading Node. JSON Schema 2020-12 is the canonical future wire format; TypeScript types must derive from the same definitions so schemas and types cannot drift. Runtime validation is required at every process or trust boundary.
 
-Financial wire values for `Price`, `Quantity`, `Money`, `Percent`, and `R:R` use decimal strings. Authoritative financial calculations cannot use JavaScript `number`; internally they use arbitrary-precision Decimal values, and symbol precision comes from versioned symbol metadata. The Decimal package/runtime, rounding policy, and metadata authority remain blocked by `OPEN-003` and `OPEN-006`.
+Financial wire values for `Price`, `Quantity`, `Money`, `Percent`, and `R:R` use decimal strings. Authoritative financial calculations cannot use JavaScript `number`; internally they use arbitrary-precision Decimal values, and symbol precision comes from versioned symbol metadata. `decimal.js` is pinned and approved for the Phase 2 foundation; the remaining venue-specific rounding, FX, margin, and metadata semantics in `OPEN-003` and `OPEN-006` remain unresolved and fail closed.
 
 The package contains schemas, generated types, Decimal parsing/formatting, canonical serialization, cryptographic hashing, and deterministic validation only. It may not import either application or contain network, storage, AI, risk, or execution logic.
 
 ### Future external boundaries
 
 - Broker/exchange adapters will be isolated behind deterministic market-data and OMS ports and introduced read-only first, then demo, then separately approved trade permission.
-- AI adapters will be isolated behind schema validation, deadlines, bounded retries, and fail-closed policy. They cannot reach risk or OMS interfaces.
-- Cloud control may later synchronize encrypted state, notifications, device health, and an executor lease. It is not an always-on analysis or execution service in v1.
-- Native Windows/Android bridges may later provide local-model runtime, secure storage, notifications, and background capabilities. They are not part of this foundation.
+- Offline AI is isolated behind schema validation, deadlines, bounded retries, and fail-closed policy. It cannot reach risk or OMS interfaces. Remote AI remains absent.
+- Cloud control currently provides only owner-initiated authentication. `OPEN-021` blocks synchronization, notifications, device health, and an executor lease; cloud is not an analysis or execution service.
+- Android has a guarded local-AI bridge and benchmark evidence. Secure storage, notifications, background work, and execution authority remain absent.
 
 ## 4. Decision flow
 
@@ -112,9 +112,9 @@ apps/pwa ----------------> packages/contracts <---------------- apps/local-tradi
 
 - Windows hosts the future Local Trading Node and installable PWA.
 - Android initially uses the shared PWA. Any executor failover, background work, secure storage, or local-model behavior requires an explicitly approved native bridge and device testing.
-- SQLite WAL is the planned transactional store. Parquet/DuckDB are later archival/analysis tools. No database is created now.
+- SQLite WAL append-only audit foundations exist locally. Production portfolio, OMS, backup/restore, retention, and transactional state remain absent. Parquet/DuckDB are later archival/analysis tools.
 - All external capability flags are build-time and runtime guarded and default off.
 
 ## 8. Current non-goals
 
-The foundation does not implement Next.js pages, service workers, Node services, contracts, schemas, calculations, databases, authentication, encryption, feeds, brokers, exchanges, OMS, paper trading, cloud control, notifications, AI routing, model management, native bridges, or live trading.
+The repository does not implement a Local Trading Node service, market-data feeds, brokers, exchanges, OMS, a Paper entry/fill/position/P&L lifecycle, cloud synchronization, notifications, remote AI routing, production model management, device authority, or live trading. The implemented PWA, Firebase Authentication boundary, offline-AI evidence, contract/math/replay foundation, SQLite audit foundation, and local Paper-readiness evidence remain non-authoritative and fail closed.

@@ -21,7 +21,24 @@ importers:
         specifier: 7.0.2
         version: 7.0.2
 
-  apps/local-trading-node: {}
+  apps/local-trading-node:
+    dependencies:
+      '@trade/deterministic-core':
+        specifier: workspace:*
+        version: link:../../packages/deterministic-core
+    devDependencies:
+      '@types/node':
+        specifier: 24.13.3
+        version: 24.13.3
+      prettier:
+        specifier: 3.6.2
+        version: 3.6.2
+      typescript:
+        specifier: 7.0.2
+        version: 7.0.2
+      vitest:
+        specifier: 4.1.11
+        version: 4.1.11(@types/node@24.13.3)(vite@8.2.2(@types/node@24.13.3)(esbuild@0.28.2)(tsx@4.23.13))
 
   apps/pwa:
     dependencies:

@@ -25,12 +25,14 @@ Do not treat compilation, a green test, or a partial artifact as completion of a
 
 ## Current repository phase
 
-Consolidated Phase 4 (Multi-platform Product and Cloud Control) is authorized by DEC-080. It may add the responsive PWA, limited Firebase/Vercel control-plane integration, authenticated device pairing/synchronization, non-execution notifications, and local bridge boundaries. During this phase, do not add:
+Consolidated Phases 1 through 4 are accepted through DEC-074, DEC-076, DEC-079, and DEC-083. The repository is now in Phase 5, where the accepted work through DEC-213 is strictly local, offline, and fail-closed. It contains replay evidence, historical-data admission, and Paper-readiness boundaries; it does not contain a Paper entry, fill, position, P&L, OMS, provider connection, or execution path.
+
+The next Phase 5 scope must be explicitly recorded and accepted before it can add any new capability. Until then, do not add:
 
 - broker, exchange, or market-data integrations;
 - trading API keys, tokens, credentials, account data, or credential placeholders;
 - remote AI calls, committed model artifacts, or a cloud AI authority;
-- live, demo, testnet, paper, OMS, or execution behavior.
+- live, demo, testnet, broker, OMS, or execution behavior.
 
 Do not request or commit secrets. Keep `LIVE_TRADING_ENABLED`, `BROKER_CONNECTORS_ENABLED`, `AI_ROUTER_ENABLED`, and `MODEL_DOWNLOADS_ENABLED` false. Cloud state is non-authoritative: it cannot calculate risk, create an `OrderIntent`, or acquire execution authority.
 
@@ -49,7 +51,7 @@ Do not request or commit secrets. Keep `LIVE_TRADING_ENABLED`, `BROKER_CONNECTOR
 - Use strict TypeScript and the rules in `docs/coding-standards.md` when source work is later approved.
 - Add tests proportionate to risk and follow `docs/test-strategy.md`.
 - Keep events immutable and audit changes through new linked records.
-- Use decimal strings for financial wire values and arbitrary-precision Decimal values for authoritative internal monetary/risk calculations. Never use JavaScript `number`; symbol precision comes from versioned metadata. Follow DEC-044 through DEC-067 and `docs/phase-1-delegated-decisions-fa.md`; `decimal.js` remains a future Phase 2 dependency requiring that phase's approval.
+- Use decimal strings for financial wire values and arbitrary-precision Decimal values for authoritative internal monetary/risk calculations. Never use JavaScript `number`; symbol precision comes from versioned metadata. Follow DEC-044 through DEC-067 and `docs/phase-1-delegated-decisions-fa.md`; `decimal.js` is an approved and pinned Phase 2 dependency.
 - Initially quantize order quantity by rounding down to the venue `stepSize`. A minimum venue-valid increase is allowed only after every policy, risk, margin, correlation, and venue check runs again; any failure rejects the trade. Do not infer remaining rounding behavior.
 - Never claim a broker, device, model, quota, or data capability without current evidence and an approved test.
 - Preserve user changes and unrelated work in a dirty worktree.
@@ -58,4 +60,4 @@ Do not request or commit secrets. Keep `LIVE_TRADING_ENABLED`, `BROKER_CONNECTOR
 
 Validate JSON/YAML syntax, workspace discovery, disabled flags, absence of dependencies/lockfiles/source code, and absence of credential or integration material. Report any verification that cannot run because dependencies are intentionally absent.
 
-For Phase 4, verify responsive Windows/Android PWA behavior, pairing authentication and revocation, origin restrictions, cloud fail-closed handling, local-node authority isolation, notification non-authority, no secret material in the repository, and disabled execution flags. Do not begin Consolidated Phase 5 without its separate scope declaration and explicit owner acceptance of Phase 4.
+For every Phase 5 change, verify its explicitly recorded scope, fail-closed behavior, local-node authority isolation, absence of secrets and external execution paths, and disabled execution flags. `OPEN-021` keeps cloud pairing, synchronization, revocation, recovery, and cloud lease disabled.

@@ -3,6 +3,26 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "trade-local-node-diagnostics": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "prettier --check . --ignore-path ../../.gitignore",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@trade/deterministic-core": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "prettier": "3.6.2",
+    "typescript": "7.0.2",
+    "vitest": "4.1.11"
+  },
   "engines": {
     "node": ">=24 <25",
     "pnpm": ">=11 <12"
