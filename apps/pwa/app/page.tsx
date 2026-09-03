@@ -262,261 +262,323 @@ export default function HomePage() {
               </div>
             </section>
 
-            <section
-              className="section-block replay-evidence"
-              aria-labelledby="replay-title"
-            >
-              <div className="section-heading">
-                <div>
-                  <p className="eyeline">دادهٔ کاری</p>
-                  <h2 id="replay-title">Replay تاریخی</h2>
-                </div>
-                <span className="subtle-status replay-evidence-status">
-                  historical · execution-ineligible
-                </span>
-              </div>
-              <p>
-                یک dataset تاریخیِ محلی از آزمون ساختاری عبور کرده است. این کارت
-                فقط evidence پذیرش را نشان می‌دهد؛ فایل CSV به مرورگر وارد یا در
-                این رابط پردازش نمی‌شود.
-              </p>
-              <dl className="replay-evidence-list">
-                <div>
-                  <dt>dataset</dt>
-                  <dd>{historicalReplayEvidence.dataset}</dd>
-                </div>
-                <div>
-                  <dt>source</dt>
-                  <dd>{historicalReplayEvidence.source}</dd>
-                </div>
-                <div>
-                  <dt>coverage</dt>
-                  <dd>{historicalReplayEvidence.coverage}</dd>
-                </div>
-                <div>
-                  <dt>evidence</dt>
-                  <dd>
-                    {historicalReplayEvidence.status} ·{" "}
-                    {historicalReplayEvidence.rows}
-                  </dd>
-                </div>
-              </dl>
-              <div
-                className="replay-preview"
-                aria-labelledby="replay-preview-title"
-              >
-                <div className="replay-preview-heading">
-                  <div>
-                    <p className="eyeline">پیش‌نمایش ثابت</p>
-                    <h3 id="replay-preview-title">پنج candle نخست Replay</h3>
+            {activePanel === "overview" ? (
+              <>
+                <section
+                  className="section-block replay-evidence"
+                  aria-labelledby="replay-title"
+                >
+                  <div className="section-heading">
+                    <div>
+                      <p className="eyeline">دادهٔ کاری</p>
+                      <h2 id="replay-title">Replay تاریخی</h2>
+                    </div>
+                    <span className="subtle-status replay-evidence-status">
+                      historical · execution-ineligible
+                    </span>
                   </div>
-                  <span className="subtle-status">cursor 0 تا 4</span>
-                </div>
-                <p>
-                  snapshot محدود از همان evidence محلیِ پذیرفته‌شده؛ نه feed
-                  جاری است، نه کنترل بازپخش و نه CSV قابل دریافت در مرورگر.
-                </p>
-                <div className="replay-preview-table-wrap">
-                  <table className="replay-preview-table" dir="ltr">
-                    <caption>EURUSD · M1 · Bid · Dukascopy · UTC</caption>
-                    <thead>
-                      <tr>
-                        <th scope="col">cursor</th>
-                        <th scope="col">UTC</th>
-                        <th scope="col">Open</th>
-                        <th scope="col">High</th>
-                        <th scope="col">Low</th>
-                        <th scope="col">Close</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {historicalReplayPreview.map((candle) => (
-                        <tr key={candle.cursor}>
-                          <td>{candle.cursor}</td>
-                          <td>{candle.timestampUtc}</td>
-                          <td>{candle.open}</td>
-                          <td>{candle.high}</td>
-                          <td>{candle.low}</td>
-                          <td>{candle.close}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <p className="replay-evidence-safe-stop">
-                این داده فقط تاریخی، منبع‌برچسب‌خورده و coverage-bounded است. نه
-                تحلیل، نه AI، نه Paper Trading، نه سود/زیان، نه سفارش و نه
-                معامله در دسترس نیست.
-              </p>
-            </section>
-
-            <section
-              className="section-block"
-              aria-labelledby="offline-ai-title"
-            >
-              <div className="section-heading">
-                <div>
-                  <p className="eyeline">شواهد آزمون پیشین</p>
-                  <h2 id="offline-ai-title">AI آفلاین</h2>
-                </div>
-                <span className="subtle-status">
-                  historical · non-authoritative
-                </span>
-              </div>
-              <p className="offline-ai-note">
-                این‌ها نتایج benchmark ثبت‌شدهٔ قبلی‌اند، نه اجرای فعلی مدل و نه
-                تحلیل یا توصیهٔ معاملاتی.
-              </p>
-              <div className="offline-ai-benchmark-list">
-                {offlineAiBenchmarks.map((benchmark) => (
-                  <article
-                    className="offline-ai-benchmark"
-                    key={benchmark.platform}
+                  <p>
+                    یک dataset تاریخیِ محلی از آزمون ساختاری عبور کرده است. این
+                    کارت فقط evidence پذیرش را نشان می‌دهد؛ فایل CSV به مرورگر
+                    وارد یا در این رابط پردازش نمی‌شود.
+                  </p>
+                  <dl className="replay-evidence-list">
+                    <div>
+                      <dt>dataset</dt>
+                      <dd>{historicalReplayEvidence.dataset}</dd>
+                    </div>
+                    <div>
+                      <dt>source</dt>
+                      <dd>{historicalReplayEvidence.source}</dd>
+                    </div>
+                    <div>
+                      <dt>coverage</dt>
+                      <dd>{historicalReplayEvidence.coverage}</dd>
+                    </div>
+                    <div>
+                      <dt>evidence</dt>
+                      <dd>
+                        {historicalReplayEvidence.status} ·{" "}
+                        {historicalReplayEvidence.rows}
+                      </dd>
+                    </div>
+                  </dl>
+                  <div
+                    className="replay-preview"
+                    aria-labelledby="replay-preview-title"
                   >
-                    <div>
-                      <strong>{benchmark.platform}</strong>
-                      <p>{benchmark.runtime}</p>
-                    </div>
-                    <dl>
+                    <div className="replay-preview-heading">
                       <div>
-                        <dt>result</dt>
-                        <dd>{benchmark.result}</dd>
+                        <p className="eyeline">پیش‌نمایش ثابت</p>
+                        <h3 id="replay-preview-title">
+                          پنج candle نخست Replay
+                        </h3>
                       </div>
-                      <div>
-                        <dt>duration</dt>
-                        <dd>{benchmark.duration}</dd>
-                      </div>
-                    </dl>
-                    <p className="offline-ai-detail">{benchmark.detail}</p>
-                  </article>
-                ))}
-              </div>
-              <p className="offline-ai-safe-stop">
-                `REJECT` یعنی AI در نبود evidence قطعی، fail-closed شده است؛ هیچ
-                سفارش یا اقدام معاملاتی ایجاد نمی‌شود.
-              </p>
-            </section>
-
-            <section className="section-block">
-              <div className="section-heading">
-                <div>
-                  <p className="eyeline">مسیر تحلیل</p>
-                  <h2>وضعیت شورای تحلیلی</h2>
-                </div>
-                <span className="subtle-status">نمونهٔ محلی</span>
-              </div>
-              <ol className="process-line" aria-label="مسیر تصمیم قطعی">
-                <li>MarketEvent</li>
-                <li>FeatureSnapshot</li>
-                <li>StrategyCandidate</li>
-                <li>PolicyGate</li>
-                <li>RiskDecision</li>
-              </ol>
-              <div className="advisory-list">
-                {advisoryRows.map((row) => (
-                  <article className="advisory-row" key={row.role}>
-                    <span
-                      className={`role-indicator ${row.tone}`}
-                      aria-hidden="true"
-                    />
-                    <div>
-                      <strong>{row.role}</strong>
-                      <p>{row.title}</p>
+                      <span className="subtle-status">cursor 0 تا 4</span>
                     </div>
-                    <span className="advisory-label">تحلیلی</span>
-                  </article>
-                ))}
-              </div>
-            </section>
+                    <p>
+                      snapshot محدود از همان evidence محلیِ پذیرفته‌شده؛ نه feed
+                      جاری است، نه کنترل بازپخش و نه CSV قابل دریافت در مرورگر.
+                    </p>
+                    <div className="replay-preview-table-wrap">
+                      <table className="replay-preview-table" dir="ltr">
+                        <caption>EURUSD · M1 · Bid · Dukascopy · UTC</caption>
+                        <thead>
+                          <tr>
+                            <th scope="col">cursor</th>
+                            <th scope="col">UTC</th>
+                            <th scope="col">Open</th>
+                            <th scope="col">High</th>
+                            <th scope="col">Low</th>
+                            <th scope="col">Close</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {historicalReplayPreview.map((candle) => (
+                            <tr key={candle.cursor}>
+                              <td>{candle.cursor}</td>
+                              <td>{candle.timestampUtc}</td>
+                              <td>{candle.open}</td>
+                              <td>{candle.high}</td>
+                              <td>{candle.low}</td>
+                              <td>{candle.close}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                  <p className="replay-evidence-safe-stop">
+                    این داده فقط تاریخی، منبع‌برچسب‌خورده و coverage-bounded
+                    است. نه تحلیل، نه AI، نه Paper Trading، نه سود/زیان، نه
+                    سفارش و نه معامله در دسترس نیست.
+                  </p>
+                </section>
 
-            <section className="section-block audit-preview">
-              <div className="section-heading">
-                <div>
-                  <p className="eyeline">رویدادها</p>
-                  <h2>ممیزی محلی</h2>
+                <section
+                  className="section-block"
+                  aria-labelledby="offline-ai-title"
+                >
+                  <div className="section-heading">
+                    <div>
+                      <p className="eyeline">شواهد آزمون پیشین</p>
+                      <h2 id="offline-ai-title">AI آفلاین</h2>
+                    </div>
+                    <span className="subtle-status">
+                      historical · non-authoritative
+                    </span>
+                  </div>
+                  <p className="offline-ai-note">
+                    این‌ها نتایج benchmark ثبت‌شدهٔ قبلی‌اند، نه اجرای فعلی مدل
+                    و نه تحلیل یا توصیهٔ معاملاتی.
+                  </p>
+                  <div className="offline-ai-benchmark-list">
+                    {offlineAiBenchmarks.map((benchmark) => (
+                      <article
+                        className="offline-ai-benchmark"
+                        key={benchmark.platform}
+                      >
+                        <div>
+                          <strong>{benchmark.platform}</strong>
+                          <p>{benchmark.runtime}</p>
+                        </div>
+                        <dl>
+                          <div>
+                            <dt>result</dt>
+                            <dd>{benchmark.result}</dd>
+                          </div>
+                          <div>
+                            <dt>duration</dt>
+                            <dd>{benchmark.duration}</dd>
+                          </div>
+                        </dl>
+                        <p className="offline-ai-detail">{benchmark.detail}</p>
+                      </article>
+                    ))}
+                  </div>
+                  <p className="offline-ai-safe-stop">
+                    `REJECT` یعنی AI در نبود evidence قطعی، fail-closed شده است؛
+                    هیچ سفارش یا اقدام معاملاتی ایجاد نمی‌شود.
+                  </p>
+                </section>
+
+                <section className="section-block">
+                  <div className="section-heading">
+                    <div>
+                      <p className="eyeline">مسیر تحلیل</p>
+                      <h2>وضعیت شورای تحلیلی</h2>
+                    </div>
+                    <span className="subtle-status">نمونهٔ محلی</span>
+                  </div>
+                  <ol className="process-line" aria-label="مسیر تصمیم قطعی">
+                    <li>MarketEvent</li>
+                    <li>FeatureSnapshot</li>
+                    <li>StrategyCandidate</li>
+                    <li>PolicyGate</li>
+                    <li>RiskDecision</li>
+                  </ol>
+                  <div className="advisory-list">
+                    {advisoryRows.map((row) => (
+                      <article className="advisory-row" key={row.role}>
+                        <span
+                          className={`role-indicator ${row.tone}`}
+                          aria-hidden="true"
+                        />
+                        <div>
+                          <strong>{row.role}</strong>
+                          <p>{row.title}</p>
+                        </div>
+                        <span className="advisory-label">تحلیلی</span>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              </>
+            ) : null}
+
+            {activePanel === "devices" ? (
+              <section className="section-block">
+                <div className="section-heading">
+                  <div>
+                    <p className="eyeline">نمایش وضعیت</p>
+                    <h2>دستگاه‌های محلی</h2>
+                  </div>
+                  <span className="subtle-status">non-authoritative</span>
                 </div>
-                <span className="subtle-status">append-only</span>
-              </div>
-              <div className="event-row">
-                <CheckCircle2 size={18} />
-                <span>قواعد UI از تصمیم قطعی جدا نگه داشته شدند.</span>
-                <time>اکنون</time>
-              </div>
-              <div className="event-row">
-                <CheckCircle2 size={18} />
-                <span>خروجی AI صرفاً مشاهده‌پذیر است.</span>
-                <time>اکنون</time>
-              </div>
-            </section>
+                <p className="offline-ai-note">
+                  این نما فقط وضعیت کنترل‌نشدهٔ دستگاه‌ها را نمایش می‌دهد؛ هیچ
+                  دستگاهی اختیار ریسک، سفارش یا اجرا ندارد.
+                </p>
+                <div className="device-row">
+                  <Laptop size={19} />
+                  <span>Windows Local Node</span>
+                  <em>محلی · تشخیصی</em>
+                </div>
+                <div className="device-row">
+                  <Smartphone size={19} />
+                  <span>Android companion</span>
+                  <em>منتظر pair</em>
+                </div>
+              </section>
+            ) : null}
+
+            {activePanel === "audit" ? (
+              <section className="section-block audit-preview">
+                <div className="section-heading">
+                  <div>
+                    <p className="eyeline">رویدادها</p>
+                    <h2>ممیزی محلی</h2>
+                  </div>
+                  <span className="subtle-status">append-only</span>
+                </div>
+                <div className="event-row">
+                  <CheckCircle2 size={18} />
+                  <span>قواعد UI از تصمیم قطعی جدا نگه داشته شدند.</span>
+                  <time>اکنون</time>
+                </div>
+                <div className="event-row">
+                  <CheckCircle2 size={18} />
+                  <span>خروجی AI صرفاً مشاهده‌پذیر است.</span>
+                  <time>اکنون</time>
+                </div>
+              </section>
+            ) : null}
           </section>
 
           <aside className="secondary-column">
-            <section className="control-card">
-              <div className="card-title">
-                <Cloud size={19} />
-                <h2>Cloud Control</h2>
-              </div>
-              <p>همگام‌سازی فقط برای وضعیت دستگاه و دادهٔ غیرحاکمیتی است.</p>
-              <dl className="key-values">
-                <div>
-                  <dt>authority</dt>
-                  <dd>ندارد</dd>
+            {activePanel !== "audit" ? (
+              <section className="control-card">
+                <div className="card-title">
+                  <Cloud size={19} />
+                  <h2>Cloud Control</h2>
                 </div>
-                <div>
-                  <dt>execution</dt>
-                  <dd>خاموش</dd>
-                </div>
-                <div>
-                  <dt>cloud state</dt>
-                  <dd>{cloudStateLabel}</dd>
-                </div>
-              </dl>
-              {cloudSession.kind === "signed-in" ? (
-                <button
-                  className="secondary-button"
-                  onClick={handleSignOut}
-                  disabled={cloudBusy}
-                >
-                  <RefreshCw size={17} /> خروج امن از Cloud Control
-                </button>
-              ) : (
-                <button
-                  className="secondary-button"
-                  onClick={handleCloudControl}
-                  disabled={cloudBusy}
-                >
-                  <Cloud size={17} />
-                  {cloudBusy
-                    ? "در حال انتقال به Google…"
-                    : "ورود مالک با Google"}
-                </button>
-              )}
-              <p className="control-note">
-                ورود فقط برای نمایش وضعیت غیرحاکمیتی است؛ همگام‌سازی و pairing
-                تا تکمیل revoke/recovery فعال نمی‌شوند.
-              </p>
-            </section>
+                <p>همگام‌سازی فقط برای وضعیت دستگاه و دادهٔ غیرحاکمیتی است.</p>
+                <dl className="key-values">
+                  <div>
+                    <dt>authority</dt>
+                    <dd>ندارد</dd>
+                  </div>
+                  <div>
+                    <dt>execution</dt>
+                    <dd>خاموش</dd>
+                  </div>
+                  <div>
+                    <dt>cloud state</dt>
+                    <dd>{cloudStateLabel}</dd>
+                  </div>
+                </dl>
+                {cloudSession.kind === "signed-in" ? (
+                  <button
+                    className="secondary-button"
+                    onClick={handleSignOut}
+                    disabled={cloudBusy}
+                  >
+                    <RefreshCw size={17} /> خروج امن از Cloud Control
+                  </button>
+                ) : (
+                  <button
+                    className="secondary-button"
+                    onClick={handleCloudControl}
+                    disabled={cloudBusy}
+                  >
+                    <Cloud size={17} />
+                    {cloudBusy
+                      ? "در حال انتقال به Google…"
+                      : "ورود مالک با Google"}
+                  </button>
+                )}
+                <p className="control-note">
+                  ورود فقط برای نمایش وضعیت غیرحاکمیتی است؛ همگام‌سازی و pairing
+                  تا تکمیل revoke/recovery فعال نمی‌شوند.
+                </p>
+              </section>
+            ) : null}
 
-            <section className="control-card">
-              <div className="card-title">
-                <MonitorSmartphone size={19} />
-                <h2>pairing دستگاه</h2>
-              </div>
-              <div className="device-row">
-                <Laptop size={19} />
-                <span>Windows Local Node</span>
-                <em>محلی</em>
-              </div>
-              <div className="device-row">
-                <Smartphone size={19} />
-                <span>Android companion</span>
-                <em>منتظر pair</em>
-              </div>
-              <button className="secondary-button" disabled>
-                pairing مسدود است — کنترل revoke/recovery لازم است
-              </button>
-            </section>
+            {activePanel === "devices" ? (
+              <section className="control-card">
+                <div className="card-title">
+                  <MonitorSmartphone size={19} />
+                  <h2>pairing دستگاه</h2>
+                </div>
+                <div className="device-row">
+                  <Laptop size={19} />
+                  <span>Windows Local Node</span>
+                  <em>محلی</em>
+                </div>
+                <div className="device-row">
+                  <Smartphone size={19} />
+                  <span>Android companion</span>
+                  <em>منتظر pair</em>
+                </div>
+                <button className="secondary-button" disabled>
+                  pairing مسدود است — کنترل revoke/recovery لازم است
+                </button>
+              </section>
+            ) : null}
+
+            {activePanel === "audit" ? (
+              <section className="control-card">
+                <div className="card-title">
+                  <ShieldCheck size={19} />
+                  <h2>محدودهٔ ممیزی</h2>
+                </div>
+                <p>
+                  این نما فقط evidence محلی و غیرقابل‌اجرا را نمایش می‌دهد؛ هیچ
+                  دادهٔ بازار، سفارش، position یا سود/زیان در مرورگر ایجاد یا
+                  ذخیره نمی‌شود.
+                </p>
+                <dl className="key-values">
+                  <div>
+                    <dt>records</dt>
+                    <dd>۰ trade artifact</dd>
+                  </div>
+                  <div>
+                    <dt>execution</dt>
+                    <dd>خاموش</dd>
+                  </div>
+                </dl>
+              </section>
+            ) : null}
           </aside>
         </div>
       </section>

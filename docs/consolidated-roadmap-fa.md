@@ -86,6 +86,7 @@
 - مرحلهٔ ۵BB: با `DEC-218` فعال است. PolicyGate و Risk Engine موجود را فقط روی input قطعی و محلی غربال می‌کند؛ نتیجه همیشه غیرقابل‌اجرا و `NO_TRADE` می‌ماند.
 - مرحلهٔ ۵BB: با `DEC-219` پذیرفته و بسته شده است. PolicyGate و Risk Engine موجود را فقط روی input قطعی و محلی غربال می‌کند؛ نتیجه همیشه غیرقابل‌اجرا و `NO_TRADE` می‌ماند.
 - مرحلهٔ ۵BC: با `DEC-221` پذیرفته و بسته شده است. workflow کم‌اختیار CI، lint/typecheck/test/build/audit را پس از push یا pull request اجرا می‌کند؛ اجرای راه‌دور شمارهٔ ۲ برای commit `c3af2c0` در ۵۳ ثانیه موفق شد. هیچ secret، deploy یا اختیار معاملاتی ندارد.
+- نگه‌داری نمایشی PWA: با `DEC-222` پذیرفته و بسته شده است. ناوبری «نمای کلی»، «دستگاه‌ها» و «ممیزی» اکنون evidenceهای محلی و غیرحاکمیتیِ جدا را نمایش می‌دهد؛ هیچ مرحله یا قابلیت معاملاتی تازه‌ای آغاز نشده است.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AI: با `DEC-183` پذیرفته و بسته شده است. قرارداد versioned و identifier-only برای lifecycle/expiry/idempotency/protective/reconciliation/evidence ثبت شد و هیچ مفهوم مالی/اجرایی ندارد.
