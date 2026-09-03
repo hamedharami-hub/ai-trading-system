@@ -34,5 +34,7 @@ export * from "./replay/historical-replay-admission-validator.js";
 export * from "./replay/historical-replay-runner.js";
 export * from "./replay/eurusd-m1-replay-feature-facts.js";
 export * from "./replay/eurusd-m1-replay-atr14-displacement.js";
+export * from "./replay/eurusd-m1-local-replay-metadata.js";
+export * from "./replay/eurusd-m1-replay-bos-fvg-facts.js";
 export * from "./risk/risk-engine.js";
 export * from "./storage/sqlite-audit-store.js";

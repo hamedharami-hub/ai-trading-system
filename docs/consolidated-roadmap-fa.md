@@ -89,6 +89,7 @@
 - نگه‌داری نمایشی PWA: با `DEC-222` پذیرفته و بسته شده است. ناوبری «نمای کلی»، «دستگاه‌ها» و «ممیزی» اکنون evidenceهای محلی و غیرحاکمیتیِ جدا را نمایش می‌دهد؛ هیچ مرحله یا قابلیت معاملاتی تازه‌ای آغاز نشده است.
 - مرحلهٔ ۵BD: با `DEC-224` پذیرفته و بسته شده است. فقط factهای candle و Swing در پنجرهٔ قطعیِ پنج کندل در هر سمت برای `EURUSD / M1 / REPLAY` محلی محاسبه می‌شوند؛ ATR، candidate، risk، هزینه، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ ۵BE: با `DEC-226` پذیرفته و بسته شده است. فقط ATR-14 و factهای displacement برای `EURUSD / M1 / REPLAY` محلی محاسبه می‌شوند؛ candidate، risk، هزینه، Paper و اجرا خارج از دامنه‌اند.
+- مرحلهٔ ۵BF: با `DEC-228` پذیرفته و بسته شده است. metadata محلی tick و factهای thresholded BOS/FVG برای `EURUSD / M1 / REPLAY` محاسبه می‌شوند؛ candidate، risk، هزینه، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AI: با `DEC-183` پذیرفته و بسته شده است. قرارداد versioned و identifier-only برای lifecycle/expiry/idempotency/protective/reconciliation/evidence ثبت شد و هیچ مفهوم مالی/اجرایی ندارد.
