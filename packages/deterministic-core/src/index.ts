@@ -44,5 +44,6 @@ export * from "./replay/eurusd-m1-replay-observation-bundle.js";
 export * from "./replay/eurusd-m1-replay-observation-digest.js";
 export * from "./replay/eurusd-m1-replay-observation-digest-verification.js";
 export * from "./replay/eurusd-m1-replay-observation-batch.js";
+export * from "./replay/eurusd-m1-replay-observation-batch-digest.js";
 export * from "./risk/risk-engine.js";
 export * from "./storage/sqlite-audit-store.js";
