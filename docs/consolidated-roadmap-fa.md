@@ -100,6 +100,7 @@
 - مرحلهٔ ۵BN: با `DEC-244` پذیرفته و بسته شده است. bundle و digest قطعی برای ۱ تا ۶۴ cursor صعودی Replay محلی جمع‌آوری می‌شود؛ persistence، انتقال، candidate، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ ۵BO: با `DEC-246` پذیرفته و بسته شده است. کل batch evidence محلی با JCS و SHA-256 digest می‌شود؛ persistence، انتقال، candidate، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ ۵BP: با `DEC-248` پذیرفته و بسته شده است. manifest دیتاست Golden محلی برای `EURUSD / M1 / REPLAY` اعتبارسنجی می‌شود؛ acquisition، ساخت داده/label، candidate، Paper و اجرا خارج از دامنه‌اند.
+- مرحلهٔ ۵BQ: با `DEC-250` پذیرفته و بسته شده است. فقط هویت، یکتایی شناسه و اتصال دقیق cursorهای مجموعه‌برچسب opaque مالک به manifest Golden محلی برای `EURUSD / M1 / REPLAY` بررسی می‌شود؛ ساخت/تأیید معنایی label، candidate، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AI: با `DEC-183` پذیرفته و بسته شده است. قرارداد versioned و identifier-only برای lifecycle/expiry/idempotency/protective/reconciliation/evidence ثبت شد و هیچ مفهوم مالی/اجرایی ندارد.
