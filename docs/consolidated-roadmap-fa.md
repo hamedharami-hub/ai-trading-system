@@ -97,6 +97,7 @@
 - مرحلهٔ ۵BK: با `DEC-238` پذیرفته و بسته شده است. evidenceهای Candle/Swing، ATR/Displacement، BOS/FVG و Sweep/Raid برای یک cursor در `EURUSD / M1 / REPLAY` محلی کنار هم قرار می‌گیرند؛ candidate، grade، entry، risk، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ ۵BL: با `DEC-240` پذیرفته و بسته شده است. evidence bundle محلی با JCS و SHA-256 digest می‌شود؛ persistence، انتقال، candidate، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ ۵BM: با `DEC-242` پذیرفته و بسته شده است. digest مورد انتظار با evidence bundle محلی به‌صورت قطعی مقایسه می‌شود؛ persistence، انتقال، candidate، Paper و اجرا خارج از دامنه‌اند.
+- مرحلهٔ ۵BN: با `DEC-244` پذیرفته و بسته شده است. bundle و digest قطعی برای ۱ تا ۶۴ cursor صعودی Replay محلی جمع‌آوری می‌شود؛ persistence، انتقال، candidate، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AI: با `DEC-183` پذیرفته و بسته شده است. قرارداد versioned و identifier-only برای lifecycle/expiry/idempotency/protective/reconciliation/evidence ثبت شد و هیچ مفهوم مالی/اجرایی ندارد.
