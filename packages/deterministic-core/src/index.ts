@@ -41,5 +41,6 @@ export * from "./replay/eurusd-m1-replay-order-block-state.js";
 export * from "./replay/eurusd-m1-replay-fvg-state.js";
 export * from "./replay/eurusd-m1-replay-sweep-raid-facts.js";
 export * from "./replay/eurusd-m1-replay-observation-bundle.js";
+export * from "./replay/eurusd-m1-replay-observation-digest.js";
 export * from "./risk/risk-engine.js";
 export * from "./storage/sqlite-audit-store.js";
