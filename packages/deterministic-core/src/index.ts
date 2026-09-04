@@ -49,5 +49,6 @@ export * from "./replay/eurusd-m1-golden-dataset-manifest-validator.js";
 export * from "./replay/eurusd-m1-golden-label-set-validator.js";
 export * from "./replay/eurusd-m1-golden-label-set-digest.js";
 export * from "./replay/eurusd-m1-golden-label-set-digest-verification.js";
+export * from "./replay/eurusd-m1-golden-evidence-readiness.js";
 export * from "./risk/risk-engine.js";
 export * from "./storage/sqlite-audit-store.js";
