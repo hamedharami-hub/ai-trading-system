@@ -7,5 +7,3 @@
 - package کیفیت data یا معنای label را تأیید نمی‌کند و permission یا readiness برای Paper/Demo یا اجرا نیست.
 
 هیچ فایل، database، شبکه، candidate، grade، entry، `OrderIntent`، fill، position، P&L یا مسیر execution ایجاد یا تغییر نمی‌کند.
-
-با `DEC-262` فقط `GOLDEN_EVIDENCE_AUDIT_PACKAGE` پذیرفته‌شده با JCS و SHA-256 به digest ممیزی محلی تبدیل می‌شود. package ناموجود/ردشده fail-closed است و digest ندارد. این helper درون‌حافظه‌ای است و هیچ داده یا label را ذخیره، انتقال، تفسیر یا تغییر نمی‌دهد.
