@@ -1,6 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { packageEurUsdM1GoldenEvidenceAudit } from "../src/replay/eurusd-m1-golden-evidence-audit-package.js";
 import { digestEurUsdM1GoldenEvidenceAuditPackage } from "../src/replay/eurusd-m1-golden-evidence-audit-package-digest.js";
+import { verifyEurUsdM1GoldenEvidenceAuditPackageDigest } from "../src/replay/eurusd-m1-golden-evidence-audit-package-digest-verification.js";
 import { digestEurUsdM1GoldenEvidenceReadiness } from "../src/replay/eurusd-m1-golden-evidence-readiness-digest.js";
 import { verifyEurUsdM1GoldenEvidenceReadinessDigest } from "../src/replay/eurusd-m1-golden-evidence-readiness-digest-verification.js";
 import { digestEurUsdM1GoldenLabelSet } from "../src/replay/eurusd-m1-golden-label-set-digest.js";
@@ -265,6 +266,59 @@ describe("EURUSD M1 Golden evidence readiness digest", () => {
       strategyCandidatesCreated: 0,
       orderIntentsCreated: 0,
       externalRequestsMade: 0,
+    });
+  });
+
+  it("verifies an audit-package digest without creating execution authority", async () => {
+    const ready = await readyEvidence();
+    const readinessDigest = await digestEurUsdM1GoldenEvidenceReadiness(ready);
+    if (readinessDigest.kind !== "GOLDEN_EVIDENCE_READINESS_DIGEST") {
+      throw new Error("fixture is not ready");
+    }
+    const auditPackage = await packageEurUsdM1GoldenEvidenceAudit(
+      ready,
+      readinessDigest.sha256,
+    );
+    const digest = await digestEurUsdM1GoldenEvidenceAuditPackage(auditPackage);
+    if (digest.kind !== "GOLDEN_EVIDENCE_AUDIT_PACKAGE_DIGEST") {
+      throw new Error("fixture package is unavailable");
+    }
+
+    await expect(
+      verifyEurUsdM1GoldenEvidenceAuditPackageDigest(
+        auditPackage,
+        digest.sha256,
+      ),
+    ).resolves.toMatchObject({
+      status: "MATCH",
+      actualDigest: digest.sha256,
+      executionEligible: false,
+      strategyCandidatesCreated: 0,
+      orderIntentsCreated: 0,
+      externalRequestsMade: 0,
+    });
+    await expect(
+      verifyEurUsdM1GoldenEvidenceAuditPackageDigest(auditPackage, "invalid"),
+    ).resolves.toMatchObject({ status: "INVALID_EXPECTED_DIGEST" });
+    await expect(
+      verifyEurUsdM1GoldenEvidenceAuditPackageDigest(
+        auditPackage,
+        "0".repeat(64),
+      ),
+    ).resolves.toMatchObject({ status: "MISMATCH" });
+    const unavailable = await packageEurUsdM1GoldenEvidenceAudit(
+      ready,
+      "invalid",
+    );
+    await expect(
+      verifyEurUsdM1GoldenEvidenceAuditPackageDigest(
+        unavailable,
+        "0".repeat(64),
+      ),
+    ).resolves.toMatchObject({
+      status: "DIGEST_UNAVAILABLE",
+      actualDigest: null,
+      executionEligible: false,
     });
   });
 });
