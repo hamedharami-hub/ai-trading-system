@@ -9,5 +9,3 @@
 هیچ فایل، database، شبکه، candidate، grade، entry، `OrderIntent`، fill، position، P&L یا مسیر execution ایجاد یا تغییر نمی‌کند.
 
 با `DEC-262` فقط `GOLDEN_EVIDENCE_AUDIT_PACKAGE` پذیرفته‌شده با JCS و SHA-256 به digest ممیزی محلی تبدیل می‌شود. package ناموجود/ردشده fail-closed است و digest ندارد. این helper درون‌حافظه‌ای است و هیچ داده یا label را ذخیره، انتقال، تفسیر یا تغییر نمی‌دهد.
-
-با `DEC-264` همین digest دوباره محاسبه و فقط با SHA-256 موردانتظار caller مقایسه می‌شود. وضعیت‌ها `MATCH`، `MISMATCH`، `INVALID_EXPECTED_DIGEST` یا برای package ناموجود `DIGEST_UNAVAILABLE` هستند. این تطبیق صرفاً درون‌حافظه‌ای است و هیچ اختیار، persistence، انتقال یا ارزیابی کیفیت ایجاد نمی‌کند.
