@@ -1,6 +1,6 @@
 # AI Trading System
 
-This repository has been recovered from an untrusted Antigravity implementation onto the approved architecture baseline. Consolidated Phases 2 and 3 provide the deterministic offline core and guarded offline AI evidence. Consolidated Phase 4 is active for the responsive PWA and non-execution Firebase/Vercel control boundary only.
+This repository has been recovered from an untrusted Antigravity implementation onto the approved architecture baseline. Consolidated Phases 1 through 4 are accepted. Phase 5 is active and is restricted to local, fail-closed `EURUSD / M1 / Historical Replay` evidence; it does not authorize Paper entry, fill, position, P&L, OMS, provider connections, or execution.
 
 ## Authority
 
@@ -43,6 +43,8 @@ Only future deterministic Local Trading Node components may calculate risk or cr
 
 ## Documentation
 
+- [Project continuation handoff](CONTINUATION-HANDOFF.md)
+- [Project continuation handoff PDF](output/pdf/project-continuation-handoff.pdf)
 - [Consolidated six-phase roadmap](docs/consolidated-roadmap-fa.md)
 - [Antigravity recovery audit](docs/antigravity-recovery-audit.md)
 - [Phase 2 implementation report](docs/phase-2-implementation.md)
