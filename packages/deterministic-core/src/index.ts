@@ -52,6 +52,5 @@ export * from "./replay/eurusd-m1-golden-label-set-digest-verification.js";
 export * from "./replay/eurusd-m1-golden-evidence-readiness.js";
 export * from "./replay/eurusd-m1-golden-evidence-readiness-digest.js";
 export * from "./replay/eurusd-m1-golden-evidence-readiness-digest-verification.js";
-export * from "./replay/eurusd-m1-golden-evidence-audit-package.js";
 export * from "./risk/risk-engine.js";
 export * from "./storage/sqlite-audit-store.js";

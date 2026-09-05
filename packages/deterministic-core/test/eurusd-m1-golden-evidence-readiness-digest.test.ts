@@ -1,5 +1,4 @@
 import { describe, expect, it } from "vitest";
-import { packageEurUsdM1GoldenEvidenceAudit } from "../src/replay/eurusd-m1-golden-evidence-audit-package.js";
 import { digestEurUsdM1GoldenEvidenceReadiness } from "../src/replay/eurusd-m1-golden-evidence-readiness-digest.js";
 import { verifyEurUsdM1GoldenEvidenceReadinessDigest } from "../src/replay/eurusd-m1-golden-evidence-readiness-digest-verification.js";
 import { digestEurUsdM1GoldenLabelSet } from "../src/replay/eurusd-m1-golden-label-set-digest.js";
@@ -151,71 +150,6 @@ describe("EURUSD M1 Golden evidence readiness digest", () => {
       status: "DIGEST_UNAVAILABLE",
       actualDigest: null,
       executionEligible: false,
-    });
-  });
-
-  it("packages only matching local readiness audit facts without execution authority", async () => {
-    const ready = await readyEvidence();
-    const digest = await digestEurUsdM1GoldenEvidenceReadiness(ready);
-    if (digest.kind !== "GOLDEN_EVIDENCE_READINESS_DIGEST") {
-      throw new Error("fixture is not ready");
-    }
-
-    const auditPackage = await packageEurUsdM1GoldenEvidenceAudit(
-      ready,
-      digest.sha256,
-    );
-
-    expect(Object.isFrozen(auditPackage)).toBe(true);
-    expect(auditPackage).toEqual({
-      kind: "GOLDEN_EVIDENCE_AUDIT_PACKAGE",
-      packageVersion: "eurusd-m1-golden-evidence-audit-package-v1",
-      datasetId: "eurusd-m1-local-replay",
-      sourceKind: "REPLAY",
-      readinessStatus: "GOLDEN_EVIDENCE_READY",
-      readinessDigest: digest.sha256,
-      readinessDigestVerificationStatus: "MATCH",
-      executionEligible: false,
-      strategyCandidatesCreated: 0,
-      orderIntentsCreated: 0,
-      externalRequestsMade: 0,
-    });
-  });
-
-  it("fails closed without digest values for rejected, invalid, or mismatched packages", async () => {
-    const ready = await readyEvidence();
-    const rejected = await evaluateEurUsdM1GoldenEvidenceReadiness({
-      playback: playback(),
-      manifest,
-      labelSet,
-      expectedLabelSetDigest: "0".repeat(64),
-    });
-
-    await expect(
-      packageEurUsdM1GoldenEvidenceAudit(ready, "invalid"),
-    ).resolves.toMatchObject({
-      kind: "GOLDEN_EVIDENCE_AUDIT_PACKAGE_UNAVAILABLE",
-      reason: "INVALID_EXPECTED_DIGEST",
-      executionEligible: false,
-    });
-    await expect(
-      packageEurUsdM1GoldenEvidenceAudit(ready, "0".repeat(64)),
-    ).resolves.toMatchObject({
-      kind: "GOLDEN_EVIDENCE_AUDIT_PACKAGE_UNAVAILABLE",
-      reason: "READINESS_DIGEST_MISMATCH",
-      executionEligible: false,
-    });
-    await expect(
-      packageEurUsdM1GoldenEvidenceAudit(rejected, "0".repeat(64)),
-    ).resolves.toEqual({
-      kind: "GOLDEN_EVIDENCE_AUDIT_PACKAGE_UNAVAILABLE",
-      reason: "EVIDENCE_NOT_READY",
-      datasetId: "eurusd-m1-local-replay",
-      sourceKind: "REPLAY",
-      executionEligible: false,
-      strategyCandidatesCreated: 0,
-      orderIntentsCreated: 0,
-      externalRequestsMade: 0,
     });
   });
 });
