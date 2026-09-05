@@ -104,6 +104,7 @@
 - مرحلهٔ ۵BR: با `DEC-252` پذیرفته و بسته شده است. فقط گزارش پذیرفته‌شدهٔ مجموعه‌برچسب Golden محلی با JCS/SHA-256 هش می‌شود؛ ساخت/تفسیر label، candidate، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ ۵BS: با `DEC-254` پذیرفته و بسته شده است. فقط هش evidence مجموعه‌برچسب Golden محلی با هش موردانتظار تطبیق می‌شود؛ ساخت/تفسیر label، candidate، Paper و اجرا خارج از دامنه‌اند.
 - مرحلهٔ ۵BT: با `DEC-256` پذیرفته و بسته شده است. فقط manifest، اتصال مجموعه‌برچسب و تطبیق هش evidence Golden محلی در یک وضعیت fail-closed جمع می‌شوند؛ کیفیت داده، تفسیر label، candidate، Paper و اجرا خارج از دامنه‌اند.
+- مرحلهٔ ۵BU: با `DEC-258` پذیرفته و بسته شده است. ارزیابی انطباق قطعی هش‌های بسته‌های مشاهداتی Replay محلی با مجموعه‌برچسب‌های Golden محلی بر پایهٔ هر مکان‌نما به صورت immutable اجرا می‌شود (`ALIGNMENT_MATCH` یا `ALIGNMENT_MISMATCH` یا fail-closed `ALIGNMENT_REJECTED`)؛ هیچ استنتاج معنایی معاملاتی، candidate، Paper یا اختیارات اجرایی افزوده نشده است.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ فعال: ندارد؛ Paper entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحلهٔ ۵AI: با `DEC-183` پذیرفته و بسته شده است. قرارداد versioned و identifier-only برای lifecycle/expiry/idempotency/protective/reconciliation/evidence ثبت شد و هیچ مفهوم مالی/اجرایی ندارد.

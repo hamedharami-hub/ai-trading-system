@@ -1,0 +1,6 @@
+{
+  "name": "سامانه تحلیل معاملاتی",
+  "description": "رابط محلی و ایمن تحلیل معاملاتی",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

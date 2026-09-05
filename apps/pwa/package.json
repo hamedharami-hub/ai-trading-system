@@ -3,13 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "engines": {
-    "node": ">=24 <25",
-    "pnpm": ">=11 <12"
-  },
   "scripts": {
     "build": "next build",
-    "dev": "next dev",
+    "dev": "next dev -p 3000 -H 0.0.0.0",
     "lint": "prettier --check . --ignore-path ../../.gitignore",
     "start": "next start",
     "typecheck": "tsc --noEmit"

@@ -20,7 +20,7 @@
     "test:historical-replay-local": "vitest run test/local"
   },
   "dependencies": {
-    "@trade/contracts": "workspace:*",
+    "@trade/contracts": "*",
     "decimal.js": "10.6.0"
   },
   "devDependencies": {
@@ -28,9 +28,5 @@
     "prettier": "3.6.2",
     "typescript": "7.0.2",
     "vitest": "4.1.11"
-  },
-  "engines": {
-    "node": ">=24 <25",
-    "pnpm": ">=11 <12"
   }
 }

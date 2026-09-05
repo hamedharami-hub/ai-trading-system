@@ -15,16 +15,12 @@
     "test": "vitest run"
   },
   "dependencies": {
-    "@trade/contracts": "workspace:*"
+    "@trade/contracts": "*"
   },
   "devDependencies": {
     "@types/node": "24.13.3",
     "prettier": "3.6.2",
     "typescript": "7.0.2",
     "vitest": "4.1.11"
-  },
-  "engines": {
-    "node": ">=24 <25",
-    "pnpm": ">=11 <12"
   }
 }

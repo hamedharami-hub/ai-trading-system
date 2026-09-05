@@ -2,20 +2,21 @@
   "name": "ai-trading-system",
   "version": "0.0.0",
   "private": true,
-  "packageManager": "pnpm@11.19.0",
-  "engines": {
-    "node": ">=24 <25",
-    "pnpm": ">=11 <12"
-  },
+  "packageManager": "npm@10.9.2",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
   "scripts": {
+    "dev": "npm run dev --workspace=@trade/pwa",
     "build": "turbo run build",
     "generate": "turbo run generate",
     "lint": "turbo run lint",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck",
-    "verify:offline-ai": "pnpm --filter @trade/offline-ai test && pnpm --filter @trade/pwa build",
-    "verify:offline-replay": "pnpm --filter @trade/deterministic-core test && pnpm --filter @trade/pwa build",
-    "verify:offline": "pnpm --filter @trade/offline-ai test && pnpm --filter @trade/deterministic-core test && pnpm --filter @trade/pwa build"
+    "verify:offline-ai": "npm test --workspace=@trade/offline-ai && npm run build --workspace=@trade/pwa",
+    "verify:offline-replay": "npm test --workspace=@trade/deterministic-core && npm run build --workspace=@trade/pwa",
+    "verify:offline": "npm test --workspace=@trade/offline-ai && npm test --workspace=@trade/deterministic-core && npm run build --workspace=@trade/pwa"
   },
   "devDependencies": {
     "@types/node": "24.13.3",
