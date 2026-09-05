@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { digestEurUsdM1GoldenEvidenceReadiness } from "../src/replay/eurusd-m1-golden-evidence-readiness-digest.js";
+import { verifyEurUsdM1GoldenEvidenceReadinessDigest } from "../src/replay/eurusd-m1-golden-evidence-readiness-digest-verification.js";
 import { digestEurUsdM1GoldenLabelSet } from "../src/replay/eurusd-m1-golden-label-set-digest.js";
 import { evaluateEurUsdM1GoldenEvidenceReadiness } from "../src/replay/eurusd-m1-golden-evidence-readiness.js";
 import { validateEurUsdM1GoldenLabelSet } from "../src/replay/eurusd-m1-golden-label-set-validator.js";
@@ -105,6 +106,50 @@ describe("EURUSD M1 Golden evidence readiness digest", () => {
       strategyCandidatesCreated: 0,
       orderIntentsCreated: 0,
       externalRequestsMade: 0,
+    });
+  });
+
+  it("compares a recomputed readiness digest without creating execution authority", async () => {
+    const ready = await readyEvidence();
+    const digest = await digestEurUsdM1GoldenEvidenceReadiness(ready);
+    if (digest.kind !== "GOLDEN_EVIDENCE_READINESS_DIGEST") {
+      throw new Error("fixture is not ready");
+    }
+
+    await expect(
+      verifyEurUsdM1GoldenEvidenceReadinessDigest(ready, digest.sha256),
+    ).resolves.toMatchObject({
+      kind: "GOLDEN_EVIDENCE_READINESS_DIGEST_VERIFICATION",
+      status: "MATCH",
+      actualDigest: digest.sha256,
+      executionEligible: false,
+      strategyCandidatesCreated: 0,
+      orderIntentsCreated: 0,
+      externalRequestsMade: 0,
+    });
+  });
+
+  it("fails closed for invalid, mismatched, and unavailable readiness evidence", async () => {
+    const ready = await readyEvidence();
+    const rejected = await evaluateEurUsdM1GoldenEvidenceReadiness({
+      playback: playback(),
+      manifest,
+      labelSet,
+      expectedLabelSetDigest: "0".repeat(64),
+    });
+
+    await expect(
+      verifyEurUsdM1GoldenEvidenceReadinessDigest(ready, "invalid"),
+    ).resolves.toMatchObject({ status: "INVALID_EXPECTED_DIGEST" });
+    await expect(
+      verifyEurUsdM1GoldenEvidenceReadinessDigest(ready, "0".repeat(64)),
+    ).resolves.toMatchObject({ status: "MISMATCH" });
+    await expect(
+      verifyEurUsdM1GoldenEvidenceReadinessDigest(rejected, "0".repeat(64)),
+    ).resolves.toMatchObject({
+      status: "DIGEST_UNAVAILABLE",
+      actualDigest: null,
+      executionEligible: false,
     });
   });
 });
