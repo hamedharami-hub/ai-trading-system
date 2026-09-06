@@ -618,6 +618,74 @@ b {
   color: var(--color-emerald-text) !important;
 }
 
+.historical-range-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  padding: 1rem;
+  border: 1px solid var(--border-medium);
+  border-radius: 0.75rem;
+  background: linear-gradient(
+    180deg,
+    rgba(56, 189, 248, 0.06),
+    var(--bg-surface)
+  );
+}
+
+.range-control-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.range-control-heading .sub-title {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.range-input-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+}
+
+.range-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+}
+
+.range-field input {
+  width: 100%;
+  min-height: 2.55rem;
+  padding: 0.45rem 0.6rem;
+  color: var(--text-primary);
+  background: var(--bg-canvas);
+  border: 1px solid var(--border-medium);
+  border-radius: 0.5rem;
+  font-family: var(--font-mono);
+  direction: ltr;
+}
+
+.range-field input:focus {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 1px;
+}
+
+.range-result {
+  padding: 0.65rem 0.75rem;
+  margin: 0;
+  color: var(--color-sky-text);
+  background: var(--color-sky-bg);
+  border: 1px solid var(--color-sky-border);
+  border-radius: 0.5rem;
+  font-size: 0.78rem;
+}
+
 /* Golden Evidence Card (Phase 5BT & 5BU) */
 .golden-evidence-card {
   border: 1px solid rgba(56, 189, 248, 0.3);
@@ -1564,6 +1632,14 @@ b {
 
   .metadata-grid {
     grid-template-columns: 1fr;
+  }
+
+  .range-input-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .range-control-heading {
+    flex-direction: column;
   }
 
   .audit-stats-row {

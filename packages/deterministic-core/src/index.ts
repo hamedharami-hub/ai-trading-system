@@ -32,6 +32,7 @@ export * from "./replay/disabled-read-only-provider-adapter.js";
 export * from "./replay/connectivity-readiness-validator.js";
 export * from "./replay/historical-replay-admission-validator.js";
 export * from "./replay/historical-replay-runner.js";
+export * from "./replay/historical-replay-range.js";
 export * from "./replay/eurusd-m1-replay-feature-facts.js";
 export * from "./replay/eurusd-m1-replay-atr14-displacement.js";
 export * from "./replay/eurusd-m1-local-replay-metadata.js";

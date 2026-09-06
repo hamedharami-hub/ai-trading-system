@@ -118,6 +118,7 @@
 - مرحلهٔ ۵AH: با `DEC-178` پذیرفته و بسته شده است. integration readiness محلی در حالت evidence کامل نیز `NO_TRADE` می‌ماند و در دادهٔ ناقص/نامعتبر `NO_TRADE` یا `REJECTED` می‌دهد.
 - مرحلهٔ فعال: ندارد؛ simulated entry، `OrderIntent`، fill، position، P&L، persistence، UI، AI signal و هر اتصال همچنان گیت مستقل و تأیید صریح مالک می‌خواهند.
 - مرحله ۶: شروع نشده و به پذیرش صریح مرحلهٔ ۵ نیاز دارد.
+- `DEC-265` مسیر سریع عملیاتی Phase 5 را برای فقط `EURUSD / M1`، دادهٔ تاریخی Dukascopy و cTrader Demo/Testnet تأیید می‌کند. کار در چهار بستهٔ مرتب انجام می‌شود: ۵.۱ catalog/range دادهٔ تاریخی و پایهٔ Node/PWA، ۵.۲ صفحات عملیاتی PWA، ۵.۳ backtest و Paper محلی، و ۵.۴ اتصال read-only و Demo/Testnet. Live همچنان خارج از دامنه و متعلق به Phase 6 است.
 - Firebase و Vercel برای مرحله ۴ تأیید شده‌اند، نه برای اختیار ریسک یا اجرا.
 - AI آفلاین Windows و Android برای مرحله ۳ تأیید شده است؛ دانلود مدل در مرحله ۱ انجام نمی‌شود.
 - Live Trading همچنان خاموش و نیازمند تصمیم مستقل آینده است.

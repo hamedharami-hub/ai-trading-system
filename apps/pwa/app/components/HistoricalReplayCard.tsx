@@ -1,4 +1,12 @@
-import { Database, FileSpreadsheet, ShieldAlert } from "lucide-react";
+"use client";
+
+import { useMemo, useState } from "react";
+import {
+  CalendarRange,
+  Database,
+  FileSpreadsheet,
+  ShieldAlert,
+} from "lucide-react";
 import type { HistoricalReplayPreviewCandle } from "./types";
 
 interface HistoricalReplayCardProps {
@@ -61,6 +69,25 @@ export const historicalReplayPreview: ReadonlyArray<HistoricalReplayPreviewCandl
 export function HistoricalReplayCard({
   showTable = true,
 }: HistoricalReplayCardProps) {
+  const [rangeStart, setRangeStart] = useState("2025-08-01T00:00");
+  const [rangeEnd, setRangeEnd] = useState("2025-08-01T00:04");
+
+  const rangeState = useMemo(() => {
+    const start = new Date(`${rangeStart}:00.000Z`).getTime();
+    const end = new Date(`${rangeEnd}:00.000Z`).getTime();
+    if (!Number.isFinite(start) || !Number.isFinite(end) || end < start) {
+      return { kind: "INVALID" } as const;
+    }
+
+    const candles = historicalReplayPreview.filter((candle) => {
+      const timestamp = new Date(candle.timestampUtc).getTime();
+      return timestamp >= start && timestamp <= end;
+    });
+    return candles.length === 0
+      ? ({ kind: "EMPTY" } as const)
+      : ({ kind: "RANGE", candles } as const);
+  }, [rangeEnd, rangeStart]);
+
   return (
     <section
       className="section-block replay-evidence"
@@ -80,9 +107,10 @@ export function HistoricalReplayCard({
       </div>
 
       <p className="section-description">
-        دیتاست محلی تأییدشده از آزمون ساختاری عبور کرده است. این نما فقط شواهد
-        اعتبارسنجی (Evidence) را نمایش می‌دهد و هیچ فایل یا دادهٔ حساسی در
-        مرورگر نگهداری نمی‌شود.
+        catalog محلیِ دادهٔ تاریخی به شما اجازه می‌دهد بازهٔ مورد نظر را انتخاب
+        و coverage موجود را بررسی کنید. اتصال Dukascopy و دریافت داده در بستهٔ
+        ۵.۴ به Local Trading Node افزوده می‌شود؛ مرورگر هرگز مستقیماً به
+        provider وصل نمی‌شود.
       </p>
 
       <div className="metadata-grid">
@@ -110,6 +138,54 @@ export function HistoricalReplayCard({
             {historicalReplayEvidence.status}
           </strong>
         </div>
+      </div>
+
+      <div className="historical-range-controls" aria-labelledby="range-title">
+        <div className="range-control-heading">
+          <div>
+            <span className="eyeline">بستهٔ ۵.۱ · انتخاب بازه</span>
+            <h3 id="range-title" className="sub-title">
+              <CalendarRange size={17} className="title-icon" />
+              مشاهدهٔ بازهٔ تاریخیِ پذیرفته‌شده
+            </h3>
+          </div>
+          <span className="subtle-status ltr-text" dir="ltr">
+            UTC · LOCAL CATALOG
+          </span>
+        </div>
+
+        <div className="range-input-grid">
+          <label className="range-field">
+            <span>شروع بازه (UTC)</span>
+            <input
+              type="datetime-local"
+              value={rangeStart}
+              min="2025-08-01T00:00"
+              max="2025-08-01T20:59"
+              onChange={(event) => setRangeStart(event.target.value)}
+              aria-label="شروع بازهٔ تاریخی بر اساس UTC"
+            />
+          </label>
+          <label className="range-field">
+            <span>پایان بازه (UTC)</span>
+            <input
+              type="datetime-local"
+              value={rangeEnd}
+              min="2025-08-01T00:00"
+              max="2025-08-01T20:59"
+              onChange={(event) => setRangeEnd(event.target.value)}
+              aria-label="پایان بازهٔ تاریخی بر اساس UTC"
+            />
+          </label>
+        </div>
+
+        <p className="range-result" role="status">
+          {rangeState.kind === "RANGE"
+            ? `${rangeState.candles.length} کندل در snapshot محلیِ انتخاب‌شده قابل مشاهده است.`
+            : rangeState.kind === "EMPTY"
+              ? "در snapshot محلی برای این بازه کندلی وجود ندارد."
+              : "پایان بازه باید پس از شروع بازه یا برابر با آن باشد."}
+        </p>
       </div>
 
       {showTable ? (
@@ -140,16 +216,22 @@ export function HistoricalReplayCard({
                 </tr>
               </thead>
               <tbody>
-                {historicalReplayPreview.map((candle) => (
-                  <tr key={candle.cursor}>
-                    <td className="cursor-cell">#{candle.cursor}</td>
-                    <td className="timestamp-cell">{candle.timestampUtc}</td>
-                    <td className="price-cell">{candle.open}</td>
-                    <td className="price-cell price-high">{candle.high}</td>
-                    <td className="price-cell price-low">{candle.low}</td>
-                    <td className="price-cell price-close">{candle.close}</td>
-                  </tr>
-                ))}
+                {rangeState.kind === "RANGE"
+                  ? rangeState.candles.map((candle) => (
+                      <tr key={candle.cursor}>
+                        <td className="cursor-cell">#{candle.cursor}</td>
+                        <td className="timestamp-cell">
+                          {candle.timestampUtc}
+                        </td>
+                        <td className="price-cell">{candle.open}</td>
+                        <td className="price-cell price-high">{candle.high}</td>
+                        <td className="price-cell price-low">{candle.low}</td>
+                        <td className="price-cell price-close">
+                          {candle.close}
+                        </td>
+                      </tr>
+                    ))
+                  : null}
               </tbody>
             </table>
           </div>
@@ -159,8 +241,9 @@ export function HistoricalReplayCard({
       <div className="safe-boundary-note">
         <ShieldAlert size={16} className="note-icon" />
         <span>
-          این داده صرفاً تاریخی و آزمایشی است. در وضعیت کنونی هیچ معامله، سفارش،
-          اجرای زنده یا حساب شبیه‌سازی متصل نیست.
+          این catalog صرفاً دادهٔ تاریخیِ محلی را نمایش می‌دهد. در این بسته هیچ
+          اتصال Dukascopy، سفارش، معامله، Paper fill یا اجرای زنده ایجاد
+          نمی‌شود.
         </span>
       </div>
     </section>
