@@ -47,6 +47,11 @@ const panels: ReadonlyArray<{ id: PanelId; label: string }> = [
   { id: "audit", label: "ممیزی" },
 ];
 
+function panelFromLocationHash(hash: string): PanelId {
+  const panel = hash.replace(/^#/, "");
+  return panels.some(({ id }) => id === panel) ? (panel as PanelId) : "overview";
+}
+
 const advisoryRows = [
   { role: "Analyst", title: "شواهد کافی نیست", tone: "review" },
   { role: "Critic", title: "دادهٔ قطعی وارد نشده", tone: "blocked" },
@@ -132,9 +137,24 @@ export default function HomePage() {
 
   useEffect(() => observeCloudSession(setCloudSession), []);
 
+  useEffect(() => {
+    function updatePanelFromLocation(): void {
+      setActivePanel(panelFromLocationHash(window.location.hash));
+    }
+
+    updatePanelFromLocation();
+    window.addEventListener("hashchange", updatePanelFromLocation);
+    window.addEventListener("popstate", updatePanelFromLocation);
+    return () => {
+      window.removeEventListener("hashchange", updatePanelFromLocation);
+      window.removeEventListener("popstate", updatePanelFromLocation);
+    };
+  }, []);
+
   function selectPanel(panel: PanelId) {
     setActivePanel(panel);
     setMobileNavigationOpen(false);
+    window.history.pushState(null, "", `#${panel}`);
   }
 
   async function handleCloudControl() {
@@ -186,7 +206,7 @@ export default function HomePage() {
             <X size={20} />
           </button>
         </div>
-        <nav>
+        <nav aria-label="نماهای برنامه" role="tablist">
           {panels.map((panel) => (
             <button
               className={
@@ -196,6 +216,10 @@ export default function HomePage() {
               }
               key={panel.id}
               onClick={() => selectPanel(panel.id)}
+              aria-controls={`${panel.id}-panel`}
+              aria-selected={activePanel === panel.id}
+              role="tab"
+              type="button"
             >
               {panel.label}
             </button>
@@ -235,7 +259,9 @@ export default function HomePage() {
             <button
               className="icon-button"
               aria-label="اعلان‌ها"
+              aria-pressed={notificationEnabled}
               onClick={() => setNotificationEnabled((value) => !value)}
+              type="button"
             >
               <Bell size={19} />
               <span className="sr-only">
@@ -249,6 +275,11 @@ export default function HomePage() {
 
         <div className="content-grid">
           <section className="primary-column">
+            <p className="panel-feedback" aria-live="polite">
+              {notificationEnabled ? "اعلان‌های رابط فعال‌اند · " : ""}
+              نمای انتخاب‌شده: {" "}
+              {panels.find((panel) => panel.id === activePanel)?.label}
+            </p>
             <section className="status-banner" aria-label="وضعیت ایمنی">
               <div className="status-icon">
                 <ShieldCheck size={22} />
@@ -263,7 +294,7 @@ export default function HomePage() {
             </section>
 
             {activePanel === "overview" ? (
-              <>
+              <div id="overview-panel" role="tabpanel">
                 <section
                   className="section-block replay-evidence"
                   aria-labelledby="replay-title"
@@ -433,11 +464,11 @@ export default function HomePage() {
                     ))}
                   </div>
                 </section>
-              </>
+              </div>
             ) : null}
 
             {activePanel === "devices" ? (
-              <section className="section-block">
+              <section className="section-block" id="devices-panel" role="tabpanel">
                 <div className="section-heading">
                   <div>
                     <p className="eyeline">نمایش وضعیت</p>
@@ -463,7 +494,11 @@ export default function HomePage() {
             ) : null}
 
             {activePanel === "audit" ? (
-              <section className="section-block audit-preview">
+              <section
+                className="section-block audit-preview"
+                id="audit-panel"
+                role="tabpanel"
+              >
                 <div className="section-heading">
                   <div>
                     <p className="eyeline">رویدادها</p>

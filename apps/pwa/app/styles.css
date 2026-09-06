@@ -152,6 +152,12 @@ h3 {
   align-content: start;
   gap: 1rem;
 }
+.panel-feedback {
+  color: #9fe4be;
+  font-size: 0.78rem;
+  line-height: 1.5;
+  min-height: 1.5rem;
+}
 .status-banner {
   display: flex;
   gap: 0.9rem;
